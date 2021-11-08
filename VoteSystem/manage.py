@@ -15,6 +15,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+
     try:
         if sys.argv[2] == 'react':
             project_root = os.getcwd()
