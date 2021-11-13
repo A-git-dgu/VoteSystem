@@ -1,3 +1,4 @@
+/* 전체 화면 */
 .Outer_M {
     height:100vh;
     width:100%;
@@ -9,10 +10,12 @@
     text-align:center;
     background-color:rgb(255, 186, 186);
 }
+/* 실제 창 */
 .Inter_M {
     height:500px;
     width:600px;
 }
+/* 버튼 공통 CSS */
 .Button_M {
     font-size:20px;
     font-weight:bold;
@@ -22,15 +25,18 @@
     border-radius: 5px;
     background-color:rgb(255, 139, 139);
 }
+/* ID, PWD 디자인 버튼 */
 #mark_M {
     margin:5px;
     height:40px;
     width:75px;
 }
+/* '입장' 버튼 */
 #loginButton_M {
     height:40px;
     width:100px;
 }
+/* '선거개설' 버튼 */
 #SignUpButton_M {
     position:absolute;
     right:100px;
@@ -39,6 +45,7 @@
     height:40px;
     width:200px;
 }
+/* 입력 텍스트필드 */
 .input_M {
     height:40px;
     width:300px;

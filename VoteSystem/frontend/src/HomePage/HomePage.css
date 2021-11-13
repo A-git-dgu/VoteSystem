@@ -1,8 +1,10 @@
+/* 화면 반반 */
 .Home_Manage {
     height:100vh;
     width:50%;
 
     float:left;
+    position:relative;
 
     text-align:center;
     background-color:rgb(255, 186, 186);
@@ -12,7 +14,143 @@
     width:50%;
 
     float:left;
+    position:relative;
 
     text-align:center;
     background-color:rgb(167, 244, 229);
+}
+/* Title Logo */
+.Home_Nav {
+    height:80px;
+    width:270px;
+
+    color:rgb(0, 0, 0);
+    position:absolute;
+}
+.Home_Title {
+    height:50px;
+    margin-top:15px;
+    margin-left:15px;
+    font-size:30px;
+    font-weight:bold;
+
+    float:left;
+}
+.Home_Logo {
+    width:40px;
+    heigh:40px;
+
+    margin-top:10px;
+    margin-left:20px;
+
+    object-fit:cover;
+    float:left;
+}
+/* Manager, Voter 기능 및 png : middle */
+.Home_Middle {
+    height:55vh;
+    width:100%;
+
+    font-size:22px;
+    font-weight:bold;
+    color:rgb(0,0,0);
+
+    bottom:35vh;
+    position:absolute;
+}
+/* Manager, Voter의 각 기능 text */
+.Manage_Cando {
+    height:300px;
+    width:200px;
+    margin-top:130px;
+    margin-left:150px;
+
+    position:absolute;
+}
+.Vote_Cando {
+    height:300px;
+    width:200px;
+    margin-top:130px;
+    margin-right:150px;
+
+    right:0px;
+    position:absolute;
+}
+/* text p */
+.Cando {
+    text-align:left;
+}
+.Cando.. {
+    font-weight:bold;
+    color:rgb(0,0,0);
+}
+/* 이미지 CSS */
+.ManageImg {
+    height:200px;
+    width:200px;
+    margin-bottom:100px;
+    margin-right:150px;
+
+    right:0px;
+    bottom:0px;
+    position:absolute;
+}
+.VoteImg {
+    height:200px;
+    width:200px;
+    margin-bottom:100px;
+    margin-left:150px;
+
+    left:0px;
+    bottom:0px;
+    position:absolute;
+}
+
+/* 밑에 삼각형 무늬 */
+.Home_Manage_tri {
+    height:0px;
+    width:0px;
+    border-bottom:35vh solid rgb(255, 139, 139);
+    border-left:100vh solid rgb(255, 186, 186);
+    border-right:0px solid transparent;
+
+    right:0px;
+    bottom:0px;
+
+    position:absolute;
+}
+.Home_Vote_tri {
+    height:0px;
+    width:0px;
+    border-bottom:35vh solid rgb(91, 223, 198);
+    border-left:0px solid transparent;
+    border-right:100vh solid rgb(167, 244, 229);
+
+    left:0px;
+    bottom:0px;
+
+    position:absolute;
+}
+/* ~~~로 입장하기 출력 */
+.Enter_Manager {
+    height:50px;
+    width:400px;
+
+    text-align:center;
+    color:rgb(0,0,0);
+
+    right:0px;
+    bottom:0px;
+    position:absolute;
+}
+.Enter_Voter {
+    height:50px;
+    width:400px;
+
+    text-align:center;
+    color:rgb(0,0,0);
+
+    left:0px;
+    bottom:0px;
+    position:absolute;
 }
