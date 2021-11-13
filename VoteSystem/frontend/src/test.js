@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import CandidateInfo from './Candidate/candidate_info';
-//import Homepage from './Homepage/homepage'
+import PossibleVoters from './PossibleVoters/possible_voters';
+
 function Test() {
   return (
-    <CandidateInfo/>
+    <PossibleVoters/>
   );
 }
 export default Test;
