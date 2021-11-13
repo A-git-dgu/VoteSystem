@@ -5,8 +5,6 @@ function Main() {
     return (
         <div>
             <Nav Type={"Manage"}/>
-            <br/>
-            <p> Main Page </p>
         </div>
     );
 }

@@ -1,14 +1,39 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import Button from '@mui/material/Button';
 import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
 import styles from './candidate_info.css';
+import Nav from '../Main/Main'
+import axios from 'axios'
 
 export default function CandidateInfo() {
+
+    let [elections, setElections] = useState([]);
+
+    // 통신 메서드
+    const searchApi = async()=> {
+        const url = "http://localhost:8000/getElection";
+        await axios.get(url)
+        .then(function(response) {
+            setElections(response.data);
+            console.log("성공");
+        })
+        .catch(function(error) {
+            console.log("실패");
+        })
+
+    };
+
+    useEffect(()=>{
+        searchApi();
+    }, [])
+    console.log(elections)
+
   return (
   <>
+    <Nav/>
     <h3 id="title">후보자 등록</h3>
       <form action="" method="post">
         <table id="table" width="100%">
@@ -17,6 +42,12 @@ export default function CandidateInfo() {
                     <p>선거 선택
                         <NativeSelect default="select_election">
                             <option value={"select_election"}>-- 선거 선택 --</option>
+                            if(elections.length>0){
+                                elections.map((election) => (
+                                <option>{election.name}</option>
+
+                                ))
+                            }
                         </NativeSelect>
                     </p>
                     <p>이름 <Input placeholder="내용을 입력하세요." /></p>

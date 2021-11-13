@@ -14,3 +14,15 @@ class UserSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     address = serializers.CharField()
     phonenumber = serializers.IntegerField()
+
+class ElectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Election
+        fields = ('electionnumber', 'name','type', 'start_date', 'end_date', 'endroll_start', 'endroll_end')
+    electionnumber = serializers.IntegerField()
+    name = serializers.CharField()
+    type = serializers.CharField()
+    start_date = serializers.DateTimeField()
+    end_date = serializers.DateTimeField()
+    endroll_start = serializers.DateTimeField()
+    endroll_end = serializers.DateTimeField()
