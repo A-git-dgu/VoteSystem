@@ -26,3 +26,16 @@ class ElectionSerializer(serializers.ModelSerializer):
     end_date = serializers.DateTimeField()
     endroll_start = serializers.DateTimeField()
     endroll_end = serializers.DateTimeField()
+
+class CandidateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Election
+        fields = ('candidate_id', 'election_id','candidate_ssn', 'email', 'introduceself','electionpledge', 'carrer', 'approvalstate')
+    candidate_id = serializers.IntegerField()
+    election = serializers.IntegerField()  # Field name made lowercase.
+    candidate_ssn = serializers.CharField()
+    email = serializers.CharField()
+    introduceself = serializers.CharField()
+    electionpledge = serializers.CharField()
+    carrer = serializers.CharField()
+    approvalstate = serializers.CharField()

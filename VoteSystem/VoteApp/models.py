@@ -18,6 +18,21 @@ class Admin(models.Model):
         managed = False
         db_table = 'admin'
 
+class Candidateinfo(models.Model):
+    candidate_id = models.AutoField(primary_key=True)
+    election = models.ForeignKey('Election', models.DO_NOTHING, db_column='Election_id')  # Field name made lowercase.
+    candidate_ssn = models.ForeignKey('User', models.DO_NOTHING, db_column='candidate_ssn')
+    email = models.CharField(max_length=30)
+    introduceself = models.TextField(blank=True, null=True)
+    electionpledge = models.TextField(blank=True, null=True)
+    carrer = models.TextField(blank=True, null=True)
+    approvalstate = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'candidateinfo'
+
+
 class Election(models.Model):
     electionnumber = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30)

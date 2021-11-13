@@ -8,7 +8,7 @@ import PossibleVoters from './PossibleVoters/possible_voters';
 
 function Test() {
   return (
-    <PossibleVoters/>
+    <CandidateInfo/>
   );
 }
 export default Test;

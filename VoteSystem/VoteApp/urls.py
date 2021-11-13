@@ -4,5 +4,6 @@ app_name = 'Vote_app'
 urlpatterns = [
     path('', include('rest_framework.urls', namespace='rest_framework_category')),
     path('getUser', views.getUserApi),
-    path('getElection', views.getElectionApi)
+    path('getElection', views.getElectionApi),
+    path('insertCandidate', views.insertCandidate)
 ]

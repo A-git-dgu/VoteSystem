@@ -4,6 +4,10 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from .models import Candidateinfo
+from .models import User
+from .models import Election
+
 from .serializers import UserSerializer
 from .serializers import ElectionSerializer
 from django.db import connection
@@ -20,7 +24,7 @@ def getUserApi(request):
         users = []
         for user in datas:
             row = {
-                'user_ssn':user[0],
+                'user_ssn':user[0][:6],
                 'id':user[1],
                 'pwd':user[2],
                 'name':user[3],
@@ -56,3 +60,27 @@ def getElectionApi(request):
 
         sendData=ElectionSerializer(elections, many=True).data
         return Response(sendData, status=200)
+
+@api_view(['PUT'])
+def insertCandidate(request):
+    if request.method=='PUT':
+        try:
+            print(request.data)
+            u = User.objects.get(user_ssn=request.data['candidate_ssn'])
+            e = Election.objects.get(electionnumber=request.data['election_id'])
+            queryset = Candidateinfo.objects.create(
+                candidate_id=None,
+                election=e,
+                candidate_ssn=u,
+                email=request.data['email'],
+                introduceself=request.data['introduceself'],
+                electionpledge=request.data['electionpledge'],
+                carrer=request.data['carrer'],
+                approvalstate=0
+            )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)
+
+
