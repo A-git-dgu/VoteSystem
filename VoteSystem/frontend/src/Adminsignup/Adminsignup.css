@@ -1,0 +1,29 @@
+
+#table {
+    border-spacing: 70px 0px;
+}
+
+#left_td {
+    text-align: right;
+    padding: 10px;
+}
+#right_td {
+    text-align: left;
+}
+.ssn {
+    width:71px;
+}
+#bottom_button {
+    display: block;
+    align: center;
+}
+
+.Button {
+    font-size:20px;
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+    background-color:rgb(91, 223, 198);
+}
