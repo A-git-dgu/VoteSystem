@@ -1,0 +1,49 @@
+.Outer_M {
+    height:100vh;
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    background-color:rgb(255, 186, 186);
+}
+.Inter_M {
+    height:500px;
+    width:600px;
+}
+.Button_M {
+    font-size:20px;
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+    background-color:rgb(255, 139, 139);
+}
+#mark_M {
+    margin:5px;
+    height:40px;
+    width:75px;
+}
+#loginButton_M {
+    height:40px;
+    width:100px;
+}
+#SignUpButton_M {
+    position:absolute;
+    right:100px;
+    bottom:100px;
+
+    height:40px;
+    width:200px;
+}
+.input_M {
+    height:40px;
+    width:300px;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
