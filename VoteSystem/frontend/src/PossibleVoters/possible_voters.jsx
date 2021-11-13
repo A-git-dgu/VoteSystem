@@ -46,6 +46,10 @@ export default function DataTable() {
         checkboxSelection
       />
     </div>
+    <div>
+        <Button variant="contained"
+        style={{position: 'fixed', bottom: '10px', right:'10px'}}>유권자 명부 등록</Button>
+    </div>
     </>
   );
 }
