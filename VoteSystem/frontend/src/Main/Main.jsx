@@ -1,6 +1,5 @@
 import React from 'react';
 import Nav from './Nav';
-import IDtextbox from '../ID_textbox';
 
 function Main() {
     return (
