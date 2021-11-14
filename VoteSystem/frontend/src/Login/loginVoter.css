@@ -13,11 +13,16 @@
 /* 실제 창 */
 .Inter_V {
     height:500px;
-    width:600px;
+    width:480px;
+}
+/* ~~~로 입장하기 */
+#Login_Title_V {
+    font-size:45px;
+    font-weight:bold;
 }
 /* 버튼 공통 CSS */
 .Button_V {
-    font-size:20px;
+    font-size:25px;
     font-weight:bold;
 
     border:0;
@@ -27,14 +32,16 @@
 }
 /* ID, PWD 디자인 버튼 */
 #mark_V {
-    margin:5px;
     height:40px;
-    width:75px;
+    width:120px;
+    margin-right:5px;
+
+    float:left;
 }
 /* '입장' 버튼 */
 #loginButton_V {
-    height:40px;
-    width:100px;
+    height:45px;
+    width:120px;
 }
 /* '회원가입' 버튼 */
 #SignUpButton_V {
@@ -42,15 +49,17 @@
     right:100px;
     bottom:100px;
 
-    height:40px;
-    width:200px;
+    height:45px;
+    width:240px;
 }
-/* 입력 텍스트필드 */
+/* 입력 텍스트필드 text */
 .input_V {
     height:40px;
-    width:300px;
+    width:350px;
 
     border:0;
     outline:0;
     border-radius: 5px;
+
+    float:left;
 }
