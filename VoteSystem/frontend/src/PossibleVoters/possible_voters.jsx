@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios'
 import Button from '@mui/material/Button';
-import Nav from '../Main/Main'
+import Nav from '../Main/main'
 
 const columns = [
   { field: 'name', headerName: '이름', width: '200' },

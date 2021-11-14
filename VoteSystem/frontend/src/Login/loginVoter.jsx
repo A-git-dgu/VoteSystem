@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Login_Voter.css'
+import styles from './loginVoter.css'
 
-function Login_Voter() {
+function loginVoter() {
     return (
         <div className="Outer_V">
             <div className="Inter_V">
@@ -23,4 +23,4 @@ function Login_Voter() {
     );
 }
 
-export default Login_Voter;
+export default loginVoter;

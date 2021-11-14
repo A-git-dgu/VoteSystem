@@ -4,8 +4,8 @@ import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
-import styles from './candidate_info.css';
-import Nav from '../Main/Main'
+import styles from './candidateInfo.css';
+import Nav from '../Main/main'
 import axios from 'axios'
 
 export default function CandidateInfo() {
@@ -62,7 +62,7 @@ export default function CandidateInfo() {
 
   return (
   <>
-    <Nav/>
+    <nav/>
     <h3 id="title">후보자 등록</h3>
       <form action="" method="post">
         <table id="table" width="100%">

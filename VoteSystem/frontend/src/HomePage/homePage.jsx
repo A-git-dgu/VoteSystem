@@ -1,13 +1,13 @@
 import React from 'react';
-import styles from './HomePage.css';
+import styles from './homePage.css';
 
-import Logo from '../Img/Logo.png';
-import ManageImg from '../Img/Home_Manage.png';
-import VoteImg from '../Img/Home_Vote.png';
+import Logo from '../Img/logo.png';
+import ManageImg from '../Img/homeManage.png';
+import VoteImg from '../Img/homeVote.png';
 
 import { Link } from 'react-router-dom';
 
-function HomePage() {
+function homePage() {
     return (
     <body>
         <Link to="/loginManage">
@@ -56,4 +56,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default homePage;

@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Test from './test'
-import Main from './Main/Main';
+import Main from './Main/main';
 
-import HomePage from './HomePage/HomePage';
-import Login_Voter from './Login/Login_Voter';
-import Login_Manage from './Login/Login_Manage';
+import HomePage from './HomePage/homePage';
+import LoginVoter from './Login/loginVoter';
+import LoginManage from './Login/loginManage';
 
-import Candidate_Info from './Candidate/candidate_info';
+import CandidateInfo from './Candidate/candidate_info';
 import AdminSignup from './Adminsignup/Adminsignup';
 
 function App() {
@@ -16,10 +16,10 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<HomePage/>} />
-                <Route path="/loginVoter" element={<Login_Voter/>} />
-                <Route path="/loginManage" element={<Login_Manage/>} />
-                <Route path="/Adminsignup" element={<AdminSignup/>} />
-                <Route path="/candidate_info" element={<Candidate_Info/>} />
+                <Route path="/loginVoter" element={<LoginVoter/>} />
+                <Route path="/loginManage" element={<LoginManage/>} />
+                <Route path="/adminSignup" element={<AdminSignup/>} />
+                <Route path="/candidate_info" element={<CandidateInfo/>} />
             </Routes>
         </BrowserRouter>
     );

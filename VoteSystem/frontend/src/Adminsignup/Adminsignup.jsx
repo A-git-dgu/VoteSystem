@@ -7,7 +7,7 @@ import DateRangePicker from '@mui/lab/DateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Box from '@mui/material/Box';
-import Nav from '../Main/Main';
+import Nav from '../Main/main';
 
 import styles from './Adminsignup.css';
 
