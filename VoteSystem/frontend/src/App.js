@@ -9,16 +9,17 @@ import Login_Voter from './Login/Login_Voter';
 import Login_Manage from './Login/Login_Manage';
 
 import Candidate_Info from './Candidate/candidate_info';
+import AdminSignup from './Adminsignup/Adminsignup';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                 <Route path="/" element={<HomePage/>} />
-                 <Route path="/loginVoter" element={<Login_Voter/>} />
-                 <Route path="/loginManage" element={<Login_Manage/>} />
-
-                 <Route path="/candidate_info" element={<Candidate_Info/>} />
+                <Route path="/" element={<HomePage/>} />
+                <Route path="/loginVoter" element={<Login_Voter/>} />
+                <Route path="/loginManage" element={<Login_Manage/>} />
+                <Route path="/Adminsignup" element={<AdminSignup/>} />
+                <Route path="/candidate_info" element={<Candidate_Info/>} />
             </Routes>
         </BrowserRouter>
     );

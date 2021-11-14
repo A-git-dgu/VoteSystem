@@ -2,6 +2,8 @@ import React from 'react';
 import styles from './Login_Manage.css'
 import Img from '../Img/Logo.png'
 
+import { Link } from 'react-router-dom';
+
 function Login_Manage() {
     return (
         <div className="Outer_M">
@@ -16,8 +18,9 @@ function Login_Manage() {
                 <br/><br/><br/><br/>
                 <button className="Button_M" id="loginButton_M">입장</button>
             </div>
+            <Link to="/Adminsignup">
             <button className="Button_M" id="SignUpButton_M">선거개설</button>
-
+            </Link>
         </div>
     );
 }
