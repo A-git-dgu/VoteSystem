@@ -1,0 +1,52 @@
+#title {
+    position: absolute;
+    left: 80px;
+    margin: 30px;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+#outer_form {
+    position: absolute;
+    top: 150px;
+    padding: 0px 80px 80px 80px;
+}
+
+#form_border {
+    display: table-cell;
+    padding: 3%;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+
+#left_form {
+    float: left;
+    width: 29%;
+}
+
+#right_form {
+    float: right;
+    width: 69%;
+}
+
+#reg_button {
+    position: fixed;
+    bottom: 10px;
+}
+
+.each_form {
+    width: 100%;
+    display: inline-block;
+    text-align: right;
+    margin: 0% 0% 5%;
+}
+
+.input_form {
+    width: 75%;
+    margin: 0% 0% 0% 2%;
+}
+
+div.ssn {
+    width: 35%;
+    margin: 0% 0% 0% 2%;
+}
