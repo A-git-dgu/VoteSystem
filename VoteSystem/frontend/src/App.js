@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Test from './test'
 import Main from './Main/main';
 
 import HomePage from './HomePage/homePage';
 import LoginVoter from './Login/loginVoter';
 import LoginManage from './Login/loginManage';
 
-import CandidateInfo from './Candidate/candidate_info';
+import CandidateInput from './Candidate/candidateInput';
 import AdminSignup from './Adminsignup/Adminsignup';
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
                 <Route path="/loginVoter" element={<LoginVoter/>} />
                 <Route path="/loginManage" element={<LoginManage/>} />
                 <Route path="/adminSignup" element={<AdminSignup/>} />
-                <Route path="/candidate_info" element={<CandidateInfo/>} />
+                <Route path="/candidateInput" element={<CandidateInput/>} />
             </Routes>
         </BrowserRouter>
     );

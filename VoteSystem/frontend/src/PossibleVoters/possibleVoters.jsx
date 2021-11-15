@@ -12,7 +12,7 @@ const columns = [
 ];
 
 
-export default function DataTable() {
+export default function PossibleVoters() {
     let [users, setUsers] = useState([]);
 
     // 통신 메서드
