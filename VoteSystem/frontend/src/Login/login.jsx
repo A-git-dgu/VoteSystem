@@ -34,7 +34,7 @@ function Login({Type}) {
             alert(response.data.msg)
         })
         .catch(function(error) {
-            alert('뭐야이건..')
+            alert('서버연결 실패')
         })
     }
 
@@ -49,7 +49,7 @@ function Login({Type}) {
             alert(response.data.msg)
         })
         .catch(function(error) {
-            alert('뭐야이건..')
+            alert('서버연결 실패')
         })
     }
 

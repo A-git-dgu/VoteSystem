@@ -4,7 +4,7 @@ import Nav from './nav';
 function Main() {
     return (
         <div>
-            <Nav Type={"Manage"}/>
+            <Nav Type={"Admin"}/>
         </div>
     );
 }
