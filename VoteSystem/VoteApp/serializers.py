@@ -6,7 +6,7 @@ from .models import Admin
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_ssn', 'id','pwd', 'name', 'name', 'address', 'phonenumber')
+        fields = ('user_ssn', 'id','pwd', 'name', 'address', 'phonenumber')
 
     user_ssn = serializers.CharField()
     id = serializers.CharField()

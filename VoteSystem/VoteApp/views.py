@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view
 from .models import Candidateinfo
 from .models import User
 from .models import Election
+from .models import Admin
 
 from .serializers import UserSerializer
 from .serializers import ElectionSerializer
@@ -83,4 +84,35 @@ def insertCandidate(request):
             print(e)
             return Response({'msg': 'failed'}, status=204)
 
+@api_view(['POST'])
+def checkAdminLogin(request):
+    if request.method=='POST':
+        try:
+            try:
+                findID = Admin.objects.get(id=request.data['id'])
+                print(findID.pwd)
+                if findID.pwd == request.data['pwd']:
+                    return Response({'msg':'Login Success'})
+                else:
+                    return Response({'msg':'PWD not equal'})
+            except Exception as e:
+                return Response({'msg': 'not found ID'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)
 
+@api_view(['POST'])
+def checkVoterLogin(request):
+    if request.method=='POST':
+        try:
+            try:
+                findID = User.objects.get(id=request.data['id'])
+                if findID.pwd == request.data['pwd']:
+                    return Response({'msg':'Login Success'})
+                else:
+                    return Response({'msg':'PWD not equal'})
+            except Exception as e:
+                return Response({'msg': 'not found ID'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)

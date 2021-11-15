@@ -1,0 +1,80 @@
+/* 전체 화면 */
+.Outer {
+    height:100vh;
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+#M {
+    background-color:rgb(255, 186, 186);
+}
+#V {
+    background-color:rgb(167, 244, 229);
+}
+.Button_M{
+    font-size:25px;
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+
+    background-color:rgb(255, 139, 139);
+}
+.Button_V{
+    font-size:25px;
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+
+    background-color:rgb(91, 223, 198);
+}
+/* 실제 창 */
+.Inter {
+    height:500px;
+    width:480px;
+}
+/* ~~~로 입장하기 */
+#Login_Title {
+    font-size:45px;
+    font-weight:bold;
+}
+/* ID, PWD 디자인 버튼 */
+#mark {
+    height:40px;
+    width:120px;
+    margin-right:5px;
+
+    float:left;
+}
+/* '입장' 버튼 */
+#loginButton {
+    height:45px;
+    width:120px;
+}
+/* '회원가입' 버튼 */
+#SignUpButton {
+    position:absolute;
+    right:100px;
+    bottom:100px;
+
+    height:45px;
+    width:240px;
+}
+/* 입력 텍스트필드 text */
+.input {
+    height:40px;
+    width:350px;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+
+    float:left;
+}
