@@ -8,7 +8,7 @@ import LoginVoter from './Login/loginVoter';
 import LoginManage from './Login/loginManage';
 
 import CandidateInput from './Candidate/candidateInput';
-import AdminSignup from './Adminsignup/Adminsignup';
+import AdminSignup from './AdminSignup/AdminSignup';
 
 function App() {
     return (

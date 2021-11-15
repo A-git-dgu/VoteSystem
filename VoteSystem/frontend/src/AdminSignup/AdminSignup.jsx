@@ -9,7 +9,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import Box from '@mui/material/Box';
 import Nav from '../Main/main';
 
-import styles from './Adminsignup.css';
+import styles from './AdminSignup.css';
 
 function Adminsignup() {
     const [value, setValue] = React.useState([null, null]);
