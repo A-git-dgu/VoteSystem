@@ -67,8 +67,10 @@ export default function SignupVoter() {
     return (
         <>
             <Nav Type={"Voter"}/>
-            <div id="title_signup">회원가입</div>
+
             <div id="outer_form_signup">
+            <div id="container">
+            <div id="title2"><p id="title_signup">회원가입</p></div>
                 <div id="form_border_signup">
                     <div id="left_form_signup">
                         <div className="each_form_signup">
@@ -113,6 +115,7 @@ export default function SignupVoter() {
                     <div id="reg_button_signup">
                         <button className="signupPage_Button" id="requestSignup" onClick={requestSignup}>회원가입</button>
                     </div>
+                </div>
                 </div>
                 <p>{okID}</p>
                 <p>{okSSN}</p>
