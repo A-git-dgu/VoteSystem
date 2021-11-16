@@ -13,9 +13,45 @@ import Nav from '../Main/nav';
 
 import styles from './signupAdmin.css';
 
+import axios from 'axios';
+
 export default function SignupAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
+
+    function requestOpenElection() {
+        const url = "http://localhost:8000/requestOpenElection";
+
+        axios.put(url,{
+            election_name:document.getElementById('election_name').value,
+            election_type:document.getElementById('select_election').value,
+            start_date:document.getElementById('start').value,
+            end_date:document.getElementById('end').value,
+            enroll_start:document.getElementById('enroll_start').value,
+            enroll_end:document.getElementById('enroll_end').value,
+            institution:document.getElementById('institution').value,
+            admin_ssn:document.getElementById('admin_fssn').value+'-'+document.getElementById('admin_lssn').value,
+            admin_id:document.getElementById('admin_id').value,
+            admin_pwd:document.getElementById('admin_pwd').value,
+            admin_name:document.getElementById('admin_name').value,
+            admin_phonenumber:document.getElementById('admin_fphone').value+document.getElementById('admin_mphone').value+document.getElementById('admin_lphone').value,
+            admin_email:document.getElementById('admin_email').value
+        })
+        .then(function(response) {
+            if(response.status===204){
+                alert('선거개설 실패')
+            }
+            else {
+                alert('선거개설 성공')
+                console.log("성공");
+            }
+        })
+        .catch(function(error) {
+            alert('서버 연결실패')
+            console.log("실패");
+        })
+    };
+
     return (
         <>
             <Nav Type={"Admin"}/>
@@ -32,10 +68,10 @@ export default function SignupAdmin() {
                        </div>
                        <div className="each_form_signup">
                        <div className="article_signup">선거 종류 </div>
-                            <NativeSelect default="select_election" className="input_form_signup">
+                            <NativeSelect id="select_election" default="select_election" className="input_form_signup">
                                 <option value={"select_election"}>-- 선거 선택 --</option>
-                                <option id="TF" value={"select_election"}>  찬반 투표  </option>
-                                <option id="who" value={"select_election"}>  후보자 투표  </option>
+                                <option value={"0"}>  찬반 투표  </option>
+                                <option value={"1"}>  후보자 투표  </option>
                             </NativeSelect>
                        </div>
                        <div className="each_form_signup">
@@ -124,7 +160,7 @@ export default function SignupAdmin() {
                         </div>
                     </div>
                     <div id="reg_button_signup">
-                        <button className="signupPage_Button" id="requestSignup1">선거 개설</button>
+                        <button className="signupPage_Button" id="requestSignup1" onClick={requestOpenElection}>선거 개설</button>
                     </div>
                 </div>
                 </div>

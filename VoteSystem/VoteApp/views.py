@@ -15,6 +15,8 @@ from .serializers import PossiblevoterSerializer
 from .serializers import CandidateSerializer
 from django.db import connection
 
+from datetime import datetime
+
 @api_view(['GET'])
 def getUser(request):
     if request.method=='GET':
@@ -95,6 +97,7 @@ def insertCandidate(request):
             print(e)
             return Response({'msg': 'failed'}, status=204)
 
+# Login
 @api_view(['POST'])
 def checkAdminLogin(request):
     if request.method=='POST':
@@ -128,6 +131,7 @@ def checkVoterLogin(request):
             print(e)
             return Response({'msg': 'failed'}, status=204)
 
+# 선거개설 및 회원가입
 @api_view(['PUT'])
 def requestSignup(request):
     if request.method=='PUT':
@@ -141,6 +145,37 @@ def requestSignup(request):
                 address=request.data['address'],
                 phonenumber=request.data['phonenumber'],
                 email=request.data['email']
+            )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)
+
+@api_view(['PUT'])
+def requestOpenElection(request):
+    if request.method == 'PUT':
+        try:
+            print(request.data)
+            print(request.data['election_type'])
+            print(request.data['start_date'])
+            print("transfer")
+            print(datetime.strptime(request.data['start_date'], "%m/%d/%Y"))
+            print("==")
+            queryset = Election.objects.create(
+                election_name=request.data['election_name'],
+                election_type=request.data['election_type'],
+                start_date=datetime.strptime(request.data['start_date'], "%m/%d/%Y"),
+                end_date=datetime.strptime(request.data['end_date'], "%m/%d/%Y"),
+                enroll_start=datetime.strptime(request.data['enroll_start'], "%m/%d/%Y"),
+                enroll_end=datetime.strptime(request.data['enroll_end'], "%m/%d/%Y"),
+
+                institution=request.data['institution'],
+                admin_ssn=request.data['admin_ssn'],
+                admin_id=request.data['admin_id'],
+                admin_pwd=request.data['admin_pwd'],
+                admin_name=request.data['admin_name'],
+                admin_phonenumber=request.data['admin_phonenumber'],
+                admin_email=request.data['admin_email']
             )
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
