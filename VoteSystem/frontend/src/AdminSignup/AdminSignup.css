@@ -1,6 +1,6 @@
-
 #table {
     border-spacing: 70px 0px;
+    border: 1px solid #BDBDBD;
 }
 
 #left_td {
@@ -9,6 +9,7 @@
 }
 #right_td {
     text-align: left;
+    padding: 0px;
 }
 .ssn {
     width:71px;
@@ -16,6 +17,8 @@
 #bottom_button {
     display: block;
     align: center;
+     margin:auto;
+     height: 30px;
 }
 
 .Button {
@@ -26,4 +29,28 @@
     outline:0;
     border-radius: 5px;
     background-color:rgb(91, 223, 198);
+}
+#outer_form {
+    position: absolute;
+    top: 60px;
+    padding: 0px 80px 80px 80px;
+    align: center;
+    margin:auto;
+}
+
+. margin1{
+    height:100px;
+}
+.admin_ssn {
+    width: 21.25%;
+    padding: 0% 0% 0% 2%;
+}
+#checkInput_signup {
+    height:30px;
+    width:80px;
+    margin-left:5%;
+
+    font-size:15px;
+    color:rgb(255, 255, 255);
+    background-color:rgb(64, 64, 64);
 }
