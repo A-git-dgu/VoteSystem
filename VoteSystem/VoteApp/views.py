@@ -100,11 +100,8 @@ def checkAdminLogin(request):
     if request.method=='POST':
         try:
             try:
-                print(request.data['id'])
                 findID = Election.objects.get(admin_id=request.data['id'])
-                print(findID.id)
-                print(findID.pwd)
-                if findID.pwd == request.data['pwd']:
+                if findID.admin_pwd == request.data['pwd']:
                     return Response({'msg':'Login Success'})
                 else:
                     return Response({'msg':'PWD not equal'})
