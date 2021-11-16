@@ -31,7 +31,8 @@ export default function SignupVoter() {
             return;
         }
         else if (document.getElementById('id').value===""||document.getElementById('pwd').value===""||document.getElementById('pwd2').value===""||
-        document.getElementById('name').value===""||document.getElementById('address').value===""||document.getElementById('phonenumber').value==="") {
+        document.getElementById('name').value===""||document.getElementById('address').value===""||document.getElementById('phonenumber').value===""||
+        document.getElementById('email').value==="") {
             alert("모든 항목을 작성해주세요.");
             return;
         }
@@ -47,7 +48,8 @@ export default function SignupVoter() {
             pwd:document.getElementById('pwd').value,
             name:document.getElementById('name').value,
             address:document.getElementById('address').value,
-            phonenumber:document.getElementById('phonenumber').value
+            phonenumber:document.getElementById('phonenumber').value,
+            email:document.getElementById('email').value
         })
         .then(function(response) {
             if(response.status===204){

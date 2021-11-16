@@ -34,14 +34,12 @@ export default function CandidateInput() {
     function insertApi(){
         const url = "http://localhost:8000/insertCandidate";
         axios.put(url,{
-                election_id: document.getElementById('election').value,
+                election_num: document.getElementById('election').value,
                 candidate_ssn: document.getElementById('fssn').value+'-'+document.getElementById('lssn').value,
                 email: document.getElementById('email').value,
                 introduceself: document.getElementById('introduceself').value,
                 electionpledge:document.getElementById('electionpledge').value,
                 carrer: document.getElementById('carrer').value
-
-
             }
         )
         .then(function(response) {
@@ -73,7 +71,7 @@ export default function CandidateInput() {
                                     <option value={"select_election"}>-- 선거 선택 --</option>
                                         if(elections.length>0){
                                             elections.map((election) => (
-                                    <option value={election.electionnumber}>{election.name}</option>
+                                    <option value={election.election_num}>{election.election_name}</option>
                                     ))
                                     }
                                 </NativeSelect>

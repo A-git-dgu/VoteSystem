@@ -4,56 +4,61 @@ from django.db import models
 from django.db import models
 
 # Create your models here.
-class Admin(models.Model):
-    electionnumber = models.ForeignKey('Election', models.DO_NOTHING, db_column='electionnumber')
-    admin_ssn = models.CharField(primary_key=True, max_length=14)
-    id = models.CharField(max_length=30)
-    pwd = models.CharField(max_length=30)
-    name = models.CharField(max_length=10)
-    address = models.CharField(max_length=50)
-    phonenumber = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=30)
-
-    class Meta:
-        managed = False
-        db_table = 'admin'
-
-class Candidateinfo(models.Model):
-    candidate_id = models.AutoField(primary_key=True)
-    election = models.ForeignKey('Election', models.DO_NOTHING, db_column='Election_id')  # Field name made lowercase.
+class Candidate(models.Model):
+    election_num = models.OneToOneField('Election', models.DO_NOTHING, db_column='election_num', primary_key=True)
     candidate_ssn = models.ForeignKey('User', models.DO_NOTHING, db_column='candidate_ssn')
-    email = models.CharField(max_length=30)
-    introduceself = models.TextField(blank=True, null=True)
-    electionpledge = models.TextField(blank=True, null=True)
-    carrer = models.TextField(blank=True, null=True)
-    approvalstate = models.IntegerField(blank=True, null=True)
+    candidate_email = models.CharField(max_length=50)
+    introduce_self = models.CharField(max_length=500)
+    election_pledge = models.CharField(max_length=1000)
+    career = models.CharField(max_length=1000)
+    approval_state = models.IntegerField()
 
     class Meta:
         managed = False
-        db_table = 'candidateinfo'
+        db_table = 'candidate'
+        unique_together = (('election_num', 'candidate_ssn'),)
 
 
 class Election(models.Model):
-    electionnumber = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=30)
-    type = models.CharField(max_length=15)
+    election_num = models.AutoField(primary_key=True)
+    election_name = models.CharField(max_length=50)
+    election_type = models.IntegerField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-    endroll_start = models.DateTimeField()
-    endroll_end = models.DateTimeField()
+    enroll_start = models.DateTimeField()
+    enroll_end = models.DateTimeField()
+    institution = models.CharField(max_length=30)
+    admin_ssn = models.CharField(max_length=15)
+    admin_id = models.CharField(unique=True, max_length=30)
+    admin_pwd = models.CharField(max_length=30)
+    admin_name = models.CharField(max_length=10)
+    admin_phonenumber = models.CharField(max_length=15)
+    admin_email = models.CharField(max_length=50)
 
     class Meta:
         managed = False
         db_table = 'election'
 
 
+class Possiblevoter(models.Model):
+    election_num = models.OneToOneField(Election, models.DO_NOTHING, db_column='election_num', primary_key=True)
+    voter_ssn = models.CharField(max_length=15)
+    voting_status = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'possiblevoter'
+        unique_together = (('election_num', 'voter_ssn'),)
+
+
 class User(models.Model):
-    user_ssn = models.CharField(primary_key=True, max_length=14)
+    user_ssn = models.CharField(primary_key=True, max_length=15)
     id = models.CharField(max_length=30)
     pwd = models.CharField(max_length=30)
     name = models.CharField(max_length=10)
-    address = models.CharField(max_length=50)
-    phonenumber = models.IntegerField(blank=True, null=True)
+    address = models.CharField(max_length=100)
+    phonenumber = models.CharField(max_length=15)
+    email = models.CharField(max_length=50)
 
     class Meta:
         managed = False

@@ -1,6 +1,7 @@
 drop table admin;
 drop table possiblevoter;
 drop table candidateinfo;
+drop table candidate;
 drop table user;
 drop table election;
 
@@ -31,17 +32,16 @@ admin_ssn VARCHAR(15) not null,
 admin_id varchar(30) not null,
 admin_pwd varchar(30) not null,
 admin_name varchar(10) not null,
-admin_address varchar(100) not null,
 admin_phonenumber varchar(15) not null,
-email varchar(50) not null,
+admin_email varchar(50) not null,
 unique(admin_id)
 );
-insert into election values(NULL,'동국대학교 총학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '000908-4444444','supiya0908','lee8018!','이시은','경기도 화성시','01055158018','supiya0908@naver.com');
+insert into election values(NULL,'동국대학교 총학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '000908-4444444','supiya0908','lee8018!','이시은','01055158018','supiya0908@naver.com');
 
-create table candidateinfo(
+create table candidate(
 election_num INT not null,
 candidate_ssn VARCHAR(15) not null,
-email VARCHAR(50) not null,
+candidate_email VARCHAR(50) not null,
 introduce_self VARCHAR(500) not null,
 election_pledge VARCHAR(1000) not null,
 career VARCHAR(1000) not null,
@@ -51,8 +51,8 @@ foreign key(candidate_ssn) references user (user_ssn) on update cascade,
 foreign key(election_num) references election (election_num) on update cascade
 );
 
-insert into candidateinfo values(1, '991115-2000000', 'aaa@dgu.kr', '후보자 a의 소개입니다.', '후보자 a의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
-insert into candidateinfo values(1, '001224-4000000', 'bbb@dgu.kr', '후보자 a의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
+insert into candidate values(1, '991115-2000000', 'aaa@dgu.kr', '후보자 a의 소개입니다.', '후보자 a의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
+insert into candidate values(1, '001224-4000000', 'bbb@dgu.kr', '후보자 a의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
 
 create table possiblevoter (
 election_num INT not null,

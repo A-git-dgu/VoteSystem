@@ -4,17 +4,19 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Candidateinfo
+from .models import Candidate
 from .models import User
 from .models import Election
-from .models import Admin
+from .models import Possiblevoter
 
 from .serializers import UserSerializer
 from .serializers import ElectionSerializer
+from .serializers import PossiblevoterSerializer
+from .serializers import CandidateSerializer
 from django.db import connection
 
 @api_view(['GET'])
-def getUserApi(request):
+def getUser(request):
     if request.method=='GET':
         cursor = connection.cursor()
         strSql = "SELECT * FROM user"
@@ -30,7 +32,8 @@ def getUserApi(request):
                 'pwd':user[2],
                 'name':user[3],
                 'address':user[4],
-                'phonenumber':user[5]
+                'phonenumber':user[5],
+                'email':user[6]
             }
             users.append(row)
 
@@ -38,7 +41,7 @@ def getUserApi(request):
         return Response(sendData, status=200)
 
 @api_view(['GET'])
-def getElectionApi(request):
+def getElection(request):
     if request.method=='GET':
         cursor = connection.cursor()
         strSql = "SELECT * FROM election"
@@ -49,13 +52,20 @@ def getElectionApi(request):
         elections = []
         for election in datas:
             row = {
-                'electionnumber': election[0],
-                'name': election[1],
-                'type':election[2],
-                'start_date': election[3],
-                'end_date': election[4],
-                'endroll_start': election[5],
-                'endroll_end' :election[6]
+                'election_num':election[0],
+                'election_name':election[1],
+                'election_type':election[2],
+                'start_date':election[3],
+                'end_date':election[4],
+                'enroll_start':election[5],
+                'enroll_end':election[6],
+                'institution':election[7],
+                'admin_ssn':election[8],
+                'admin_id':election[9],
+                'admin_pwd':election[10],
+                'admin_name':election[11],
+                'admin_phonenumber':election[12],
+                'admin_email':election[13]
             }
             elections.append(row)
 
@@ -67,17 +77,18 @@ def insertCandidate(request):
     if request.method=='PUT':
         try:
             print(request.data)
+            e = Election.objects.get(election_num=request.data['election_num'])
             u = User.objects.get(user_ssn=request.data['candidate_ssn'])
-            e = Election.objects.get(electionnumber=request.data['election_id'])
-            queryset = Candidateinfo.objects.create(
-                candidate_id=None,
-                election=e,
+            print(e)
+            print(u)
+            queryset = Candidate.objects.create(
+                election_num=e,
                 candidate_ssn=u,
-                email=request.data['email'],
-                introduceself=request.data['introduceself'],
-                electionpledge=request.data['electionpledge'],
-                carrer=request.data['carrer'],
-                approvalstate=0
+                candidate_email=request.data['email'],
+                introduce_self=request.data['introduceself'],
+                election_pledge=request.data['electionpledge'],
+                career=request.data['carrer'],
+                approval_state=0
             )
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
@@ -89,13 +100,16 @@ def checkAdminLogin(request):
     if request.method=='POST':
         try:
             try:
-                findID = Admin.objects.get(id=request.data['id'])
+                print(request.data['id'])
+                findID = Election.objects.get(admin_id=request.data['id'])
+                print(findID.id)
                 print(findID.pwd)
                 if findID.pwd == request.data['pwd']:
                     return Response({'msg':'Login Success'})
                 else:
                     return Response({'msg':'PWD not equal'})
             except Exception as e:
+                print(e)
                 return Response({'msg': 'not found ID'}, status=200)
         except Exception as e:
             print(e)
@@ -128,7 +142,8 @@ def requestSignup(request):
                 pwd=request.data['pwd'],
                 name=request.data['name'],
                 address=request.data['address'],
-                phonenumber=request.data['phonenumber']
+                phonenumber=request.data['phonenumber'],
+                email=request.data['email']
             )
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
@@ -136,19 +151,23 @@ def requestSignup(request):
             return Response({'msg': 'failed'}, status=204)
 
 @api_view(['POST'])
-def getCandidateApi(request):
+def getCandidate(request):
     if request.method=="POST":
-        cursor = connection.cursor()
-        strSql = "SELECT distinct electionnumber, name FROM candidateinfo, election where candidate_ssn=%s"
-        result = cursor.execute(strSql, [request.data['candidate_ssn']])
-        datas = cursor.fetchall()
-        connection.commit()
-        connection.close()
-        candidate_elections = []
-        for election in datas:
-            row = {
-                'electionnumber': election[0],
-                'name': election[1]
-            }
-            candidate_elections.append(row)
-        return Response(candidate_elections, status=200)
+        try:
+            cursor = connection.cursor()
+            strSql = "SELECT distinct candidate.election_num, election_name FROM candidate, election where candidate_ssn=%s"
+            result = cursor.execute(strSql, [request.data['candidate_ssn']])
+            datas = cursor.fetchall()
+            connection.commit()
+            connection.close()
+            candidate_elections = []
+            for election in datas:
+                row = {
+                    'election_num': election[0],
+                    'name': election[1]
+                }
+                candidate_elections.append(row)
+            return Response(candidate_elections, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)

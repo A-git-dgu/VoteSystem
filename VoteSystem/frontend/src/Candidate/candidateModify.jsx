@@ -15,6 +15,7 @@ export default function CandidateInput() {
     // 통신 메서드
     const searchApi = async()=> {
         const url = "http://localhost:8000/getCandidate";
+        alert("hi~")
         await axios.post(url, {'candidate_ssn': '991115-2000000'})
         .then(function(response) {
             setCandidateElections(response.data);
