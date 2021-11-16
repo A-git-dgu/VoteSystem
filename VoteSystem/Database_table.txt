@@ -1,0 +1,67 @@
+drop table admin;
+drop table possiblevoter;
+drop table candidateinfo;
+drop table user;
+drop table election;
+
+create table user(
+user_ssn varchar(15) primary key,
+id varchar(30) not null,
+pwd varchar(30) not null,
+name varchar(10) not null,
+address varchar(100) not null,
+phonenumber varchar(15) not null,
+email varchar(50) not null
+);
+
+insert into user values('991115-2000000','kimgaeun','kge','김가은','성균관대역','01012345678','kimgaeun@naver.com');
+insert into user values('001224-4000000','parkeve','pev','박이브','경기도 수원시 권선구 00동 0000아파트','01011112222','ev@dgu.co.kr');
+
+create table election (
+election_num INT auto_increment primary key,
+election_name VARCHAR(50) not null,
+election_type INT not null,
+start_date datetime not null,
+end_date datetime not null,
+enroll_start datetime not null,
+enroll_end datetime not null,
+
+institution VARCHAR(30) not null,
+admin_ssn VARCHAR(15) not null,
+admin_id varchar(30) not null,
+admin_pwd varchar(30) not null,
+admin_name varchar(10) not null,
+admin_address varchar(100) not null,
+admin_phonenumber varchar(15) not null,
+email varchar(50) not null,
+unique(admin_id)
+);
+insert into election values(NULL,'동국대학교 총학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '000908-4444444','supiya0908','lee8018!','이시은','경기도 화성시','01055158018','supiya0908@naver.com');
+
+create table candidateinfo(
+election_num INT not null,
+candidate_ssn VARCHAR(15) not null,
+email VARCHAR(50) not null,
+introduce_self VARCHAR(500) not null,
+election_pledge VARCHAR(1000) not null,
+career VARCHAR(1000) not null,
+approval_state INT(1) not null,
+primary key(election_num, candidate_ssn),
+foreign key(candidate_ssn) references user (user_ssn) on update cascade,
+foreign key(election_num) references election (election_num) on update cascade
+);
+
+insert into candidateinfo values(1, '991115-2000000', 'aaa@dgu.kr', '후보자 a의 소개입니다.', '후보자 a의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
+insert into candidateinfo values(1, '001224-4000000', 'bbb@dgu.kr', '후보자 a의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
+
+create table possiblevoter (
+election_num INT not null,
+voter_ssn varchar(15) not null,
+voting_status INT not null,
+primary key(election_num, voter_ssn),
+foreign key(election_num) references election (election_num) on update cascade
+);
+
+insert into possiblevoter values(1, '991115-2000000', 0);
+insert into possiblevoter values(1, '001224-4000000', 0);
+
