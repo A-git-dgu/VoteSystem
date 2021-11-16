@@ -79,7 +79,7 @@ function Login({Type}) {
 
             </div>
             {
-                Type=="Admin" && (<Link to='/adminSignup'><button className={buttonColor} id="SignUpButton">선거개설</button></Link>)
+                Type=="Admin" && (<Link to='/signupAdmin'><button className={buttonColor} id="SignUpButton">선거개설</button></Link>)
             }
             {
                 Type=="Voter" && (<Link to='/signupVoter'><button className={buttonColor} id="SignUpButton">회원가입</button></Link>)

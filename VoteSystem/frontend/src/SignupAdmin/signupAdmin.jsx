@@ -11,9 +11,9 @@ import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Nav from '../Main/nav';
 
-import styles from './AdminSignup.css';
+import styles from './signupAdmin.css';
 
-function Adminsignup() {
+export default function SignupAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
     return (
@@ -32,7 +32,7 @@ function Adminsignup() {
                        </div>
                        <div className="each_form_signup">
                        <div className="article_signup">선거 종류 </div>
-                            <NativeSelect default="select_election" >
+                            <NativeSelect default="select_election" className="input_form_signup">
                                 <option value={"select_election"}>-- 선거 선택 --</option>
                                 <option id="TF" value={"select_election"}>  찬반 투표  </option>
                                 <option id="who" value={"select_election"}>  후보자 투표  </option>
@@ -56,7 +56,7 @@ function Adminsignup() {
                                     renderInput={(startProps, endProps) => (
                                     <React.Fragment>
                                         <TextField id="start"{...startProps} />
-                                        <Box sx={{ mx: 2 }}> to </Box>
+                                        <Box sx={{ mx: 2, fontSize:18 }}> to </Box>
                                         <TextField id="end"{...endProps} />
                                     </React.Fragment>
                                     )}
@@ -65,7 +65,7 @@ function Adminsignup() {
                             </div>
                        </div>
                        <div className="each_form_signup">
-                            <p className="article_signup2"> 후보자 등록기간</p>
+                            <p className="article_signup_candi">후보자 등록기간</p>
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
@@ -78,7 +78,7 @@ function Adminsignup() {
                                     renderInput={(startProps, endProps) => (
                                        <React.Fragment>
                                             <TextField id="enroll_start"{...startProps} />
-                                            <Box sx={{ mx: 2 }}> to </Box>
+                                            <Box sx={{ mx: 2,fontSize:18 }}> to </Box>
                                             <TextField id="enroll_end"{...endProps} />
                                         </React.Fragment>
                                     )}
@@ -134,5 +134,3 @@ function Adminsignup() {
         </>
   );
 }
-
-export default Adminsignup;

@@ -9,7 +9,7 @@ import Login from './Login/login';
 import CandidateInput from './Candidate/candidateInput';
 import CandidateModify from './Candidate/candidateModify';
 
-import AdminSignup from './AdminSignup/AdminSignup';
+import SignupAdmin from './SignupAdmin/signupAdmin';
 import SignupVoter from './SignupVoter/signupVoter';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
                 <Route path="/loginVoter" element={<Login Type={"Voter"}/>} />
                 <Route path="/loginManage" element={<Login Type={"Admin"}/>} />
 
-                <Route path="/adminSignup" element={<AdminSignup/>} />
+                <Route path="/signupAdmin" element={<SignupAdmin/>} />
                 <Route path="/signupVoter" element={<SignupVoter/>} />
 
                 <Route path="/candidateInput" element={<CandidateInput/>} />
