@@ -116,3 +116,21 @@ def checkVoterLogin(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=204)
+
+@api_view(['PUT'])
+def requestSignup(request):
+    if request.method=='PUT':
+        try:
+            print(request.data)
+            queryset = User.objects.create(
+                user_ssn=request.data['user_ssn'],
+                id=request.data['id'],
+                pwd=request.data['pwd'],
+                name=request.data['name'],
+                address=request.data['address'],
+                phonenumber=request.data['phonenumber']
+            )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)

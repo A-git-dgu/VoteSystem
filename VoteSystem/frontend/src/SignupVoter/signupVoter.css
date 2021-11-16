@@ -1,0 +1,102 @@
+/* "회원가입" */
+#title_signup {
+    position: absolute;
+    left: 80px;
+    margin: 30px;
+    font-weight: bold;
+    font-size: 200%;
+}
+
+/* 회원가입 및 공간 */
+#outer_form_signup {
+    position: absolute;
+    top: 150px;
+    padding: 0px 80px 80px 80px;
+}
+/* 회색 틀 */
+#form_border_signup {
+    display: table-cell;
+    padding: 3%;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+/* 왼쪽 div */
+#left_form_signup {
+    float: left;
+    height:60vh;
+    width: 45%;
+}
+/* 오른쪽 div */
+#right_form_signup {
+    float: right;
+    height:60vh;
+    width: 45%;
+}
+/* 중간 선 */
+#middle_line_signup{
+    float:left;
+    height:55vh;
+    width:1px;
+    margin-left:4.5%;
+    background-color:rgb(189, 189, 189);
+}
+/* 아래 div : "회원가입"버튼 있는 아래쪽 div */
+#reg_button_signup {
+    clear:both;
+    text-align:center;
+}
+/* 각 입력 전체 틀 */
+.each_form_signup {
+    width: 100%;
+    display: inline-block;
+    margin: 0% 0% 5%;
+}
+/* 입력 항목 이름 */
+.article_signup {
+    float:left;
+    width: 25%;
+
+    text-align:right;
+    font-size:22px;
+}
+/* 입력 폼 */
+.input_form_signup {
+    width: 45%;
+    float:left;
+    margin: 0% 0% 0% 2%;
+    padding: 0% 0% 0% 2%;
+}
+/* 주민등록번호 입력 폼 */
+.ssn_signup {
+    width: 21.25%;
+    padding: 0% 0% 0% 2%;
+}
+/* 뒤에 margin 필요한 특수 article */
+#backmargin_article_signup {
+    margin: 0% 2% 0% 0%;
+}
+/* 헤당 페이지 버튼 근본디자인 */
+.signupPage_Button {
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
+/* "회원가입" 버튼 */
+#requestSignup {
+    height:45px;
+    width:110px;
+    font-size:20px;
+    background-color:rgb(91, 223, 198);
+}
+/* "중복확인" & "본인확인" 버튼 */
+#checkInput_signup {
+    height:30px;
+    width:80px;
+    margin-left:80px;
+
+    font-size:15px;
+    color:rgb(255, 255, 255);
+    background-color:rgb(64, 64, 64);
+}

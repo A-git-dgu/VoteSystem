@@ -8,5 +8,7 @@ urlpatterns = [
     path('insertCandidate', views.insertCandidate),
 
     path('checkAdminLogin', views.checkAdminLogin),
-    path('checkVoterLogin', views.checkVoterLogin)
+    path('checkVoterLogin', views.checkVoterLogin),
+
+    path('requestSignup', views.requestSignup)
 ]
