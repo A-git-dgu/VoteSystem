@@ -1,56 +1,125 @@
-#table {
-    border-spacing: 70px 0px;
+
+/* "회원가입" */
+#title_signup {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/* 회원가입 및 공간 */
+#outer_form_signup {
+}
+#container{
+    width:1000px;
+    margin:auto;
+
+}
+/* 회색 틀 */
+#form_border_signup {
+    padding:3%;
     border: 1px solid #BDBDBD;
+    border-radius: 10px;
 }
+/* 왼쪽 div */
+#left_form_signup {
+    float: left;
+    height:60vh;
+    width: 45%;
+}
+/* 오른쪽 div */
+#right_form_signup {
+    float: right;
+    height:60vh;
+    width: 45%;
+}
+/* 중간 선 */
+#middle_line_signup{
+    float:left;
+    height:55vh;
+    width:1px;
+    margin-left:4.7%;
+    background-color:rgb(189, 189, 189);
+}
+/* 아래 div : "회원가입"버튼 있는 아래쪽 div */
+#reg_button_signup {
+    clear:both;
+    text-align:center;
+}
+/* 각 입력 전체 틀 */
+.each_form_signup {
+    width: 100%;
+    display: inline-block;
+    margin: 0% 0% 5%;
+    font-size:5px;
+}
+/* 입력 항목 이름 */
+.article_signup {
+    float:left;
+    width: 30%;
 
-#left_td {
-    text-align: right;
-    padding: 10px;
+    text-align:right;
+    font-size:18px;
 }
-#right_td {
-    text-align: left;
-    padding: 0px;
-}
-.ssn {
-    width:71px;
-}
-#bottom_button {
-    display: block;
-    align: center;
-     margin:auto;
-     height: 30px;
-}
+/* 후보자 등록 기간 항목 이름*/
+.article_signup2 {
+    float:left;
+    width: 35%;
 
-.Button {
-    font-size:20px;
+    text-align:right;
+    font-size:18px;
+}
+/* 입력 폼 */
+.input_form_signup {
+    width: 45%;
+    float:left;
+    margin: 0% 0% 0% 2%;
+    padding: 0% 0% 0% 2%;
+}
+/* 날짜 입력 폼 */
+.input_form_signup2 {
+    width: 70%;
+    float:right;
+    margin: 0% 0% 0% 2%;
+    padding: 0% 0% 0% 2%;
+}
+/* 주민등록번호 입력 폼 */
+.ssn_signup {
+    width: 21.25%;
+    padding: 0% 0% 0% 2%;
+}
+.phone_signup {
+    width: 15%;
+    padding: 0% 0% 0% 2%;
+}
+/* 뒤에 margin 필요한 특수 article */
+#backmargin_article_signup {
+    margin: 0% 2% 0% 0%;
+}
+/* 헤당 페이지 버튼 근본디자인 */
+.signupPage_Button {
     font-weight:bold;
 
     border:0;
     outline:0;
     border-radius: 5px;
-    background-color:rgb(91, 223, 198);
 }
-#outer_form {
-    position: absolute;
-    top: 60px;
-    padding: 0px 80px 80px 80px;
-    align: center;
-    margin:auto;
+/* "회원가입" 버튼 */
+#requestSignup1 {
+    height:45px;
+    width:110px;
+    font-size:20px;
+    background-color:rgb(255, 139, 139);
+    cursor:pointer;
 }
-
-. margin1{
-    height:100px;
-}
-.admin_ssn {
-    width: 21.25%;
-    padding: 0% 0% 0% 2%;
-}
+/* "중복확인" & "본인확인" 버튼 */
 #checkInput_signup {
     height:30px;
     width:80px;
-    margin-left:5%;
+    margin-left:10px;
 
     font-size:15px;
     color:rgb(255, 255, 255);
     background-color:rgb(64, 64, 64);
+    cursor:pointer;
 }
+
+
