@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import NativeSelect from '@mui/material/NativeSelect';
@@ -19,9 +18,44 @@ export default function SignupAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
 
+    const [okID, setOkID] = React.useState([]);
+    const [okSSN, setOkSSN] = React.useState([]);
+
+    React.useEffect(()=>{
+        setOkID("T");
+        setOkSSN("T");
+    },[])
+
     function requestOpenElection() {
         const url = "http://localhost:8000/requestOpenElection";
 
+        // 예외처리
+        if (okID === "F") {
+            alert("아이디 중복 확인을 해주세요.");
+            return;
+        }
+        else if (document.getElementById('admin_pwd').value!==document.getElementById('admin_pwd2').value) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+        else if (okSSN === "F") {
+            alert("본인 확인을 해주세요.");
+            return;
+        }
+        else if (document.getElementById('select_election').value==="None") {
+            alert("선거 종류를 선택하세요.")
+            return;
+        }
+        else if (document.getElementById('election_name').value===""||document.getElementById('start').value===""||document.getElementById('end').value===""
+        ||document.getElementById('enroll_start').value===""||document.getElementById('enroll_end').value===""||document.getElementById('institution').value===""
+        ||document.getElementById('admin_fssn').value===""||document.getElementById('admin_lssn').value===""||document.getElementById('admin_id').value===""
+        ||document.getElementById('admin_pwd').value===""||document.getElementById('admin_name').value===""||document.getElementById('admin_fphone').value===""
+        ||document.getElementById('admin_mphone').value===""||document.getElementById('admin_lphone').value===""||document.getElementById('admin_email').value==="") {
+            alert("모든 항목을 작성해주세요.");
+            return;
+        }
+
+        // request server
         axios.put(url,{
             election_name:document.getElementById('election_name').value,
             election_type:document.getElementById('select_election').value,
@@ -69,7 +103,7 @@ export default function SignupAdmin() {
                        <div className="each_form_signup">
                        <div className="article_signup">선거 종류 </div>
                             <NativeSelect id="select_election" default="select_election" className="input_form_signup">
-                                <option value={"select_election"}>-- 선거 선택 --</option>
+                                <option value={"None"}>-- 선거 선택 --</option>
                                 <option value={"0"}>  찬반 투표  </option>
                                 <option value={"1"}>  후보자 투표  </option>
                             </NativeSelect>
