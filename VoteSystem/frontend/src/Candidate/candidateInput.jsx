@@ -62,6 +62,7 @@ export default function CandidateInput() {
 
     return (
         <>
+            {/* select distinct name from candidateinfo, election where candidate_ssn="991115-2000000"; */}
             <Nav/>
             <div id="title">후보자 등록</div>
                 <div id="outer_form">
@@ -116,7 +117,7 @@ export default function CandidateInput() {
                 </div>
             </div>
         <div id="reg_button">
-            <Button variant="contained" type="button">후보자 등록</Button>
+            <Button variant="contained" type="button" onClick={insertApi}>후보자 등록</Button>
             후보자 등록 정보는 "회원정보 수정"에서 수정 가능합니다.</div>
         </div>
     </>

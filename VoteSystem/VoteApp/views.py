@@ -134,3 +134,21 @@ def requestSignup(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=204)
+
+@api_view(['POST'])
+def getCandidateApi(request):
+    if request.method=="POST":
+        cursor = connection.cursor()
+        strSql = "SELECT distinct electionnumber, name FROM candidateinfo, election where candidate_ssn=%s"
+        result = cursor.execute(strSql, [request.data['candidate_ssn']])
+        datas = cursor.fetchall()
+        connection.commit()
+        connection.close()
+        candidate_elections = []
+        for election in datas:
+            row = {
+                'electionnumber': election[0],
+                'name': election[1]
+            }
+            candidate_elections.append(row)
+        return Response(candidate_elections, status=200)

@@ -10,5 +10,6 @@ urlpatterns = [
     path('checkAdminLogin', views.checkAdminLogin),
     path('checkVoterLogin', views.checkVoterLogin),
 
-    path('requestSignup', views.requestSignup)
+    path('requestSignup', views.requestSignup),
+    path('getCandidate', views.getCandidateApi)
 ]
