@@ -78,11 +78,11 @@ export default function SignupVoter() {
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호</div>
-                            <Input placeholder="알파벳+숫자(영어 대소문자 구분)" id="pwd" className="input_form_signup"/>
+                            <Input type="password" placeholder="알파벳+숫자(영어 대소문자 구분)" id="pwd" className="input_form_signup"/>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호 재확인</div>
-                            <Input placeholder="아이디를 입력하세요.(영어 대소문자 구분)" id="pwd2" className="input_form_signup"/>
+                            <Input type="password" placeholder="비밀번호를 다시 한번 입력하세요." id="pwd2" className="input_form_signup"/>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">회원 이름</div>
