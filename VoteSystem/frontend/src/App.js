@@ -12,6 +12,8 @@ import CandidateModify from './Candidate/candidateModify';
 import SignupAdmin from './SignupAdmin/signupAdmin';
 import SignupVoter from './SignupVoter/signupVoter';
 
+import PossibleVoters from './PossibleVoters/possibleVoters';
+
 function App() {
     return (
         <BrowserRouter>
@@ -25,6 +27,8 @@ function App() {
 
                 <Route path="/candidateInput" element={<CandidateInput/>} />
                 <Route path="/candidateModify" element={<CandidateModify/>} />
+
+                <Route path="/possibleVoters" element={<PossibleVoters/>} />
             </Routes>
         </BrowserRouter>
     );
