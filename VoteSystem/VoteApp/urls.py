@@ -18,4 +18,6 @@ urlpatterns = [
 
     path('getUserElection', views.getUserElection),
 
+    path('insertPossibleVoter', views.insertPossibleVoter)
+
 ]

@@ -89,7 +89,7 @@ def insertCandidate(request):
                 candidate_email=request.data['email'],
                 introduce_self=request.data['introduceself'],
                 election_pledge=request.data['electionpledge'],
-                career=request.data['carrer'],
+                career=request.data['career'],
                 approval_state=0
             )
             return Response({'msg': 'success'}, status=200)
@@ -291,3 +291,20 @@ def getUserElection(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def insertPossibleVoter(request):
+    if request.method=='PUT':
+        try:
+            print(request.data)
+            e = Election.objects.get(election_num=request.data['election_num'])
+            print(e)
+            queryset = Candidate.objects.create(
+                election_num=e,
+                voter_ssn=request.data['voter_ssn'],
+                voting_status=0
+            )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=204)

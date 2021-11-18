@@ -23,14 +23,14 @@ function ErrorMsgForWrongInput() {
 }
 
 export default function PossibleVoters() {
-    let [users, setUsers] = useState([]);
+    let [possibleVoter, setPossibleVoter] = useState([]);
 
     // 통신 메서드
     const searchApi = async()=> {
-        const url = "http://localhost:8000/getUser";
+        const url = "http://localhost:8000/insertPossibleVoter";
         await axios.get(url)
         .then(function(response) {
-            setUsers(response.data);
+            setPossibleVoter(response.data);
             console.log("성공");
         })
         .catch(function(error) {
@@ -42,6 +42,29 @@ export default function PossibleVoters() {
     useEffect(()=>{
         searchApi();
     }, [])
+
+    function insertApi(){
+        const url = "http://localhost:8000/insertPossibleVoter";
+        axios.put(url,{
+                election_num: 0,
+                voter_ssn: document.querySelector(".newTd").textContent,
+                voting_status: 0
+            }
+        )
+        .then(function(response) {
+            if(response.status==204){
+                alert('실패했습니다.')
+            }
+            else {
+                alert('성공했습니다.')
+                console.log("성공");
+            }
+        })
+        .catch(function(error) {
+            alert('실패했습니다.')
+            console.log("실패: ",error);
+        })
+    };
 
     return (
     <>
@@ -129,7 +152,8 @@ export default function PossibleVoters() {
                         </table>
                     </div>
                     <div id="reg_button_possibleVoters">
-                        <button className="possibleVoters_Button" id="requestPossibleVoters">유권자 명부 등록</button>
+                        <button className="possibleVoters_Button" id="requestPossibleVoters"
+                        onClick={insertApi}>유권자 명부 등록</button>
                     </div>
                 </div>
             </div>
