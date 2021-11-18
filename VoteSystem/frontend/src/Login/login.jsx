@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './login.css';
 import axios from 'axios';
-
 import { Link } from 'react-router-dom';
 
 function Login({Type}) {
@@ -31,7 +30,17 @@ function Login({Type}) {
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
-            alert(response.data.msg)
+            if (response.status==200) {
+                alert(response.data.msg)
+
+            }
+            else if (response.status==204) {
+                alert('아이디 혹은 비밀번호를 확인하세요.')
+                document.location.href='/loginAdmin';
+            }
+            else if (response.status=400) {
+                alert(response.data.msg)
+            }
         })
         .catch(function(error) {
             alert('서버연결 실패')
@@ -46,7 +55,16 @@ function Login({Type}) {
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
-            alert(response.data.msg)
+            if (response.status==200) {
+                document.location.href='/mainVoter';
+            }
+            else if (response.status==204) {
+                alert('아이디 혹은 비밀번호를 확인하세요.')
+                document.location.href='/';
+            }
+            else if (response.status=400) {
+                alert(response.data.msg)
+            }
         })
         .catch(function(error) {
             alert('서버연결 실패')

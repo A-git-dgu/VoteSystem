@@ -12,5 +12,6 @@ urlpatterns = [
 
     path('requestSignup', views.requestSignup),
     path('requestOpenElection', views.requestOpenElection),
-    path('getCandidate', views.getCandidate)
+    path('getCandidate', views.getCandidate),
+    path('getUserElection', views.getUserElection)
 ]

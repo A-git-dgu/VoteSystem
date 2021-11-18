@@ -1,0 +1,122 @@
+/* 리스트 및 공간 */
+#outer_form_mainVoter {
+}
+#container_mainVoter{
+    width:1000px;
+    margin:auto;
+}
+/* "투표가능한 리스트" */
+#title_mainVoter {
+    font-weight: bold;
+    font-size: 30px;
+}
+/* 회색 틀 */
+#form_border_mainVoter {
+
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+/* 헤당 페이지 버튼 근본디자인 */
+.mainVoterPage_Button {
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+/* 선거리스트 객체 */
+.eachElection_mainVoter {
+    height:80px;
+    width:100%;
+
+    border-radius: 10px;
+    border:1px solid #BDBDBD;
+}
+
+/* 선거 개수 숫자 */
+.Count_mainVoter {
+    margin:2% 0% 0% 2%;
+
+    font-size:25px;
+
+    float:left;
+}
+/* 선거 이름 */
+.electionName_mainVoter {
+    width:85%;
+    margin:1.2% 0% 0% 6%;
+    float:top;
+
+    font-size:20px;
+    front-weight:bold;
+}
+/* 선거 기간 */
+.electionPeriod_mainVoter {
+    width:85%;
+    margin:0.5% 0% 0% 6%;
+    float:top;
+
+    font-size:15px;
+}
+
+/* "투표하기" 버튼 */
+#voteButton_mainVoter {
+    width:65px;
+    height:27px;
+    margin:2.5% 2% 0% 0%;
+    float:right;
+
+    color:rgb(255, 255, 255);
+    background-color:rgb(91, 223, 198);
+}
+/* "투표완료" 버튼 */
+#complete_mainVoter {
+    width:65px;
+    height:27px;
+    margin:2.5% 2% 0% 0%;
+    float:right;
+
+    color:rgb(255, 255, 255);
+    background-color:rgb(155, 155, 155);
+    cursor:default;
+}
+/* "결과보기" 버튼 */
+#showResult_mainVoter {
+    width:65px;
+    height:27px;
+    margin:2.5% 2% 0% 0%;
+    float:right;
+
+    color:rgb(255, 255, 255);
+    background-color:rgb(64, 64, 64);
+}
+
+/* 후보자 신청하기 버튼 div : bottom */
+#bottom_mainVoter {
+    height:50px;
+    width:100%;
+    margin-top:15px;
+
+    clear:both;
+}
+#candiAppli_img_mainVoter {
+    height:50px;
+    width:50px;
+    margin:0px 0px 0px 20px;
+
+    float:left;
+}
+#candiAppli_button_mainVoter {
+    height:40px;
+    width:170px;
+    margin:5px 0px 0px 20px;
+
+    float:left;
+
+    font-size:15px;
+    font-weight:bold;
+    color:rgb(255, 255, 255);
+    background-color:rgb(64, 64, 64);
+}

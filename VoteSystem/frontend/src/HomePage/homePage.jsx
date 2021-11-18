@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 function homePage() {
     return (
     <body>
-        <Link to="/loginManage">
+        <Link to="/loginAdmin">
             <div className="Home_Manage">
                 <Link to="/">
                     <div className="Home_Nav">

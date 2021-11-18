@@ -16,7 +16,8 @@ email varchar(50) not null
 );
 
 insert into user values('991115-2000000','kimgaeun','kge','김가은','성균관대역','01012345678','kimgaeun@naver.com');
-insert into user values('001224-4000000','parkeve','pev','박이브','경기도 수원시 권선구 00동 0000아파트','01011112222','ev@dgu.co.kr');
+insert into user values('001224-4000000','parkeve','pev','박이브','경기도 수원시 권선구 00동 0000아파트','01011112222','ev@dgu.ac.kr');
+insert into user values('000908-4200000','sieun','8018','이시은','경기도 화성시 향남읍 행정리 00아파트','01011111111','2019112009@dgu.ac.kr');
 
 create table election (
 election_num INT auto_increment primary key,
@@ -36,7 +37,10 @@ admin_phonenumber varchar(15) not null,
 admin_email varchar(50) not null,
 unique(admin_id)
 );
-insert into election values(NULL,'동국대학교 총학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '000908-4444444','supiya0908','lee8018!','이시은','01055158018','supiya0908@naver.com');
+insert into election values(NULL,'2022 동국대학교 총학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '010104-4444444','admin4','0000','변은서','01082207793','eunseo@naver.com');
+insert into election values(NULL,'2022 동국대학교 공과대학 학생회 선거','1','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '991115-2222222','admin3','0000','김가은','01047568188','gaeun@naver.com');
+insert into election values(NULL,'2022 동국대학교 컴퓨터공학과 학생회 선거','0','2021-11-12 00:00:00','2021-12-12 11:59:59','2021-11-12 00:00:00','2021-11-22 11:59:59', '동국대학교', '000201-2222222','admin2','0000','김다은','01055926213','daeun@naver.com');
+insert into election values(NULL,'2021 화성시 00아파트 동대표 선거','1','2021-11-12 00:00:00','2021-11-17 11:59:59','2021-11-12 00:00:00','2021-11-17 11:59:59', '향남읍사무소', '000908-1111111','admin1','0000','이시은','01055158018','sieun@naver.com');
 
 create table candidate(
 election_num INT not null,
@@ -64,4 +68,9 @@ foreign key(election_num) references election (election_num) on update cascade
 
 insert into possiblevoter values(1, '991115-2000000', 0);
 insert into possiblevoter values(1, '001224-4000000', 0);
-
+insert into possiblevoter values(1, '000908-4200000', 0);
+insert into possiblevoter values(2, '000908-4200000', 0);
+insert into possiblevoter values(3, '000908-4200000', 1);
+insert into possiblevoter values(4, '000908-4200000', 1);
+insert into possiblevoter values(2, '991115-2000000', 0);
+insert into possiblevoter values(3, '991115-2000000', 1);
