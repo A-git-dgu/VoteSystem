@@ -61,7 +61,7 @@ export default function CandidateInput() {
     return (
         <>
             {/* select distinct name from candidateinfo, election where candidate_ssn="991115-2000000"; */}
-            <Nav/>
+            <Nav Type={"Voter"}/>
             <div id="title">후보자 등록</div>
                 <div id="outer_form">
                     <div id="form_border">

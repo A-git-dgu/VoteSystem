@@ -105,15 +105,15 @@ def checkAdminLogin(request):
             try:
                 findID = Election.objects.get(admin_id=request.data['id'])
                 if findID.admin_pwd == request.data['pwd']:
-                    return Response({'msg':'Login Success'})
+                    return Response({'msg':'Login Success'}, status=200)
                 else:
-                    return Response({'msg':'PWD not equal'})
+                    return Response({'msg':'PWD not equal'}, status=204)
             except Exception as e:
                 print(e)
-                return Response({'msg': 'not found ID'}, status=200)
+                return Response({'msg': 'not found ID'}, status=204)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'Login failed'}, status=400)
 
 @api_view(['POST'])
 def checkVoterLogin(request):
@@ -122,14 +122,14 @@ def checkVoterLogin(request):
             try:
                 findID = User.objects.get(id=request.data['id'])
                 if findID.pwd == request.data['pwd']:
-                    return Response({'msg':'Login Success'})
+                    return Response({'msg':'Login Success'}, status=200)
                 else:
-                    return Response({'msg':'PWD not equal'})
+                    return Response({'msg':'PWD not equal'}, status=204)
             except Exception as e:
-                return Response({'msg': 'not found ID'}, status=200)
+                return Response({'msg': 'not found ID'}, status=204)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'Login failed'}, status=400)
 
 # 선거개설 및 회원가입
 @api_view(['PUT'])
@@ -204,32 +204,41 @@ def getCandidate(request):
             print(e)
             return Response({'msg': 'failed'}, status=204)
 
-@api_view(['POST'])
-def getCandidateContent(request):
-    if request.method=="POST":
-        try:
-            cursor = connection.cursor()
-            strSql = "select c.candidate_ssn, c.candidate_email, u.name, u.phonenumber, u.address, c.introduce_self," \
-                     "c.election_pledge, c.career, c.approval_state from  candidate c, election e, user u " \
-                     "where c.election_num=e.election_num and u.user_ssn=c.candidate_ssn and candidate_ssn=%s and c.election_num=%s;"
-            result = cursor.execute(strSql, [request.data['candidate_ssn'], request.data['election_num']])
-            datas = cursor.fetchall()
-            connection.commit()
-            connection.close()
-            for data in datas:
-                row={
-                    'candidate_ssn':data[0],
-                    'candidate_email':data[1],
-                    'name':data[2],
-                    'phonenumber': data[3],
-                    'address':data[4],
-                    'introduce_self':data[5],
-                    'election_pledge':data[6],
-                    'career':data[7],
-                    'approval_state':data[8]
-                }
 
+@api_view(['POST'])
+def getUserElection(request):
+    if request.method=='POST':
+        try:
+            print("id = ")
+            print(request.data)
+            findSSN = User.objects.get(id=request.data['id'])
+            print(findSSN.user_ssn)
+            findElection = Possiblevoter.objects.filter(voter_ssn=findSSN.user_ssn).values('election_num')
+            print(findElection)
+            voter_elections=[]
+            index=0
+            for electionNum in findElection:
+                electionInfo = Election.objects.get(election_num=electionNum["election_num"])
+                voterElection = Possiblevoter.objects.get(voter_ssn=findSSN.user_ssn,election_num=electionNum["election_num"])
+
+                # 선거 종료 여부 판단
+                now = datetime.now()
+                election_status = "0"
+                if now.date() <= electionInfo.end_date.date():
+                    election_status = "1"
+                index+=1
+                row = {
+                    'election_num':electionInfo.election_num,
+                    'election_name':electionInfo.election_name,
+                    'start_date':electionInfo.start_date.date(),
+                    'end_date':electionInfo.end_date.date(),
+                    'election_status':election_status,
+                    'voting_status':voterElection.voting_status,
+                    'index':index
+                }
+                voter_elections.append(row)
+            print(voter_elections)
+            return Response(voter_elections, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'data error'}, status=400)
-        return Response(row, status=200)
+            return Response({'msg': 'failed'}, status=204)

@@ -1,0 +1,91 @@
+#container_possibleVoters {
+    width:1000px;
+    margin:auto;
+}
+
+#title_possibleVoters {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/* 회색 틀 */
+#form_border_possibleVoters {
+    padding:3%;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+
+.possibleVotersSsn {
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 15px;
+    margin-bottom: 8px;
+}
+
+#new_table {
+    width: 900px;
+    margin-bottom: 30px;
+}
+
+#add_possibleVoter {
+    float: left;
+    height:30px;
+    width:70px;
+    margin:10px;
+
+    font-size:15px;
+    color:rgb(255, 255, 255);
+    background-color:rgb(64, 64, 64);
+    cursor:pointer;
+}
+
+.newTr {
+    border: 1px solid;
+}
+
+.newTd {
+    border: 1px solid #BDBDBD;
+    border-radius: 15px;
+    width: 900px;
+    height: 50px;
+    padding-left: 30px;
+}
+.newBtn {
+    margin-top: 10px;
+    background-color: #BDBDBD;
+    font-weight:bold;
+    outline:0;
+    border-radius: 5px;
+    border: 0px;
+    height: 33px;
+    width: 65px;
+    cursor: pointer;
+}
+
+.possibleVoters_ssn {
+    float: right;
+    margin-top: 7px;
+    width: 89%;
+}
+
+/* 헤당 페이지 버튼 근본디자인 */
+.possibleVoters_Button {
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
+
+#reg_button_possibleVoters {
+    clear:both;
+    text-align:center;
+}
+
+#requestPossibleVoters {
+    height:45px;
+    width:200px;
+    font-size:20px;
+    background-color:rgb(255, 139, 139);
+    cursor:pointer;
+}
