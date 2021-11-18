@@ -292,19 +292,38 @@ def getUserElection(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
+@api_view(['GET'])
+def getPossibleVoter(request):
+    if request.method=='GET':
+        try:
+            datas = Possiblevoter.objects.filter(election_num=request.GET['election_num'])
+
+            possibleVoters=[]
+            for data in datas:
+                row = {
+                    'voter_ssn': data.voter_ssn
+                }
+                possibleVoters.append(row)
+            return Response(possibleVoters, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
 @api_view(['PUT'])
 def insertPossibleVoter(request):
     if request.method=='PUT':
         try:
-            print(request.data)
+
+            e = Possiblevoter.objects.filter(election_num=request.data['election_num'])
+            e.delete()
             e = Election.objects.get(election_num=request.data['election_num'])
-            print(e)
-            queryset = Candidate.objects.create(
-                election_num=e,
-                voter_ssn=request.data['voter_ssn'],
-                voting_status=0
-            )
+            for i in request.data['voter_ssn']:
+                queryset = Possiblevoter.objects.create(
+                    election_num=e,
+                    voter_ssn=i,
+                    voting_status=0
+                )
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)

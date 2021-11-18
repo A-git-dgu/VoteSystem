@@ -27,11 +27,13 @@ export default function PossibleVoters() {
 
     // 통신 메서드
     const searchApi = async()=> {
-        const url = "http://localhost:8000/insertPossibleVoter";
+        const url = "http://localhost:8000/getPossibleVoter?election_num="+1;
         await axios.get(url)
         .then(function(response) {
-            setPossibleVoter(response.data);
             console.log("성공");
+            for(let i=0; i< response.data.length; i++){
+                addPossibleVoterTd(response.data[i].voter_ssn)
+            }
         })
         .catch(function(error) {
             console.log("실패");
@@ -45,9 +47,15 @@ export default function PossibleVoters() {
 
     function insertApi(){
         const url = "http://localhost:8000/insertPossibleVoter";
+        let voters = []
+        let tds=document.querySelectorAll(".newTd")
+
+        for(let i=0; i < tds.length; i++){
+            voters.push(tds[i].textContent)
+        }
         axios.put(url,{
-                election_num: 0,
-                voter_ssn: document.querySelector(".newTd").textContent,
+                election_num: 1,//수정해야함
+                voter_ssn: voters,
                 voting_status: 0
             }
         )
@@ -66,6 +74,79 @@ export default function PossibleVoters() {
         })
     };
 
+    function addPossibleVoterTd(e){
+        let ssn=document.getElementById("possibleVoters_ssn").value
+        if(typeof(e)=='string'){
+            ssn=e
+        }
+        /******* 예외 처리 **********/
+        var input_id = ""
+        // 입력에 '-'가 포함된 경우 (예. 000000-1111111)
+        if (ssn[6] == '-') {
+            if (ssn.length != 14) {
+                ErrorMsgForWrongInput();
+                return;
+            }
+            input_id = ssn;
+        }
+        // 입력에 '-'가 포함되지 않은 경우 (예. 0000001111111)
+        else if (ssn[6] != '-') {
+            if (ssn.length != 13) {
+                ErrorMsgForWrongInput();
+                return;
+            }
+            ssn = ssn.slice(0, 6) + '-' + ssn.slice(6, 13);
+            input_id = ssn;
+        }
+
+        var dashNum = 0; // '-'의 개수
+        for (var i=0; i<input_id.length; i++) {
+            // 주민등록번호에 입력 가능한 문자인지 확인
+            if (CharCanType(input_id[i])) {
+                ErrorMsgForWrongInput();
+                return;
+            }
+            if (input_id[i] == '-') { dashNum += 1; }
+            // '-'의 개수가 2개 이상이면 잘못된 입력
+            if (dashNum > 2) {
+                ErrorMsgForWrongInput();
+                return;
+            }
+        }
+        /************************************/
+
+        var new_td = document.querySelectorAll('.newTd')
+        // 중복되는 주민등록번호 확인
+        for (var i=0; i<new_td.length; i++) {
+            if (input_id == new_td[i].textContent) {
+                alert("이미 등록된 주민등록번호입니다.")
+                document.getElementById("possibleVoters_ssn").value = ""
+                return
+            }
+        }
+        var newTable = document.getElementById("new_table")
+        var newTr = document.createElement("tr")
+        var newTd = document.createElement("td")
+        var newBtn = document.createElement("button")
+        newTable.appendChild(newTr)
+        newTr.appendChild(newTd)
+        newTr.appendChild(newBtn)
+        // 클릭하면 삭제
+        newBtn.onclick = function removeNode() {
+            newTable.removeChild(this.parentNode)
+        }
+
+        newBtn.textContent = "삭제"
+        newTd.textContent = input_id
+        newTd.className = "newTd"
+        newBtn.className = "newBtn"
+        document.getElementById("possibleVoters_ssn").value = ""
+        newBtn.id = document.querySelectorAll('.newBtn').length
+        newTr.id = "trNum_" + (document.querySelectorAll('.newBtn').length)
+    }
+
+
+
     return (
     <>
         <Nav Type={"Admin"}/>
@@ -77,75 +158,7 @@ export default function PossibleVoters() {
                         <div className="possibleVotersSsn">등록할 유권자의 주민등록번호를 입력하세요.</div>
                         <table id="new_table">
                             <button className="" id="add_possibleVoter" className="possibleVoters_Button"
-                            onClick={() => {
-                                /******* 예외 처리 **********/
-                                var tmp_input_id = document.getElementById("possibleVoters_ssn")
-                                var input_id = ""
-                                // 입력에 '-'가 포함된 경우 (예. 000000-1111111)
-                                if (tmp_input_id.value[6] == '-') {
-                                    if (tmp_input_id.value.length != 14) {
-                                        ErrorMsgForWrongInput();
-                                        return;
-                                    }
-                                    input_id = tmp_input_id;
-                                }
-                                // 입력에 '-'가 포함되지 않은 경우 (예. 0000001111111)
-                                else if (tmp_input_id.value[6] != '-') {
-                                    if (tmp_input_id.value.length != 13) {
-                                        ErrorMsgForWrongInput();
-                                        return;
-                                    }
-                                    tmp_input_id.value = tmp_input_id.value.slice(0, 6) + '-' + tmp_input_id.value.slice(6, 13);
-                                    input_id = tmp_input_id;
-                                }
-
-                                var dashNum = 0; // '-'의 개수
-                                for (var i=0; i<input_id.value.length; i++) {
-                                    // 주민등록번호에 입력 가능한 문자인지 확인
-                                    if (CharCanType(input_id.value[i])) {
-                                        ErrorMsgForWrongInput();
-                                        return;
-                                    }
-                                    if (input_id.value[i] == '-') { dashNum += 1; }
-                                    // '-'의 개수가 2개 이상이면 잘못된 입력
-                                    if (dashNum > 2) {
-                                        ErrorMsgForWrongInput();
-                                        return;
-                                    }
-                                }
-                                /************************************/
-
-                                input_id.focus()
-                                var new_td = document.querySelectorAll('.newTd')
-                                // 중복되는 주민등록번호 확인
-                                for (var i=0; i<new_td.length; i++) {
-                                    if (tmp_input_id.value == new_td[i].textContent) {
-                                        alert("이미 등록된 주민등록번호입니다.")
-                                        document.getElementById("possibleVoters_ssn").value = ""
-                                        return
-                                    }
-                                }
-                                var newTable = document.getElementById("new_table")
-                                var newTr = document.createElement("tr")
-                                var newTd = document.createElement("td")
-                                var newBtn = document.createElement("button")
-                                newTable.appendChild(newTr)
-                                newTr.appendChild(newTd)
-                                newTr.appendChild(newBtn)
-                                // 클릭하면 삭제
-                                newBtn.onclick = function removeNode() {
-                                    newTable.removeChild(this.parentNode)
-                                }
-
-                                newBtn.textContent = "삭제"
-                                newTd.textContent = document.getElementById("possibleVoters_ssn").value
-                                newTd.className = "newTd"
-                                newBtn.className = "newBtn"
-                                document.getElementById("possibleVoters_ssn").value = ""
-                                newBtn.id = document.querySelectorAll('.newBtn').length
-                                newTr.id = "trNum_" + (document.querySelectorAll('.newBtn').length)
-
-                            }}>추가</button>
+                            onClick={addPossibleVoterTd}>추가</button>
 
                             <Input placeholder="000000-123456789"
                             className="possibleVoters_ssn" id="possibleVoters_ssn"/>
