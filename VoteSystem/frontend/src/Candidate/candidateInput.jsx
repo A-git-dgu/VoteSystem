@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
 import styles from './twoSegInputForm.css';
-import Nav from '../Main/main';
+import Nav from '../Main/nav';
 import axios from 'axios';
 
 export default function CandidateInput() {

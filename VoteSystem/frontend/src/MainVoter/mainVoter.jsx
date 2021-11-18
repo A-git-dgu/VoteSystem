@@ -5,17 +5,16 @@ import Nav from '../Main/nav';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import getSessionCookie, {isLogin} from '../Login/cookies';
 
 export default function MainVoter() {
-    let [userID, setUserID] = useState([]);
     let [elections, setElections] = useState([]);
-    let [count, setCount] = useState([]);
 
     // user의 선거 불러오기
     const getUserElection = async() => {
         const url = "http://localhost:8000/getUserElection";
         await axios.post(url,{
-            id:"sieun"
+            id:getSessionCookie('id')
         })
         .then(function(response) {
             setElections(response.data);
@@ -27,14 +26,9 @@ export default function MainVoter() {
     };
 
     useEffect(()=>{
+        isLogin("Voter");
         getUserElection();
-        setUserID("sieun");
-        setCount(1);
     },[])
-
-    function increaseCount() {
-        setCount(count+1)
-    }
 
     return (
         <>

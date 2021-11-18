@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styles from './login.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import getSessionCookie, { setSessionCookie } from './cookies';
 
 function Login({Type}) {
     // Manager or Voter PageType
@@ -22,17 +23,23 @@ function Login({Type}) {
         setPageColor();
     }, [])
 
+    // Login
+    let [ID, setID] = useState([])
+
     // Admin Login
     async function requestAdminLogin() {
         const url = "http://localhost:8000/checkAdminLogin";
+        let ID = document.getElementById('id').value;
+
         await axios.post(url, {
             id:document.getElementById('id').value,
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
             if (response.status==200) {
-                alert(response.data.msg)
-
+                setSessionCookie('id', ID, 1/48);
+                setSessionCookie('type', Type, 1/48);
+                document.location.href='/';
             }
             else if (response.status==204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
@@ -50,12 +57,16 @@ function Login({Type}) {
     // Voter Login
     async function requestVoterLogin() {
         const url = "http://localhost:8000/checkVoterLogin";
+        let ID = document.getElementById('id').value;
+
         await axios.post(url, {
             id:document.getElementById('id').value,
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
             if (response.status==200) {
+                setSessionCookie('id', ID, 1/48);
+                setSessionCookie('type', Type, 1/48);
                 document.location.href='/mainVoter';
             }
             else if (response.status==204) {
