@@ -9,6 +9,7 @@ import SignupAdmin from './SignupAdmin/signupAdmin';
 import SignupVoter from './SignupVoter/signupVoter';
 
 import MainVoter from './MainVoter/mainVoter';
+import MainAdmin from './MainAdmin/mainAdmin';
 
 import CandidateInput from './Candidate/candidateInput';
 import CandidateModify from './Candidate/candidateModify';
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/signupVoter" element={<SignupVoter/>} />
 
                 <Route path="/mainVoter" element={<MainVoter/>} />
+                <Route path="/mainAdmin" element={<MainAdmin/>} />
 
                 <Route path="/candidateInput" element={<CandidateInput/>} />
                 <Route path="/candidateModify" element={<CandidateModify/>} />
