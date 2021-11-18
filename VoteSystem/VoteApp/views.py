@@ -95,7 +95,7 @@ def insertCandidate(request):
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)
 
 # Login
 @api_view(['POST'])
@@ -149,7 +149,7 @@ def requestSignup(request):
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)
 
 @api_view(['PUT'])
 def requestOpenElection(request):
@@ -180,7 +180,8 @@ def requestOpenElection(request):
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)
+
 
 @api_view(['POST'])
 def getCandidate(request):
@@ -202,7 +203,55 @@ def getCandidate(request):
             return Response(candidate_elections, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getCandidateContent(request):
+    if request.method=="POST":
+        try:
+            cursor = connection.cursor()
+            strSql = "select c.candidate_ssn, c.candidate_email, u.name, u.phonenumber, u.address, c.introduce_self," \
+                     "c.election_pledge, c.career, c.approval_state from  candidate c, election e, user u " \
+                     "where c.election_num=e.election_num and u.user_ssn=c.candidate_ssn and candidate_ssn=%s and c.election_num=%s;"
+            result = cursor.execute(strSql, [request.data['candidate_ssn'], request.data['election_num']])
+            datas = cursor.fetchall()
+            connection.commit()
+            connection.close()
+            for data in datas:
+                row={
+                    'candidate_ssn':data[0],
+                    'candidate_email':data[1],
+                    'name':data[2],
+                    'phonenumber': data[3],
+                    'address':data[4],
+                    'introduce_self':data[5],
+                    'election_pledge':data[6],
+                    'career':data[7],
+                    'approval_state':data[8]
+                }
+
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'data error'}, status=400)
+        return Response(row, status=200)
+
+@api_view(['PUT'])
+def updateCandidateContent(request):
+    if request.method=='PUT':
+        try:
+            cursor = connection.cursor()
+            sql = "update Candidate SET introduce_self=%s, career=%s, election_pledge=%s WHERE candidate_ssn=%s and election_num=%s"
+            print(request.data)
+            result = cursor.execute(sql, [request.data['introduceself'], request.data['career'], request.data['electionpledge'],
+                                          request.data['candidate_ssn'], request.data['election_num']])
+            connection.commit()
+            connection.close()
+            return  Response({'msg': 'success'}, status=200)
+
+
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
 
 
 @api_view(['POST'])
@@ -241,4 +290,4 @@ def getUserElection(request):
             return Response(voter_elections, status=200)
         except Exception as e:
             print(e)
-            return Response({'msg': 'failed'}, status=204)
+            return Response({'msg': 'failed'}, status=400)

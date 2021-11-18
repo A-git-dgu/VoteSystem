@@ -42,7 +42,7 @@ export default function CandidateInput() {
             }
             else {
                 if(response.data.approval_state==1){
-                    console.log('이미 승인된 후보자입니다.')
+                    alert('이미 승인된 후보자입니다.')
                 }
                 else{
                     document.getElementById("name").value=response.data.name
@@ -60,6 +60,25 @@ export default function CandidateInput() {
         .catch(function(error) {
             alert('실패했습니다.')
             console.log("실패");
+        })
+    }
+
+    function updateCandidateContent(){
+        const url = "http://localhost:8000/updateCandidateContent";
+        axios.put(url, {
+            'candidate_ssn':'001224-4000000',
+            'election_num':document.getElementById('election').value,
+            'introduceself': document.getElementById("introduceself").value,
+            'career': document.getElementById("career").value,
+            'electionpledge': document.getElementById("electionpledge").value
+        })
+        .then(function(response){
+            if(response.status=200){
+                alert("수정이 완료되었습니다.")
+            }
+            else{
+                alert("실패했습니다.")
+            }
         })
     }
 
@@ -119,7 +138,7 @@ export default function CandidateInput() {
                 </div>
             </div>
         <div id="reg_button">
-            <Button variant="contained" type="button">후보자 등록</Button>
+            <Button variant="contained" type="button" onClick={updateCandidateContent}>후보자 등록</Button>
             후보자 등록 정보는 "회원정보 수정"에서 수정 가능합니다.</div>
         </div>
     </>
