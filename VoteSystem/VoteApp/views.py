@@ -292,6 +292,38 @@ def getUserElection(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
+@api_view(['POST'])
+def getAdminCandidate(request):
+    if request.method=='POST':
+        try:
+            print("id = ")
+            print(request.data)
+            findElection = Election.objects.get(admin_id=request.data['id'])
+            print("election_num : " + str(findElection.election_num))
+            findCandidate = Candidate.objects.filter(election_num=findElection.election_num).values('candidate_ssn')
+            print(findCandidate)
+            admin_candidate=[]
+            index=0
+            for candidate in findCandidate:
+                print("candidate : ")
+                print(candidate['candidate_ssn'])
+                userInfo = User.objects.get(user_ssn=candidate['candidate_ssn'])
+                candidateInfo = Candidate.objects.get(election_num=findElection.election_num, candidate_ssn=candidate['candidate_ssn'])
+                index+=1
+                row = {
+                    'candidate_name':userInfo.name,
+                    'candidate_id':userInfo.id,
+                    'approval_state':candidateInfo.approval_state,
+                    'index':index
+                }
+                admin_candidate.append(row)
+            print(admin_candidate)
+            return Response(admin_candidate, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+
 @api_view(['GET'])
 def getPossibleVoter(request):
     if request.method=='GET':

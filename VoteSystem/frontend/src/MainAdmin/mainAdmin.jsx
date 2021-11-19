@@ -8,15 +8,39 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
+
 import Nav from '../Main/nav';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import getSessionCookie, {isLogin} from '../Login/cookies';
 
 import styles from './mainAdmin.css';
-
 
 export default function MainAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
-     return (
+    const [candidates, setCandidates] = React.useState([]);
+
+    const getAdminCandidate = async() => {
+        const url = "http://localhost:8000/getAdminCandidate";
+        await axios.post(url,{
+            id:getSessionCookie('id')
+        })
+        .then(function(response) {
+            setCandidates(response.data);
+            console.log("성공");
+        })
+        .catch(function(error) {
+            console.log("실패");
+        })
+    };
+
+    React.useEffect(()=>{
+        isLogin("Admin");
+        getAdminCandidate();
+    },[])
+
+    return (
         <>
             <Nav Type={"Admin"}/>
 
@@ -142,6 +166,14 @@ export default function MainAdmin() {
                     </div>
                <div id="reg_button_signup_admain"></div>
               </div>
+
+              {candidates.map(candidate => (
+                    <div>
+                        {candidate.index} , {candidate.candidate_name}, {candidate.approval_state}
+                    </div>
+              ))}
+
+
             </div>
 
         </>

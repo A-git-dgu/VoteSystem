@@ -56,7 +56,9 @@ foreign key(election_num) references election (election_num) on update cascade
 );
 
 insert into candidate values(1, '991115-2000000', 'aaa@dgu.kr', '후보자 a의 소개입니다.', '후보자 a의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
-insert into candidate values(1, '001224-4000000', 'bbb@dgu.kr', '후보자 a의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
+insert into candidate values(1, '001224-4000000', 'bbb@dgu.kr', '후보자 b의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 1);
+insert into candidate values(1, '000908-4200000', 'c@dgu.kr', '후보자 c의 소개입니다.', '후보자 c의 공약입니다.', '2019년~2020년 학생회 집행부', -1);
+insert into candidate values(2, '001224-4000000', 'bbb@dgu.kr', '후보자 a의 소개입니다.', '후보자 b의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
 
 create table possiblevoter (
 election_num INT not null,

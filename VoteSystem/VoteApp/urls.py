@@ -17,7 +17,7 @@ urlpatterns = [
     path('updateCandidateContent', views.updateCandidateContent),
 
     path('getUserElection', views.getUserElection),
+    path('getAdminCandidate', views.getAdminCandidate),
     path('getPossibleVoter', views.getPossibleVoter),
     path('insertPossibleVoter', views.insertPossibleVoter)
-
 ]

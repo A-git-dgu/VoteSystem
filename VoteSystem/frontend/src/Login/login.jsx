@@ -39,7 +39,7 @@ function Login({Type}) {
             if (response.status==200) {
                 setSessionCookie('id', ID, 1/48);
                 setSessionCookie('type', Type, 1/48);
-                document.location.href='/';
+                document.location.href='/mainAdmin';
             }
             else if (response.status==204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
