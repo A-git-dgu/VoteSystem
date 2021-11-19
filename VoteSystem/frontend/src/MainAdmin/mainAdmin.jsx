@@ -109,41 +109,41 @@ export default function MainAdmin() {
                     <div id="left_form_signup_admain">
                        <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 이름 : </div>
-                            <Input placeholder="선거 이름을 입력하세요" id="election_name" className="input_form_signup"/>
+                            <Input placeholder = {election.election_name} id="election_name" className="input_form_signup"/>
                        </div>
                        <div className="each_form_signup_admain">
                        <div className="article_signup_admain">선거 종류 : </div>
-                            <NativeSelect default="select_election" className="input_form_signup_admain">
-                                <option value={"select_election"}>-- 선거 선택 --</option>
-                                <option id="TF" value={"select_election"}>  찬반 투표  </option>
-                                <option id="who" value={"select_election"}>  후보자 투표  </option>
+                            <NativeSelect value={election.election_type} className="input_form_signup">
+                                <option id="TF" value={0}>  찬반 투표  </option>
+                                <option id="who" value={1}>  후보자 투표  </option>
                             </NativeSelect>
                        </div>
                        <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 번호 : </div>
+                            <div className="election_num_view">&nbsp; {election.election_num}</div>
                        </div>
                        <div className="each_form_signup_admain">
                             <div className="article_signup_admain">소속 기관 : </div>
-                            <Input placeholder="소속기관을 입력하세요" id="institution" className="input_form_signup"/>
+                            <Input placeholder = {election.institution} id="institution" className="input_form_signup"/>
                        </div>
                     </div>
                     <div id="middle_line_signup_admain"></div>
-                    <div id="right_form_signup_admain">
+                    <div id="right_form_signup_admainmain">
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">회원 이름 : </div>
-                            <Input placeholder="이름를 입력하세요." id="admin_name" className="input_form_signup"/>
+                            <Input placeholder = {election.admin_name} id="admin_name" className="input_form_signup"/>
                         </div>
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">관리자 e-mail : </div>
-                            <Input type="email" placeholder="dongguk@dgu.kr" className="input_form_signup" id="admin_email"/>
+                            <Input type="email" placeholder = {election.admin_email} className="input_form_signup" id="admin_email"/>
                         </div>
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 기간 : </div>
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
-                                        startText="시작"
-                                        endText="종료"
+                                        startText={election.start_date}
+                                        endText={election.end_date}
                                         value={value1}
                                         onChange={(newdate) => {
                                         setValue1(newdate);
@@ -164,8 +164,8 @@ export default function MainAdmin() {
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
-                                       startText="시작"
-                                       endText="종료"
+                                       startText={election.enroll_start}
+                                       endText={election.enroll_end}
                                       value={value}
                                       onChange={(newValue) => {
                                        setValue(newValue);
@@ -181,41 +181,25 @@ export default function MainAdmin() {
                                 </LocalizationProvider>
                             </div>
                         </div>
+
                     </div>
-                        <div id="reg_button_signup_admain"></div>
+                    <div id="reg_button_signup_admain"></div>
                 </div>
                 <p id="title_signup_admain">후보자 정보</p>
-                    <div id="form_border_signup_view">
-                        <div id="form_view_candidate">
-                         <div id="candidate_num">1</div>
-                            <div id="candidate_info_view">
-                             후보자 명
-                             <div id="candidate_button">승인여부:
-                                <button id="finish_button" className="signupPage_Button">승인완료</button>
-                              </div>
-                           </div>
+                   <div id="form_border_signup_view">
+                        {candidates.map(candidate => (
+                        <div className="form_view_candidate">
+                        <div className="Count_mainAdmin">{candidate.index}. </div>
+                        <div className="candidate_mainAdmin">{candidate.candidate_name}
+                            <div id="candidate_button"> 승인여부:
+                            {candidate.approval_state=="0" && <button id="request_button" className="signupPage_Button">승인중</button>}
+                            {candidate.approval_state=="1" && <button id="finish_button" className="signupPage_Button">승인완료</button>}
+                            {candidate.approval_state=="-1" && <button id="reject_button" className="signupPage_Button">승인거절</button>}
                         </div>
-                        <div id="form_view_candidate">
-                            <div id="candidate_num">2</div>
-                            <div id="candidate_info_view">
-                             후보자 명
-                              <div id="candidate_button">승인여부:
-                                <button id="request_button" className="signupPage_Button">요청중</button>
-                              </div>
-                           </div>
-
                         </div>
-                         <div id="form_view_candidate">
-                         <div id="candidate_num">3</div>
-                            <div id="candidate_info_view">
-                             후보자 명
-                             <div id="candidate_button">승인여부:
-                             <button id="reject_button" className="signupPage_Button">승인거절</button>
-                             </div>
-                           </div>
                         </div>
-
-                   </div>
+                    ))}
+                    </div>
                     <div id="button_site">
                             <button id="finish_election" className="signupPage_Button">개표하기</button>
                             <button id="delete_election" className="signupPage_Button" onClick={handleClickOpen}>선거종료</button>
@@ -245,23 +229,6 @@ export default function MainAdmin() {
                     </div>
                <div id="reg_button_signup_admain"></div>
               </div>
-              <p>{election.election_name}</p>
-              <p>{election.election_type}</p>
-              <p>{election.election_num}</p>
-              <p>{election.institution}</p>
-              <p>{election.admin_name}</p>
-              <p>{election.admin_email}</p>
-              <p>{election.start_date}</p>
-              <p>{election.end_date}</p>
-              <p>{election.enroll_start}</p>
-              <p>{election.enroll_end}</p>
-              {candidates.map(candidate => (
-                    <div>
-                        {candidate.index} , {candidate.candidate_name}, {candidate.approval_state}
-                    </div>
-              ))}
-
-
             </div>
 
         </>

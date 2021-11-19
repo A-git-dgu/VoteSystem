@@ -29,31 +29,32 @@
 }
 
 /*후보자 한 세트*/
-#form_view_candidate{
+.form_view_candidate{
     padding:1%;
     border-bottom: solid;
     height:30px;
     width:99%;
 }
 
-/*후보자 번호*/
-#candidate_num{
-    float: left;
-    font-size: 17px;
-    height:30px;
+/* 후보자 개수 숫자 */
+.Count_mainAdmin {
     width:10%;
+    font-size:20px;
+    height:30px;
+    float:left;
 }
 
-/*후보자 명*/
-#candidate_info_view{
-    height:30px;
+/* 후보자 이름 */
+.candidate_mainAdmin {
     width:99%;
-    font-size:17px;
+    height:30px;
+    font-size:20px;
+    front-weight:bold;
 }
 
 /*승인여부버튼 둘 공간*/
 #candidate_button{
-    height:29x;
+    height:30px;
     width:25%;
     float:right;
     font-size:17px;
@@ -61,7 +62,7 @@
 
 /*승인완료 버튼*/
 #finish_button{
-    height:30px;
+    height:28px;
     width:80px;
     font-size:10px;
     color:rgb(255,255,255);
@@ -71,7 +72,7 @@
 
 /*승인거절 버튼*/
 #reject_button{
-     height:30px;
+     height:28px;
     width:80px;
     font-size:10px;
     background-color:rgb(211, 211, 211);
@@ -80,9 +81,9 @@
 
 /*승인요청 버튼*/
 #request_button{
-      height:30px;
+      height:28px;
     width:80px;
-    font-size:10px;
+    font-size:15px;
    background-color:rgb(255, 139, 139);
     cursor:pointer;
     float:right;}
@@ -95,10 +96,10 @@
 }
 
 /* 오른쪽 div */
-#right_form_signup_admain {
+#right_form_signup_admainmain {
     float: right;
     height:20vh;
-    width: 45%;
+    width: 48%;
 }
 
 /* 중간 선 */
@@ -127,8 +128,7 @@
 /* 입력 항목 이름 */
 .article_signup_admain {
     float:left;
-    width: 30%;
-
+    width: 26%;
     text-align:right;
     font-size:15px;
 }
@@ -136,25 +136,30 @@
 /* 후보자 등록 기간 항목 이름*/
 .article_signup_candi {
     float:left;
-    width: 43%;
-
+    width: 26%;
+    margin: 0% 0% 0% 2%;
     text-align:right;
-    font-size:17px;
+    font-size:15px;
 }
 /* 입력 폼 */
 .input_form_signup {
-    width: 45%;
+    width: 70%;
     float:left;
     margin: 0% 0% 0% 2%;
     padding: 0% 0% 0% 2%;
+    color:black;
 }
 /* 날짜 입력 폼 */
 .input_form_signup2 {
-    width: 65%;
+    width: 68%;
     float:right;
     margin: 0% 0% 0% 2%;
     padding: 0% 0% 0% 2%;
 
+}
+/*선거번호출력*/
+.election_num_view{
+    font-size:15px;
 }
 
 /* 주민등록번호 입력 폼 */
