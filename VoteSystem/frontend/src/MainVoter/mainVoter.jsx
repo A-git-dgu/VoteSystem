@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import getSessionCookie, {isLogin} from '../Login/cookies';
 
-export default function MainVoter() {
+export default function MainVoter({match}) {
     let [elections, setElections] = useState([]);
 
     // user의 선거 불러오기
@@ -44,7 +44,9 @@ export default function MainVoter() {
                             {election.election_status=="0" && <button className="mainVoterPage_Button" id="showResult_mainVoter">결과보기</button>}
                             {election.election_status=="1" && election.voting_status=="0" && <button className="mainVoterPage_Button" id="voteButton_mainVoter">투표하기</button>}
                             {election.election_status=="1" && election.voting_status=="1" && <button className="mainVoterPage_Button" id="complete_mainVoter">투표완료</button>}
-                            <div className="electionName_mainVoter">{election.election_name}</div>
+                            <Link to={"/electionInfoForVoter/"+election.election_num} style={{textDecoration: 'none'}}>
+                                <div className="electionName_mainVoter">{election.election_name}</div>
+                            </Link>
                             <div className="electionPeriod_mainVoter">선거 기간 : {election.start_date} ~ {election.end_date}</div>
                         </div>
                     ))}

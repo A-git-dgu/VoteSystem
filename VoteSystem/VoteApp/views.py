@@ -258,12 +258,12 @@ def updateCandidateContent(request):
 def getUserElection(request):
     if request.method=='POST':
         try:
-            print("id = ")
-            print(request.data)
+            # print("id = ")
+            # print(request.data)
             findSSN = User.objects.get(id=request.data['id'])
-            print(findSSN.user_ssn)
+            # print(findSSN.user_ssn)
             findElection = Possiblevoter.objects.filter(voter_ssn=findSSN.user_ssn).values('election_num')
-            print(findElection)
+            # print(findElection)
             voter_elections=[]
             index=0
             for electionNum in findElection:
@@ -286,7 +286,7 @@ def getUserElection(request):
                     'index':index
                 }
                 voter_elections.append(row)
-            print(voter_elections)
+            # print(voter_elections)
             return Response(voter_elections, status=200)
         except Exception as e:
             print(e)
@@ -377,6 +377,28 @@ def insertPossibleVoter(request):
                     voting_status=0
                 )
             return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['GET'])
+def getElectionInfoForUser(request):
+    if request.method=='GET':
+        try:
+            e = Election.objects.get(election_num=request.GET['election_num'])
+            row = {
+                'election_name':e.election_name,
+                'election_type':e.election_type,
+                'enroll_start':e.enroll_start.date(),
+                'enroll_end':e.enroll_end.date(),
+                'start_date':e.start_date.date(),
+                'end_date':e.end_date.date(),
+                'institution':e.institution,
+                'admin_name':e.admin_name,
+                'admin_email':e.admin_email
+            }
+            electionInfoForUser = row
+            return Response(electionInfoForUser, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
