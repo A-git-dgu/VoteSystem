@@ -19,7 +19,22 @@ import styles from './mainAdmin.css';
 export default function MainAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
+    const [election, setElection] = React.useState([]);
     const [candidates, setCandidates] = React.useState([]);
+
+    const getAdminElection = async() => {
+        const url = "http://localhost:8000/getAdminElection";
+        await axios.post(url,{
+            id:getSessionCookie('id')
+        })
+        .then(function(response) {
+            setElection(response.data);
+            console.log("성공");
+        })
+        .catch(function(error) {
+            console.log("실패");
+        })
+    };
 
     const getAdminCandidate = async() => {
         const url = "http://localhost:8000/getAdminCandidate";
@@ -37,6 +52,7 @@ export default function MainAdmin() {
 
     React.useEffect(()=>{
         isLogin("Admin");
+        getAdminElection();
         getAdminCandidate();
     },[])
 
@@ -166,7 +182,16 @@ export default function MainAdmin() {
                     </div>
                <div id="reg_button_signup_admain"></div>
               </div>
-
+              <p>{election.election_name}</p>
+              <p>{election.election_type}</p>
+              <p>{election.election_num}</p>
+              <p>{election.institution}</p>
+              <p>{election.admin_name}</p>
+              <p>{election.admin_email}</p>
+              <p>{election.start_date}</p>
+              <p>{election.end_date}</p>
+              <p>{election.enroll_start}</p>
+              <p>{election.enroll_end}</p>
               {candidates.map(candidate => (
                     <div>
                         {candidate.index} , {candidate.candidate_name}, {candidate.approval_state}

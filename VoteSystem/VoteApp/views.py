@@ -293,20 +293,42 @@ def getUserElection(request):
             return Response({'msg': 'failed'}, status=400)
 
 @api_view(['POST'])
-def getAdminCandidate(request):
+def getAdminElection(request):
     if request.method=='POST':
         try:
             print("id = ")
             print(request.data)
+            electionInfo = Election.objects.get(admin_id=request.data['id'])
+            print("election_num : " + str(electionInfo.election_num))
+            election=[]
+            row = {
+                'election_num': electionInfo.election_num,
+                'election_name': electionInfo.election_name,
+                'election_type': electionInfo.election_type,
+                'institution': electionInfo.institution,
+                'admin_name': electionInfo.admin_name,
+                'admin_email': electionInfo.admin_email,
+                'start_date': electionInfo.start_date.date(),
+                'end_date': electionInfo.end_date.date(),
+                'enroll_start': electionInfo.enroll_start.date(),
+                'enroll_end': electionInfo.enroll_end.date()
+            }
+            election= row
+            return Response(election, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+
+@api_view(['POST'])
+def getAdminCandidate(request):
+    if request.method=='POST':
+        try:
             findElection = Election.objects.get(admin_id=request.data['id'])
-            print("election_num : " + str(findElection.election_num))
             findCandidate = Candidate.objects.filter(election_num=findElection.election_num).values('candidate_ssn')
-            print(findCandidate)
             admin_candidate=[]
             index=0
             for candidate in findCandidate:
-                print("candidate : ")
-                print(candidate['candidate_ssn'])
                 userInfo = User.objects.get(user_ssn=candidate['candidate_ssn'])
                 candidateInfo = Candidate.objects.get(election_num=findElection.election_num, candidate_ssn=candidate['candidate_ssn'])
                 index+=1
@@ -317,7 +339,6 @@ def getAdminCandidate(request):
                     'index':index
                 }
                 admin_candidate.append(row)
-            print(admin_candidate)
             return Response(admin_candidate, status=200)
         except Exception as e:
             print(e)
