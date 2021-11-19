@@ -60,7 +60,7 @@ export default function PossibleVoters() {
             }
         )
         .then(function(response) {
-            if(response.status==204){
+            if(response.status==400){
                 alert('실패했습니다.')
             }
             else {

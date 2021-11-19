@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('getUserElection', views.getUserElection),
     path('getAdminElection', views.getAdminElection),
+    path('deleteElection', views.deleteElection),
     path('getAdminCandidate', views.getAdminCandidate),
     path('getPossibleVoter', views.getPossibleVoter),
     path('insertPossibleVoter', views.insertPossibleVoter),

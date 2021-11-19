@@ -8,12 +8,17 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
-
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import Nav from '../Main/nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import getSessionCookie, {isLogin} from '../Login/cookies';
-
+import getSessionCookie, {isLogin, removeSessionCookie} from '../Login/cookies';
 import styles from './mainAdmin.css';
 
 export default function MainAdmin() {
@@ -21,6 +26,17 @@ export default function MainAdmin() {
     const [value1, setValue1] = React.useState([null, null]);
     const [election, setElection] = React.useState([]);
     const [candidates, setCandidates] = React.useState([]);
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
 
     const getAdminElection = async() => {
         const url = "http://localhost:8000/getAdminElection";
@@ -55,6 +71,30 @@ export default function MainAdmin() {
         getAdminElection();
         getAdminCandidate();
     },[])
+
+    function deleteElection(){
+        setOpen(false);
+        const url = "http://localhost:8000/deleteElection";
+        axios.post(url,{ admin_id: getSessionCookie('id')}
+        )
+        .then(function(response) {
+            if(response.status==400){
+                alert('실패했습니다.')
+            }
+            else {
+                alert('선거 강제 종료에 성공했습니다.')
+                window.location.href="/"
+                //로그인 세션 만료
+                removeSessionCookie();
+            }
+        })
+        .catch(function(error) {
+            alert('실패했습니다.')
+            console.log("실패");
+        })
+
+
+    };
 
     return (
         <>
@@ -178,7 +218,30 @@ export default function MainAdmin() {
                    </div>
                     <div id="button_site">
                             <button id="finish_election" className="signupPage_Button">개표하기</button>
-                            <button id="delete_election" className="signupPage_Button">선거종료</button>
+                            <button id="delete_election" className="signupPage_Button" onClick={handleClickOpen}>선거종료</button>
+                            <Dialog
+                        fullScreen={fullScreen}
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="responsive-dialog-title"
+                        >
+                        <DialogTitle id="responsive-dialog-title">
+                          {"------- 정말로 선거를 강제종료 하시겠습니까? -------"}
+                        </DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            지금 선거를 종료하면 선거가 완전히 삭제되며 되돌릴 수 없습니다.
+                          </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                          <Button autoFocus onClick={handleClose} className="signupPage_Button">
+                            취소
+                          </Button>
+                          <Button onClick={deleteElection} color="error" className="signupPage_Button" >
+                            선거 삭제
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </div>
                <div id="reg_button_signup_admain"></div>
               </div>

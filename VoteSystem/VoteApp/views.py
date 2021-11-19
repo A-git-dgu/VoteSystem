@@ -74,6 +74,17 @@ def getElection(request):
         sendData=ElectionSerializer(elections, many=True).data
         return Response(sendData, status=200)
 
+@api_view(['POST'])
+def deleteElection(requset):
+    if requset.method == 'POST':
+        try:
+            e=Election.objects.get(admin_id=requset.data['admin_id'])
+            e.delete()
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
 @api_view(['PUT'])
 def insertCandidate(request):
     if request.method=='PUT':

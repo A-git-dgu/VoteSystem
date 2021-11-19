@@ -72,7 +72,7 @@ export default function SignupAdmin() {
             admin_email:document.getElementById('admin_email').value
         })
         .then(function(response) {
-            if(response.status===204){
+            if(response.status===400){
                 alert('선거개설 실패')
             }
             else {

@@ -52,7 +52,7 @@ export default function SignupVoter() {
             email:document.getElementById('email').value
         })
         .then(function(response) {
-            if(response.status===204){
+            if(response.status===400){
                 alert('회원가입 실패')
             }
             else {
