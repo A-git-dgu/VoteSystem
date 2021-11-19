@@ -11,6 +11,7 @@
 /* 회색 틀 */
 #form_border_election4user {
     overflow: auto; /* 자식 크기에 부모 크기 맞춤 */
+    margin-bottom:10px;
     padding:3%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;

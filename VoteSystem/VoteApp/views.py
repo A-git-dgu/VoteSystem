@@ -397,6 +397,19 @@ def getElectionInfoForUser(request):
     if request.method=='GET':
         try:
             e = Election.objects.get(election_num=request.GET['election_num'])
+            candidateInfo = Candidate.objects.filter(election_num=request.GET['election_num'])
+            candidates=[]
+            for i in candidateInfo:
+                userInfo= i.candidate_ssn
+                candidate = {
+                    'candidate_name': userInfo.name,
+                    'candidate_email': i.candidate_email,
+                    'introduce_self': i.introduce_self,
+                    'election_pledge': i.election_pledge,
+                    'career': i.career
+                }
+                candidates.append(candidate)
+
             row = {
                 'election_name':e.election_name,
                 'election_type':e.election_type,
@@ -406,7 +419,8 @@ def getElectionInfoForUser(request):
                 'end_date':e.end_date.date(),
                 'institution':e.institution,
                 'admin_name':e.admin_name,
-                'admin_email':e.admin_email
+                'admin_email':e.admin_email,
+                'candidates':candidates
             }
             electionInfoForUser = row
             return Response(electionInfoForUser, status=200)

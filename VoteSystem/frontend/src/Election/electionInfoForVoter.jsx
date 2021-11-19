@@ -15,11 +15,10 @@ export default function ElectionInfoForVoter({match}) {
     // 통신 메서드
     const searchApi = async()=> {
         const url = "http://localhost:8000/getElectionInfoForUser?election_num="+id;
-        const url2 = "http://localhost:8000/getCandidateInfoForUser?election_num="+id;
         await axios.get(url)
         .then(function(response) {
             setElectionInfoForUser(response.data);
-            setCandidateInfoForUser(response.data);
+            setCandidateInfoForUser(response.data.candidates);
             console.log("성공");
         })
         .catch(function(error) {
@@ -83,40 +82,41 @@ export default function ElectionInfoForVoter({match}) {
                         </div>
                     </div>
                     <div><p id="title_election4user">후보자 정보</p></div>
+
+                     { candidateInfoForUser.map((candidate) => (
                     <div id="form_border_election4user">
                         <div id="left_form_election4user">
                             <div className="each_form_election4user">
-                                <div className="article_election4user_bottom_up">이름 : </div>
+                                <div className="article_election4user_bottom_up">이름 : {candidate.candidate_name}</div>
                                 <div className="article_print_election4user_bottom_up" id="candidate_name">
                             </div>
                         </div>
                         <div className="each_form_election4user">
-                            <div className="article_election4user_bottom_up">소속 : </div>
-                            <div className="article_print_election4user_bottom_up" id="candidate_group">총학생회</div>
-                        </div>
-                        <div className="each_form_election4user">
-                            <div className="article_election4user_bottom_up">email : </div>
+                            <div className="article_election4user_bottom_up">email : {candidate.candidate_email}</div>
                             <div className="article_print_election4user_bottom_up" id="candidate_email">
-                            {candidateInfoForUser.candidate_email}</div>
+                            {electionInfoForUser.candidate_email}</div>
                         </div>
                         <div className="each_form_election4user">
-                            <div className="article_election4user_bottom">소개 : </div>
+                            <div className="article_election4user_bottom">소개 :</div>
                             <div><p className="print_form" id="self_introduce">
-                            {candidateInfoForUser.introduce_self}</p></div>
+                            {candidate.introduce_self}</p></div>
                         </div>
                     </div>
                     <div id="middle_line_election4user"></div>
                     <div id="right_form_election4user">
                         <div className="each_form_election4user_bottom">
                             <div className="article_election4user_bottom">이력 : </div>
-                            <div><p className="print_form" id="career"></p></div>
+                            <div><p className="print_form" id="career">{candidate.career}</p></div>
                         </div>
                         <div className="each_form_election4user_bottom">
                              <div className="article_election4user_bottom">공약 : </div>
-                             <div><p className="print_form" id="election_pledge"></p></div>
+                             <div><p className="print_form" id="election_pledge">{candidate.election_pledge}</p></div>
                         </div>
                     </div>
                 </div>
+                ))
+                }}
+
                 </div>
             </div>
             <button id="vote_button" className="election4user_Button">투표하기</button>
