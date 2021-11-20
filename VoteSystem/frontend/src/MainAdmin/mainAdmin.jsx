@@ -201,6 +201,7 @@ export default function MainAdmin() {
                             </div>
                         </Link>
                         ))}
+                        { candidates.length==0 && <p id="notfindCandidate">후보자 정보가 없습니다.</p>}
                     </div>
                     <div id="button_site">
                             <button id="finish_election" className="signupPage_Button">개표하기</button>
