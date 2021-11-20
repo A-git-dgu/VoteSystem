@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
-import { useTheme } from '@mui/material/styles';
 import Nav from '../Main/nav';
-import styles from './viewCandidate.css';
+import './viewCandidate.css';
 import getSessionCookie, { isLogin } from '../Login/cookies';
 
 import axios from 'axios';
@@ -36,7 +31,7 @@ export default function MainAdmin({match}) {
     };
     function requestApproval() {
         const url = "http://localhost:8000/requestApproval";
-        if (isChecked==false) {
+        if (isChecked===false) {
             alert("모든 서류의 제출을 확인하세요.");
             return;
         }
@@ -57,7 +52,7 @@ export default function MainAdmin({match}) {
     };
     function requestReject() {
         const url = "http://localhost:8000/requestReject";
-        if (isChecked==false) {
+        if (isChecked===false) {
             alert("모든 서류의 제출을 확인하세요.");
             return;
         }
@@ -92,68 +87,67 @@ export default function MainAdmin({match}) {
     },[])
 
     return (
-       <>
+        <>
             <Nav Type={"Admin"}/>
 
             <div id="outer_form_viewCandidate">
-              <div id="container">
+                <div id="container">
 
-                <p id="title_viewCandidate">후보자 상세정보</p>
-                <div id="form_border_viewCandidate">
-                    <div id="left_form_viewCandidate">
-                       <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">대표자 이름 : {candidate.name}</div>
-                       </div>
-                       <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">주민등록번호 : {candidate.ssn}</div>
-                       </div>
-                       <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">소속 : </div>
-                       </div>
+                    <p id="title_viewCandidate">후보자 상세정보</p>
+                    <div id="form_border_viewCandidate">
+                        <div id="left_form_viewCandidate">
+                           <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">대표자 이름 : {candidate.name}</div>
+                           </div>
+                           <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">주민등록번호 : {candidate.ssn}</div>
+                           </div>
+                           <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">소속 : </div>
+                           </div>
+                        </div>
+                        <div id="middle_line_viewCandidate"></div>
+                        <div id="right_form_viewCandidate">
+                            <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">전화번호 : {candidate.phonenumber}</div>
+                            </div>
+                            <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">e-mail : {candidate.email}</div>
+                            </div>
+                        </div>
+                        <div id="bottom_form">
+                            <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">소개: </div>
+                                <TextField multiline maxRows={4} rows="5"
+                                id="introduceself" value={candidate.introduce}
+                                fullWidth></TextField>
+                            </div>
+                            <div className="each_form_viewCandidate">
+                                <div className="article_viewCandidate">이력: </div>
+                                <TextField multiline maxRows={4} rows="5"
+                                id="introduceself" value={candidate.career}
+                                fullWidth></TextField>
+                            </div>
+                            <div className="each_form_viewCandidate2">
+                                <div className="article_viewCandidate">공약: </div>
+                                <TextField multiline maxRows={4} rows="5"
+                                id="introduceself" value={candidate.pledge}
+                                fullWidth></TextField>
+                            </div>
+                            <div id="checkDocument" className="each_form_viewCandidate">
+                                모든서류의 제출을 확인하였습니다:
+                                <Checkbox onClick={changeCheck}/>
+                            </div>
+                        </div>
+                        <div id="bottom_viewCandidate">
+                            { candidate.approval_state=="0" && <button id="request_button_viewCandidate" className="viewCandidate_Button" onClick={requestApproval}>승인</button>}
+                            { candidate.approval_state=="0" && <button id="reject_button_viewCandidate" className="viewCandidate_Button" onClick={requestReject}>거절</button>}
+                            { candidate.approval_state=="-1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인거절</button>}
+                            { candidate.approval_state=="1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인완료</button>}
+                        </div>
                     </div>
-                    <div id="middle_line_viewCandidate"></div>
-                    <div id="right_form_viewCandidate">
-                        <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">전화번호 : {candidate.phonenumber}</div>
-                        </div>
-                        <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">e-mail : {candidate.email}</div>
-                        </div>
-                    </div>
-                    <div id="bottom_form">
-                        <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">소개: </div>
-                            <TextField multiline maxRows={4} rows="5"
-                            id="introduceself" value={candidate.introduce}
-                            fullWidth></TextField>
-                        </div>
-                        <div className="each_form_viewCandidate">
-                            <div className="article_viewCandidate">이력: </div>
-                            <TextField multiline maxRows={4} rows="5"
-                            id="introduceself" value={candidate.career}
-                            fullWidth></TextField>
-                        </div>
-                        <div className="each_form_viewCandidate2">
-                            <div className="article_viewCandidate">공약: </div>
-                            <TextField multiline maxRows={4} rows="5"
-                            id="introduceself" value={candidate.pledge}
-                            fullWidth></TextField>
-                        </div>
-                        <div id="checkDocument" className="each_form_viewCandidate">
-                            모든서류의 제출을 확인하였습니다:
-                            <Checkbox onClick={changeCheck}/>
-                        </div>
-                    </div>
-                     <div id="bottom_viewCandidate">
-                        { candidate.approval_state=="0" && <button id="request_button_viewCandidate" className="viewCandidate_Button" onClick={requestApproval}>승인</button>}
-                        { candidate.approval_state=="0" && <button id="reject_button_viewCandidate" className="viewCandidate_Button" onClick={requestReject}>거절</button>}
-                        { candidate.approval_state=="-1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인거절</button>}
-                        { candidate.approval_state=="1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인완료</button>}
-                     </div>
                 </div>
-              </div>
             </div>
-
         </>
-);
+    );
 }

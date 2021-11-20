@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
-import styles from './signupVoter.css';
+import './signupVoter.css';
 import Nav from '../Main/nav'
 import axios from 'axios';
 

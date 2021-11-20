@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
 import Input from '@mui/material/Input';
-import TextField from '@mui/material/TextField';
 import Nav from '../Main/main';
 
 import './possibleVoters.css';
@@ -75,13 +74,13 @@ export default function PossibleVoters() {
 
     function addPossibleVoterTd(e){
         let ssn=document.getElementById("possibleVoters_ssn").value
-        if(typeof(e)=='string'){
+        if(typeof(e)==='string'){
             ssn=e
         }
         /******* 예외 처리 **********/
         var input_id = ""
         // 입력에 '-'가 포함된 경우 (예. 000000-1111111)
-        if (ssn[6] == '-') {
+        if (ssn[6] === '-') {
             if (ssn.length != 14) {
                 ErrorMsgForWrongInput();
                 return;
@@ -89,8 +88,8 @@ export default function PossibleVoters() {
             input_id = ssn;
         }
         // 입력에 '-'가 포함되지 않은 경우 (예. 0000001111111)
-        else if (ssn[6] != '-') {
-            if (ssn.length != 13) {
+        else if (ssn[6] !== '-') {
+            if (ssn.length !== 13) {
                 ErrorMsgForWrongInput();
                 return;
             }
@@ -105,7 +104,7 @@ export default function PossibleVoters() {
                 ErrorMsgForWrongInput();
                 return;
             }
-            if (input_id[i] == '-') { dashNum += 1; }
+            if (input_id[i] === '-') { dashNum += 1; }
             // '-'의 개수가 2개 이상이면 잘못된 입력
             if (dashNum > 2) {
                 ErrorMsgForWrongInput();
@@ -117,7 +116,7 @@ export default function PossibleVoters() {
         var new_td = document.querySelectorAll('.newTd')
         // 중복되는 주민등록번호 확인
         for (var i=0; i<new_td.length; i++) {
-            if (input_id == new_td[i].textContent) {
+            if (input_id === new_td[i].textContent) {
                 alert("이미 등록된 주민등록번호입니다.")
                 document.getElementById("possibleVoters_ssn").value = ""
                 return
