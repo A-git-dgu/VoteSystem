@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import getSessionCookie, { isLogin } from '../Login/cookies';
 
 import Nav from '../Main/nav';
 import axios from 'axios';
@@ -11,6 +12,7 @@ export default function ElectionInfoForVoter({match}) {
     let [electionInfoForUser, setElectionInfoForUser] = useState([]);
     let [candidateInfoForUser, setCandidateInfoForUser] = useState([]);
     const { id } = useParams();
+    getSessionCookie('id')
 
     // 통신 메서드
     const searchApi = async()=> {
@@ -27,8 +29,16 @@ export default function ElectionInfoForVoter({match}) {
     };
 
     useEffect(()=>{
+        isLogin( "Voter" );
         searchApi();
     }, [])
+
+    function electionType(elec_type) {
+        if (elec_type==0) {
+            return "찬반 투표";
+        }
+        else { return "후보자 투표"}
+    }
 
     return (
         <>
@@ -48,7 +58,7 @@ export default function ElectionInfoForVoter({match}) {
                             <div className="each_form_election4user">
                                 <div className="article_election4user">선거 종류 : </div>
                                 <div className="article_print_election4user" id="election_type">
-                                {electionInfoForUser.election_type}
+                                    {electionType(electionInfoForUser.election_type)}
                                 </div>
                             </div>
                             <div className="each_form_election4user">
