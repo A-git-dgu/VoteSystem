@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 import Nav from '../Main/main';
 
-import styles from './possibleVoters.css';
+import './possibleVoters.css';
 
 // 주민등록번호에 입력 가능한 문자인지 확인 (숫자와 '-'만 가능)
 function CharCanType(ch) {
-    if ({ch} == '0' || {ch} == '1' || {ch} == '2' || {ch} == '3' || {ch} == '4' || {ch} == '5'
-        || {ch} == '6' || {ch} == '7' || {ch} == '8' || {ch} == '9' || {ch} == '-') {
+    if ({ch} === '0' || {ch} === '1' || {ch} === '2' || {ch} === '3' || {ch} === '4' || {ch} === '5'
+        || {ch} === '6' || {ch} === '7' || {ch} === '8' || {ch} === '9' || {ch} === '-') {
         return true;
     }
     else { return false; }

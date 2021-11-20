@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import styles from './nav.css';
+import './nav.css';
 import Logo from '../Img/logo.png'
 
 import { Link } from 'react-router-dom';
@@ -29,30 +29,30 @@ export default function Nav({Type}) {
     return (
         <div className={Type}>
             {
-            Type=="Voter" &&
+            Type==="Voter" &&
             <Link to='/mainVoter'>
                 <img src={Logo} className="Logo"/>
                 <p className="Title">투표 아지트</p>
             </Link>
             }
             {
-            Type=="Admin" &&
+            Type==="Admin" &&
             <Link to='/'>
                 <img src={Logo} className="Logo"/>
                 <p className="Title">투표 아지트</p>
             </Link>
             }
-            { checkLogin==1 &&
+            { checkLogin===1 &&
             <div class="Nav_right">
                 {
-                    Type=="Voter" && <button className="button_nav" id="modifyUserInfo">회원정보 수정</button>
+                    Type==="Voter" && <button className="button_nav" id="modifyUserInfo">회원정보 수정</button>
                 }
                 <button className="button_nav" id="logoutButton" onClick={Logout}>로그아웃</button>
                 {
-                    Type=="Voter" && <p id="welcomeMsg">{getSessionCookie('id')}님, 올바른 투표하세요~</p>
+                    Type==="Voter" && <p id="welcomeMsg">{getSessionCookie('id')}님, 올바른 투표하세요~</p>
                 }
                 {
-                    Type=="Admin" && <p id="welcomeMsg">{getSessionCookie('id')} 선거 관리자님, 반갑습니다!</p>
+                    Type==="Admin" && <p id="welcomeMsg">{getSessionCookie('id')} 선거 관리자님, 반갑습니다!</p>
                 }
             </div>
             }

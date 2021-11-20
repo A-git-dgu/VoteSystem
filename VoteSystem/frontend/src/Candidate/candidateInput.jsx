@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import Button from '@mui/material/Button';
 import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
 import getSessionCookie, { isLogin } from '../Login/cookies';
-import styles from './twoSegInputForm.css';
+import './candidate.css';
 import Nav from '../Main/nav';
 import axios from 'axios';
 
 export default function CandidateInput() {
 
     let [elections, setElections] = useState([]);
-    getSessionCookie('id')
 
     // 통신 메서드
     const searchApi = async()=> {
@@ -63,9 +61,9 @@ export default function CandidateInput() {
     return (
         <>
             <Nav Type={"Voter"}/>
-            <div><p id="title_candidate">후보자 등록</p></div>
             <div id="outer_form_candidate">
                 <div id="container_candidate">
+                    <div><p id="title_candidate">후보자 등록</p></div>
                     <div id="form_border_candidate">
                         <div id="left_form_candidate">
                             <div className="each_form_candidate">

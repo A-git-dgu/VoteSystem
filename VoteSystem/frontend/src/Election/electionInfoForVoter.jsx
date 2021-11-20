@@ -5,14 +5,12 @@ import getSessionCookie, { isLogin } from '../Login/cookies';
 import Nav from '../Main/nav';
 import axios from 'axios';
 
-import styles from '../MainAdmin/mainAdmin.css';
 import './electionInfoForVoter.css';
 
 export default function ElectionInfoForVoter({match}) {
     let [electionInfoForUser, setElectionInfoForUser] = useState([]);
     let [candidateInfoForUser, setCandidateInfoForUser] = useState([]);
     const { id } = useParams();
-    getSessionCookie('id')
 
     // 통신 메서드
     const searchApi = async()=> {
@@ -48,8 +46,8 @@ export default function ElectionInfoForVoter({match}) {
                 <div id="container_election4user">
                     <div><p id="title_election4user">선거 정보</p></div>
 
-                    <div id="form_border_election4user">
-                        <div id="left_form_election4user">
+                    <div className="form_border_election4user">
+                        <div className="left_form_election4user">
                             <div className="each_form_election4user">
                                 <div className="article_election4user">선거 이름 :</div>
                                 <div className="article_print_election4user" id="election_name">
@@ -72,8 +70,8 @@ export default function ElectionInfoForVoter({match}) {
                                 {electionInfoForUser.start_date} ~ {electionInfoForUser.end_date}</div>
                             </div>
                         </div>
-                        <div id="middle_line_election4user"></div>
-                        <div id="right_form_election4user">
+                        <div className="middle_line_election4user"></div>
+                        <div className="right_form_election4user">
                             <div className="each_form_election4user">
                                 <div className="article_election4user">소속 기관 : </div>
                                 <div className="article_print_election4user" id="institution">
@@ -93,9 +91,19 @@ export default function ElectionInfoForVoter({match}) {
                     </div>
                     <div><p id="title_election4user">후보자 정보</p></div>
 
-                     { candidateInfoForUser.map((candidate) => (
-                    <div id="form_border_election4user">
-                        <div id="left_form_election4user">
+                    {/* 만약 등록된 후보자가 없을 경우 "등록된 후보자가 없습니다" 출력 */ }
+                    {
+                        candidateInfoForUser.length === 0 &&
+                        <div className="form_border_election4user">
+                            <center><div style={{color:'gray'}}>
+                                등록된 후보자가 없습니다.
+                            </div></center>
+                        </div>
+                    }
+
+                    { candidateInfoForUser.map((candidate) => (
+                    <div className="form_border_election4user">
+                        <div className="left_form_election4user">
                             <div className="each_form_election4user">
                                 <div className="article_election4user_bottom_up">이름 : {candidate.candidate_name}</div>
                                 <div className="article_print_election4user_bottom_up" id="candidate_name">
@@ -112,8 +120,8 @@ export default function ElectionInfoForVoter({match}) {
                             {candidate.introduce_self}</p></div>
                         </div>
                     </div>
-                    <div id="middle_line_election4user"></div>
-                    <div id="right_form_election4user">
+                    <div className="middle_line_election4user"></div>
+                    <div className="right_form_election4user">
                         <div className="each_form_election4user_bottom">
                             <div className="article_election4user_bottom">이력 : </div>
                             <div><p className="print_form" id="career">{candidate.career}</p></div>

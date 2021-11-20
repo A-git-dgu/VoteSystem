@@ -9,7 +9,7 @@
 }
 
 /* 회색 틀 */
-#form_border_election4user {
+.form_border_election4user {
     overflow: auto; /* 자식 크기에 부모 크기 맞춤 */
     margin-bottom:10px;
     padding:3%;
@@ -18,13 +18,13 @@
 }
 
 /* 왼쪽 div */
-#left_form_election4user {
+.left_form_election4user {
     float: left;
     width: 45%;
 }
 
 /* 오른쪽 div */
-#right_form_election4user {
+.right_form_election4user {
     float: right;
     width: 45%;
 }
@@ -82,7 +82,7 @@
 }
 
 /* 중간 선 */
-#middle_line_election4user {
+.middle_line_election4user {
     float:left;
     height:30vh;
     width:1px;
