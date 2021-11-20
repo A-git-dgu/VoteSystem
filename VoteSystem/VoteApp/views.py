@@ -427,3 +427,57 @@ def getElectionInfoForUser(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getAdminCandidateInfo(request):
+    if request.method == 'POST':
+        try:
+            print("candidate = ")
+            print(request.data)
+            findUser = User.objects.get(id=request.data['candidate_id'])
+            print(findUser.user_ssn)
+            findCandidate = Candidate.objects.get(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
+            print(findCandidate.candidate_email)
+            row = {
+                'name': findUser.name,
+                'phonenumber': findUser.phonenumber,
+                'ssn': findUser.user_ssn,
+                'email':findUser.email,
+                'introduce':findCandidate.introduce_self,
+                'pledge':findCandidate.election_pledge,
+                'career':findCandidate.career,
+                'approval_state':findCandidate.approval_state
+            }
+            print(row)
+            return Response(row, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def requestApproval(request):
+    if request.method=='PUT':
+        try:
+            print("requestReject = ")
+            print(request.data)
+            findUser = User.objects.get(id=request.data['candidate_id'])
+            findCandidate = Candidate.objects.filter(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
+            findCandidate.update(approval_state=1)
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def requestReject(request):
+    if request.method=='PUT':
+        try:
+            print("requestReject = ")
+            print(request.data)
+            findUser = User.objects.get(id=request.data['candidate_id'])
+            findCandidate = Candidate.objects.filter(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
+            findCandidate.update(approval_state=-1)
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)

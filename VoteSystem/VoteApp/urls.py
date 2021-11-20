@@ -25,4 +25,8 @@ urlpatterns = [
 
     path('getElectionInfoForUser', views.getElectionInfoForUser),
     # path('getCandidateInfoForUser', views.getCandidateInfoForUser)
+
+    path('getAdminCandidateInfo', views.getAdminCandidateInfo),
+    path('requestReject', views.requestReject),
+    path('requestApproval', views.requestApproval)
 ]

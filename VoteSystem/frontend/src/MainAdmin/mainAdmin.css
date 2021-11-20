@@ -21,7 +21,6 @@
 
 /*후보자 정보 창*/
 #form_border_signup_view {
-    padding:1%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
     width :70%;
@@ -33,7 +32,10 @@
     padding:1%;
     border-bottom: solid;
     height:30px;
-    width:99%;
+    width:98%;
+    color:black;
+    border-radius: 10px;
+    border:1px solid #BDBDBD;
 }
 
 /* 후보자 개수 숫자 */
@@ -72,7 +74,7 @@
 
 /*승인거절 버튼*/
 #reject_button{
-     height:28px;
+    height:28px;
     width:80px;
     font-size:10px;
     background-color:rgb(211, 211, 211);
@@ -81,10 +83,10 @@
 
 /*승인요청 버튼*/
 #request_button{
-      height:28px;
+    height:28px;
     width:80px;
     font-size:15px;
-   background-color:rgb(255, 139, 139);
+    background-color:rgb(255, 139, 139);
     cursor:pointer;
     float:right;}
 

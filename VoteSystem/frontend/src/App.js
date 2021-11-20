@@ -39,7 +39,7 @@ function App() {
                 <Route path="/possibleVoters" element={<PossibleVoters/>} />
                 <Route path="/electionInfoForVoter/:id" element={<ElectionInfoForVoter/>} />
 
-                <Route path="/viewCandidate" element={<ViewCandidate/>} />
+                <Route path="/viewCandidate/:electionNum/:candidateId" element={<ViewCandidate/>} />
 
             </Routes>
         </BrowserRouter>

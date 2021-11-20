@@ -17,10 +17,11 @@
     padding:3%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
+    margin-bottom:30px;
 }
 
 /*승인완료 버튼*/
-#finish_button{
+#finish_button_viewCandidate{
     height:30px;
     width:80px;
     font-size:10px;
@@ -30,21 +31,23 @@
 }
 
 /*승인거절 버튼*/
-#reject_button{
-   height:30px;
+#reject_button_viewCandidate{
+    height:30px;
     width:80px;
-    font-size:10px;
-    background-color:rgb(255, 139, 139);
+    font-size:15px;
+    background-color:rgb(231, 76, 60);
     float:center;
-    }
+    cursor:pointer;
+}
 
 /*승인요청 버튼*/
-#request_button{
+#request_button_viewCandidate{
     float:center;
     height:30px;
     width:80px;
-    font-size:10px;
-   background-color:rgb(255, 139, 139);
+    font-size:15px;
+    background-color:rgb(52, 152, 219);
+    cursor:pointer;
 }
 
 /* 왼쪽 div */
@@ -75,10 +78,9 @@
     padding:3%;
 }
 /* 아래 div : "회원가입"버튼 있는 아래쪽 div */
-#reg_button_viewCandidate {
+#bottom_viewCandidate {
     clear:both;
     text-align:center;
-    border:solid;
 }
 
 /* 각 입력 전체 틀 */
@@ -111,11 +113,12 @@
 }
 
 /* 헤당 페이지 버튼 근본디자인 */
-.signupPage_Button {
+.viewCandidate_Button {
     font-weight:bold;
     border:0;
     outline:0;
     border-radius: 5px;
+    margin: 5px;
 }
 
 
