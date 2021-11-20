@@ -26,7 +26,10 @@
     width :70%;
     float:left;
 }
-
+/* 후보자 정보 없을 때 */
+#notfindCandidate {
+    padding-left:15px;
+}
 /*후보자 한 세트*/
 .form_view_candidate{
     padding:1%;
