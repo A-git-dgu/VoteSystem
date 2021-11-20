@@ -34,7 +34,13 @@
     border-radius: 10px;
     border:1px solid #BDBDBD;
 }
-
+/* 선거정보보기 이동 div */
+.showElection_mainVoter {
+    height:80px;
+    width:90%;
+    float:left;
+    color: black;
+}
 /* 선거 개수 숫자 */
 .Count_mainVoter {
     margin:2% 0% 0% 2%;
@@ -51,9 +57,6 @@
 
     font-size:20px;
     front-weight:bold;
-}
-.electionName_mainVoter {
-    color: black;
 }
 /* 선거 기간 */
 .electionPeriod_mainVoter {
