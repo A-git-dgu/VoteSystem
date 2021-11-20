@@ -100,20 +100,20 @@ export default function MainAdmin() {
         <>
             <Nav Type={"Admin"}/>
 
-            <div id="outer_form_signup">
+            <div id="outer_form_mainadmin">
               <div id="container">
 
-                <p id="title_signup_admain">선거 정보
+                <p id="title_mainadmin">선거 정보
                         <button className="signupPage_Button" id="requestSignup_admain"> 정보 수정 </button></p>
-                <div id="form_border_signup">
-                    <div id="left_form_signup_admain">
+                <div id="form_border_mainadmin">
+                    <div id="left_form_mainadmin">
                        <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 이름 : </div>
-                            <Input placeholder = {election.election_name} id="election_name" className="input_form_signup"/>
+                            <Input placeholder = {election.election_name} id="election_name" className="input_form_mainadmin"/>
                        </div>
                        <div className="each_form_signup_admain">
                        <div className="article_signup_admain">선거 종류 : </div>
-                            <NativeSelect value={election.election_type} className="input_form_signup">
+                            <NativeSelect value={election.election_type} className="input_form_mainadmin">
                                 <option id="TF" value={0}>  찬반 투표  </option>
                                 <option id="who" value={1}>  후보자 투표  </option>
                             </NativeSelect>
@@ -124,22 +124,22 @@ export default function MainAdmin() {
                        </div>
                        <div className="each_form_signup_admain">
                             <div className="article_signup_admain">소속 기관 : </div>
-                            <Input placeholder = {election.institution} id="institution" className="input_form_signup"/>
+                            <Input placeholder = {election.institution} id="institution" className="input_form_mainadmin"/>
                        </div>
                     </div>
-                    <div id="middle_line_signup_admain"></div>
-                    <div id="right_form_signup_admainmain">
+                    <div id="middle_line_mainadmin"></div>
+                    <div id="right_form_mainadmin">
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">회원 이름 : </div>
-                            <Input placeholder = {election.admin_name} id="admin_name" className="input_form_signup"/>
+                            <Input placeholder = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>
                         </div>
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">관리자 e-mail : </div>
-                            <Input type="email" placeholder = {election.admin_email} className="input_form_signup" id="admin_email"/>
+                            <Input type="email" placeholder = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>
                         </div>
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 기간 : </div>
-                            <div className="input_form_signup2">
+                            <div className="input_form_mainadmin2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
                                         startText={election.start_date}
@@ -161,7 +161,7 @@ export default function MainAdmin() {
                         </div>
                         <div className="each_form_signup_admain">
                             <div className="article_signup_admain">후보자 등록기간 : </div>
-                            <div className="input_form_signup2">
+                            <div className="input_form_mainadmin2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
                                        startText={election.enroll_start}
@@ -183,10 +183,10 @@ export default function MainAdmin() {
                         </div>
 
                     </div>
-                    <div id="reg_button_signup_admain"></div>
+                    <div id="reg_button_mainadmin"></div>
                 </div>
-                <p id="title_signup_admain">후보자 정보</p>
-                   <div id="form_border_signup_view">
+                <p id="title_mainadmin">후보자 정보</p>
+                   <div id="form_border_mainadmin2">
                         {candidates.map(candidate => (
                         <Link to={"/viewCandidate/"+election.election_num+"/"+candidate.candidate_id} style={{textDecoration: 'none'}}>
                             <div className="form_view_candidate">
@@ -201,7 +201,6 @@ export default function MainAdmin() {
                             </div>
                         </Link>
                         ))}
-                        { candidates.length==0 && <p id="notfindCandidate">후보자 정보가 없습니다.</p>}
                     </div>
                     <div id="button_site">
                             <button id="finish_election" className="signupPage_Button">개표하기</button>
@@ -230,11 +229,10 @@ export default function MainAdmin() {
                         </DialogActions>
                       </Dialog>
                     </div>
-               <div id="reg_button_signup_admain"></div>
+               <div id="reg_button_mainadmin"></div>
               </div>
             </div>
 
         </>
   );
 }
-

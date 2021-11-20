@@ -1,10 +1,10 @@
-#title_signup_admain {
+#title_viewCandidate {
     font-weight: bold;
     font-size: 30px;
 }
 
 /* 회원가입 및 공간 */
-#outer_form_signup {
+#outer_form_viewCandidate {
 }
 #container{
     width:1000px;
@@ -13,7 +13,7 @@
 }
 
 /* 회색 틀 */
-#form_border_signup {
+#form_border_viewCandidate {
     padding:3%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
@@ -51,21 +51,21 @@
 }
 
 /* 왼쪽 div */
-#left_form_signup_admain {
+#left_form_viewCandidate {
     float: left;
     height:20vh;
     width: 45%;
 }
 
 /* 오른쪽 div */
-#right_form_signup_admain {
+#right_form_viewCandidate {
     float: right;
     height:20vh;
     width: 45%;
 }
 
 /* 중간 선 */
-#middle_line_signup_viewCandidate{
+#middle_line_viewCandidate{
     float:left;
     height:17vh;
     width:1px;
@@ -84,14 +84,14 @@
 }
 
 /* 각 입력 전체 틀 */
-.each_form_signup_admain {
+.each_form_viewCandidate {
     width: 100%;
     display: inline-block;
     margin: 0% 0% 5%;
     font-size:15px;
 }
 
-.each_form_signup_admain2 {
+.each_form_viewCandidate2 {
     width: 100%;
     display: inline-block;
     margin: 0% 0% 0%;
@@ -99,13 +99,13 @@
 }
 
 /* 입력 항목 이름 */
-.article_signup_admain {
+.article_viewCandidate {
     float:left;
-    width: 30%;
-    text-align:right;
+    width: 90%;
+    text-align:left;
     font-size:18px;
 }
-.article_viewCandidate {
+.article_viewCandidate2 {
     float:left;
     width: 30%;
     text-align:left;
@@ -120,7 +120,3 @@
     border-radius: 5px;
     margin: 5px;
 }
-
-
-
-

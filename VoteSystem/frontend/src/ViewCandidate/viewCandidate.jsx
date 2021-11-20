@@ -95,51 +95,51 @@ export default function MainAdmin({match}) {
        <>
             <Nav Type={"Admin"}/>
 
-            <div id="outer_form_signup">
+            <div id="outer_form_viewCandidate">
               <div id="container">
 
-                <p id="title_signup_admain">후보자 상세정보</p>
-                <div id="form_border_signup">
-                    <div id="left_form_signup_admain">
-                       <div className="each_form_signup_admain">
-                            <div className="article_signup_admain">대표자 이름 : {candidate.name}</div>
+                <p id="title_viewCandidate">후보자 상세정보</p>
+                <div id="form_border_viewCandidate">
+                    <div id="left_form_viewCandidate">
+                       <div className="each_form_viewCandidate">
+                            <div className="article_viewCandidate">대표자 이름 : {candidate.name}</div>
                        </div>
-                       <div className="each_form_signup_admain">
-                            <div className="article_signup_admain">주민등록번호 : {candidate.ssn}</div>
+                       <div className="each_form_viewCandidate">
+                            <div className="article_viewCandidate">주민등록번호 : {candidate.ssn}</div>
                        </div>
-                       <div className="each_form_signup_admain">
-                            <div className="article_signup_admain">소속 : </div>
+                       <div className="each_form_viewCandidate">
+                            <div className="article_viewCandidate">소속 : </div>
                        </div>
                     </div>
-                    <div id="middle_line_signup_viewCandidate"></div>
-                    <div id="right_form_signup_admain">
-                        <div className="each_form_signup_admain">
-                            <div className="article_signup_admain">전화번호 : {candidate.phonenumber}</div>
+                    <div id="middle_line_viewCandidate"></div>
+                    <div id="right_form_viewCandidate">
+                        <div className="each_form_viewCandidate">
+                            <div className="article_viewCandidate">전화번호 : {candidate.phonenumber}</div>
                         </div>
-                        <div className="each_form_signup_admain">
-                            <div className="article_signup_admain">e-mail : {candidate.email}</div>
+                        <div className="each_form_viewCandidate">
+                            <div className="article_viewCandidate">e-mail : {candidate.email}</div>
                         </div>
                     </div>
                     <div id="bottom_form">
-                        <div className="each_form_signup_admain">
+                        <div className="each_form_viewCandidate">
                             <div className="article_viewCandidate">소개: </div>
                             <TextField multiline maxRows={4} rows="5"
                             id="introduceself" value={candidate.introduce}
                             fullWidth></TextField>
                         </div>
-                        <div className="each_form_signup_admain">
+                        <div className="each_form_viewCandidate">
                             <div className="article_viewCandidate">이력: </div>
                             <TextField multiline maxRows={4} rows="5"
                             id="introduceself" value={candidate.career}
                             fullWidth></TextField>
                         </div>
-                        <div className="each_form_signup_admain2">
+                        <div className="each_form_viewCandidate2">
                             <div className="article_viewCandidate">공약: </div>
                             <TextField multiline maxRows={4} rows="5"
                             id="introduceself" value={candidate.pledge}
                             fullWidth></TextField>
                         </div>
-                        <div id="checkDocument" className="each_form_signup_admain">
+                        <div id="checkDocument" className="each_form_viewCandidate">
                             모든서류의 제출을 확인하였습니다:
                             <Checkbox onClick={changeCheck}/>
                         </div>

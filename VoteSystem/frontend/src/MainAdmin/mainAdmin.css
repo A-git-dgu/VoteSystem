@@ -1,10 +1,10 @@
-#title_signup_admain {
+#title_mainadmin {
     font-weight: bold;
     font-size: 30px;
 }
 
 /* 회원가입 및 공간 */
-#outer_form_signup {
+#outer_form_mainadmin {
 }
 #container{
     width:1000px;
@@ -13,29 +13,27 @@
 }
 
 /* 회색 틀 */
-#form_border_signup {
+#form_border_mainadmin {
     padding:3%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
 }
 
 /*후보자 정보 창*/
-#form_border_signup_view {
+#form_border_mainadmin2 {
+    overflow: auto;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
-    width :70%;
+    height:20vh;
+    width :75%;
     float:left;
 }
-/* 후보자 정보 없을 때 */
-#notfindCandidate {
-    padding-left:15px;
-}
+
 /*후보자 한 세트*/
 .form_view_candidate{
     padding:1%;
-    border-bottom: solid;
     height:30px;
-    width:98%;
+    width:97%;
     color:black;
     border-radius: 10px;
     border:1px solid #BDBDBD;
@@ -94,21 +92,21 @@
     float:right;}
 
 /* 왼쪽 div */
-#left_form_signup_admain {
+#left_form_mainadmin {
     float: left;
     height:20vh;
     width: 45%;
 }
 
 /* 오른쪽 div */
-#right_form_signup_admainmain {
+#right_form_mainadmin {
     float: right;
     height:20vh;
     width: 48%;
 }
 
 /* 중간 선 */
-#middle_line_signup_admain{
+#middle_line_mainadmin{
     float:left;
     height:30vh;
     width:1px;
@@ -117,7 +115,7 @@
 }
 
 /* 아래 div : "회원가입"버튼 있는 아래쪽 div */
-#reg_button_signup_admain {
+#reg_button_mainadmin {
     clear:both;
     text-align:right;
 }
@@ -147,7 +145,7 @@
     font-size:15px;
 }
 /* 입력 폼 */
-.input_form_signup {
+.input_form_mainadmin {
     width: 70%;
     float:left;
     margin: 0% 0% 0% 2%;
@@ -155,7 +153,7 @@
     color:black;
 }
 /* 날짜 입력 폼 */
-.input_form_signup2 {
+.input_form_mainadmin2 {
     width: 68%;
     float:right;
     margin: 0% 0% 0% 2%;
