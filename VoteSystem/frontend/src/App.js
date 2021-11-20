@@ -17,6 +17,8 @@ import CandidateModify from './Candidate/candidateModify';
 import PossibleVoters from './PossibleVoters/possibleVoters';
 import ElectionInfoForVoter from './Election/electionInfoForVoter';
 
+import ViewCandidate from './ViewCandidate/viewCandidate';
+
 function App() {
     return (
         <BrowserRouter>
@@ -36,6 +38,8 @@ function App() {
 
                 <Route path="/possibleVoters" element={<PossibleVoters/>} />
                 <Route path="/electionInfoForVoter/:id" element={<ElectionInfoForVoter/>} />
+
+                <Route path="/viewCandidate" element={<ViewCandidate/>} />
 
             </Routes>
         </BrowserRouter>

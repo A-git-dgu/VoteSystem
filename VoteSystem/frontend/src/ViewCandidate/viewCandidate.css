@@ -1,0 +1,123 @@
+#title_signup_admain {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+/* 회원가입 및 공간 */
+#outer_form_signup {
+}
+#container{
+    width:1000px;
+    position: relative;
+    margin:auto;
+}
+
+/* 회색 틀 */
+#form_border_signup {
+    padding:3%;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+
+/*승인완료 버튼*/
+#finish_button{
+    height:30px;
+    width:80px;
+    font-size:10px;
+    color:rgb(255,255,255);
+    background-color:rgb(79, 83, 88);
+    float:center;
+}
+
+/*승인거절 버튼*/
+#reject_button{
+   height:30px;
+    width:80px;
+    font-size:10px;
+    background-color:rgb(255, 139, 139);
+    float:center;
+    }
+
+/*승인요청 버튼*/
+#request_button{
+    float:center;
+    height:30px;
+    width:80px;
+    font-size:10px;
+   background-color:rgb(255, 139, 139);
+}
+
+/* 왼쪽 div */
+#left_form_signup_admain {
+    float: left;
+    height:20vh;
+    width: 45%;
+}
+
+/* 오른쪽 div */
+#right_form_signup_admain {
+    float: right;
+    height:20vh;
+    width: 45%;
+}
+
+/* 중간 선 */
+#middle_line_signup_viewCandidate{
+    float:left;
+    height:17vh;
+    width:1px;
+    margin-left:4.7%;
+    background-color:rgb(189, 189, 189);
+}
+
+#bottom_form{
+    clear:both;
+    padding:3%;
+}
+/* 아래 div : "회원가입"버튼 있는 아래쪽 div */
+#reg_button_viewCandidate {
+    clear:both;
+    text-align:center;
+    border:solid;
+}
+
+/* 각 입력 전체 틀 */
+.each_form_signup_admain {
+    width: 100%;
+    display: inline-block;
+    margin: 0% 0% 5%;
+    font-size:15px;
+}
+
+.each_form_signup_admain2 {
+    width: 100%;
+    display: inline-block;
+    margin: 0% 0% 0%;
+    font-size:5px;
+}
+
+/* 입력 항목 이름 */
+.article_signup_admain {
+    float:left;
+    width: 30%;
+    text-align:right;
+    font-size:18px;
+}
+.article_viewCandidate {
+    float:left;
+    width: 30%;
+    text-align:left;
+    font-size:18px;
+}
+
+/* 헤당 페이지 버튼 근본디자인 */
+.signupPage_Button {
+    font-weight:bold;
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
+
+
+
+

@@ -125,7 +125,7 @@ export default function ElectionInfoForVoter({match}) {
                     </div>
                 </div>
                 ))
-                }}
+                }
 
                 </div>
             </div>
