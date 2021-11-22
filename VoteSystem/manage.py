@@ -19,7 +19,7 @@ def main():
     try:
         if sys.argv[2] == 'react':
             project_root = os.getcwd()
-            os.chdir(os.path.join(project_root, "frontend"))
+            os.chdir(os.path.join(project_root, "frontend2"))
             os.system("npm run build")
             os.chdir(project_root)
             sys.argv.pop(2)

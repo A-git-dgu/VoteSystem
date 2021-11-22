@@ -1,0 +1,112 @@
+#title_election4user {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#container_election4user {
+    width:1000px;
+    margin:auto;
+}
+
+/* 회색 틀 */
+#form_border_election4user {
+    overflow: auto; /* 자식 크기에 부모 크기 맞춤 */
+    margin-bottom:10px;
+    padding:3%;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+
+/* 왼쪽 div */
+#left_form_election4user {
+    float: left;
+    width: 45%;
+}
+
+/* 오른쪽 div */
+#right_form_election4user {
+    float: right;
+    width: 45%;
+}
+
+/* 각 입력 전체 틀 */
+.each_form_election4user {
+    display:inline-block;
+    width: 100%;
+    height: 30px;
+    margin: 0% 0% 5%;
+}
+
+/* 선거 정보 제목 */
+.article_election4user {
+    float: left;
+    width: 30%;
+    text-align:right;
+    font-size:18px;
+}
+/* 선거 정보 내용 */
+.article_print_election4user {
+    float: right;
+    width: 65%;
+    font-size: 18px;
+    margin-left: 2%;
+}
+/* 후보자 정보에서 이름, 소속, email 제목 */
+.article_election4user_bottom_up {
+    float: left;
+    text-align:right;
+    font-size:18px;
+}
+/* 후보자 정보에서 이름, 소속, email 내용(오른쪽)*/
+.article_print_election4user_bottom_up {
+    float: right;
+    width: 85%;
+    font-size: 18px;
+    margin-left: 2%;
+}
+/* 후보자 정보에서 소개, 이력, 공약 제목 */
+.article_election4user_bottom {
+    float: top;
+    width: 13%;
+    text-align:right;
+    font-size:18px;
+}
+/* 후보자 정보에서 소개, 이력, 공약 내용 */
+.print_form {
+    float:bottom;
+    margin: 10px 10px 10px 0px;
+    width: 93%;
+    height: 100px;
+    border: 1px solid #BDBDBD;
+    border-radius: 5px;
+}
+
+/* 중간 선 */
+#middle_line_election4user {
+    float:left;
+    height:30vh;
+    width:1px;
+    margin-left:4.7%;
+    background-color:rgb(189, 189, 189);
+}
+
+/* "투표하기" 버튼 */
+#vote_button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width:150px;
+    height:60px;
+    font-size:22px;
+    font-weight: bold;
+    background-color:rgb(91, 223, 198);
+    cursor:pointer;
+}
+/* 헤당 페이지 버튼 근본디자인 */
+.election4user_Button {
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
