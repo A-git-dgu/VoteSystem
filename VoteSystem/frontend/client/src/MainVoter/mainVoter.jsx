@@ -47,7 +47,7 @@ export default function MainVoter({match}) {
                                     <div className="electionPeriod_mainVoter">선거 기간 : {election.start_date} ~ {election.end_date}</div>
                                 </div>
                             </Link>
-                            {election.election_status=="0" && <button className="mainVoterPage_Button" id="showResult_mainVoter">결과보기</button>}
+                            {election.election_status==="0" && <button className="mainVoterPage_Button" id="showResult_mainVoter">결과보기</button>}
                             {election.election_status=="1" && election.voting_status=="0" && <button className="mainVoterPage_Button" id="voteButton_mainVoter">투표하기</button>}
                             {election.election_status=="1" && election.voting_status=="1" && <button className="mainVoterPage_Button" id="complete_mainVoter">투표완료</button>}
                         </div>

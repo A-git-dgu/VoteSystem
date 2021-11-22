@@ -1,10 +1,10 @@
-#title_signup_admain {
+#title_viewCandidate {
     font-weight: bold;
     font-size: 30px;
 }
 
 /* 회원가입 및 공간 */
-#outer_form_signup {
+#outer_form_viewCandidate {
 }
 #container{
     width:1000px;
@@ -13,14 +13,15 @@
 }
 
 /* 회색 틀 */
-#form_border_signup {
+#form_border_viewCandidate {
     padding:3%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
+    margin-bottom:30px;
 }
 
 /*승인완료 버튼*/
-#finish_button{
+#finish_button_viewCandidate{
     height:30px;
     width:80px;
     font-size:10px;
@@ -30,39 +31,41 @@
 }
 
 /*승인거절 버튼*/
-#reject_button{
-   height:30px;
+#reject_button_viewCandidate{
+    height:30px;
     width:80px;
-    font-size:10px;
-    background-color:rgb(255, 139, 139);
+    font-size:15px;
+    background-color:rgb(231, 76, 60);
     float:center;
-    }
+    cursor:pointer;
+}
 
 /*승인요청 버튼*/
-#request_button{
+#request_button_viewCandidate{
     float:center;
     height:30px;
     width:80px;
-    font-size:10px;
-   background-color:rgb(255, 139, 139);
+    font-size:15px;
+    background-color:rgb(52, 152, 219);
+    cursor:pointer;
 }
 
 /* 왼쪽 div */
-#left_form_signup_admain {
+#left_form_viewCandidate {
     float: left;
     height:20vh;
     width: 45%;
 }
 
 /* 오른쪽 div */
-#right_form_signup_admain {
+#right_form_viewCandidate {
     float: right;
     height:20vh;
     width: 45%;
 }
 
 /* 중간 선 */
-#middle_line_signup_viewCandidate{
+#middle_line_viewCandidate{
     float:left;
     height:17vh;
     width:1px;
@@ -75,21 +78,20 @@
     padding:3%;
 }
 /* 아래 div : "회원가입"버튼 있는 아래쪽 div */
-#reg_button_viewCandidate {
+#bottom_viewCandidate {
     clear:both;
     text-align:center;
-    border:solid;
 }
 
 /* 각 입력 전체 틀 */
-.each_form_signup_admain {
+.each_form_viewCandidate {
     width: 100%;
     display: inline-block;
     margin: 0% 0% 5%;
     font-size:15px;
 }
 
-.each_form_signup_admain2 {
+.each_form_viewCandidate2 {
     width: 100%;
     display: inline-block;
     margin: 0% 0% 0%;
@@ -97,13 +99,13 @@
 }
 
 /* 입력 항목 이름 */
-.article_signup_admain {
+.article_viewCandidate {
     float:left;
-    width: 30%;
-    text-align:right;
+    width: 90%;
+    text-align:left;
     font-size:18px;
 }
-.article_viewCandidate {
+.article_viewCandidate2 {
     float:left;
     width: 30%;
     text-align:left;
@@ -111,13 +113,10 @@
 }
 
 /* 헤당 페이지 버튼 근본디자인 */
-.signupPage_Button {
+.viewCandidate_Button {
     font-weight:bold;
     border:0;
     outline:0;
     border-radius: 5px;
+    margin: 5px;
 }
-
-
-
-

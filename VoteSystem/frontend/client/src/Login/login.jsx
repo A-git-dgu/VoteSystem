@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import styles from './login.css';
+import './login.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import getSessionCookie, { setSessionCookie } from './cookies';
@@ -10,11 +10,11 @@ function Login({Type}) {
     const [buttonColor, setButtonColor] = useState([]);
 
     function setPageColor() {
-        if (Type=="Admin") {
+        if (Type==="Admin") {
             setColor("M");
             setButtonColor("Button_M");
         }
-        else if (Type=="Voter") {
+        else if (Type==="Voter") {
             setColor("V");
             setButtonColor("Button_V");
         }
@@ -36,12 +36,12 @@ function Login({Type}) {
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
-            if (response.status==200) {
+            if (response.status===200) {
                 setSessionCookie('id', ID, 1/48);
                 setSessionCookie('type', Type, 1/48);
                 document.location.href='/mainAdmin';
             }
-            else if (response.status==204) {
+            else if (response.status===204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
                 document.location.href='/loginAdmin';
             }
@@ -64,12 +64,12 @@ function Login({Type}) {
             pwd:document.getElementById('pwd').value
         })
         .then(function(response) {
-            if (response.status==200) {
+            if (response.status===200) {
                 setSessionCookie('id', ID, 1/48);
                 setSessionCookie('type', Type, 1/48);
                 document.location.href='/mainVoter';
             }
-            else if (response.status==204) {
+            else if (response.status===204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
                 document.location.href='/';
             }
@@ -86,10 +86,10 @@ function Login({Type}) {
         <div className="Outer" id={color}>
             <div className="Inter">
                 {
-                    Type=="Admin" && (<p id="Login_Title">관리자로 입장</p>)
+                    Type==="Admin" && (<p id="Login_Title">관리자로 입장</p>)
                 }
                 {
-                    Type=="Voter" && (<p id="Login_Title">투표자로 입장</p>)
+                    Type==="Voter" && (<p id="Login_Title">투표자로 입장</p>)
                 }
 
                 <br/><br/><br/>
@@ -100,18 +100,18 @@ function Login({Type}) {
                 <input id="pwd" className="input" Type="password" placeholder="비밀번호를 입력하세요."/>
                 <br/><br/><br/><br/>
                 {
-                    Type=="Admin" && <button className={buttonColor} id="loginButton" onClick={requestAdminLogin}>입장</button>
+                    Type==="Admin" && <button className={buttonColor} id="loginButton" onClick={requestAdminLogin}>입장</button>
                 }
                 {
-                    Type=="Voter" && <button className={buttonColor} id="loginButton" onClick={requestVoterLogin}>입장</button>
+                    Type==="Voter" && <button className={buttonColor} id="loginButton" onClick={requestVoterLogin}>입장</button>
                 }
 
             </div>
             {
-                Type=="Admin" && (<Link to='/signupAdmin'><button className={buttonColor} id="SignUpButton">선거개설</button></Link>)
+                Type==="Admin" && (<Link to='/signupAdmin'><button className={buttonColor} id="SignUpButton">선거개설</button></Link>)
             }
             {
-                Type=="Voter" && (<Link to='/signupVoter'><button className={buttonColor} id="SignUpButton">회원가입</button></Link>)
+                Type==="Voter" && (<Link to='/signupVoter'><button className={buttonColor} id="SignUpButton">회원가입</button></Link>)
             }
         </div>
     );
