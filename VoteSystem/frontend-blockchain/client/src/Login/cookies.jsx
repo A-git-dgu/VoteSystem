@@ -19,7 +19,6 @@ export default function getSessionCookie(key) {
         console.log("Cookie undefined")
         return null;
     } else {
-        console.log("sessionCookie : " + sessionCookie);
         return sessionCookie;
     }
 }

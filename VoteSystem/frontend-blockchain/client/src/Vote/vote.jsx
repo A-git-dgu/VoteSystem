@@ -57,6 +57,12 @@ export default function Vote() {
         console.log(event.target.value);
     }
 
+    function vote() {
+        console.log(electionNum);
+        console.log(radioValue);
+        console.log(getSessionCookie('id'));
+    }
+
     return (
         <>
             <Nav Type={"Voter"}/>
@@ -93,7 +99,7 @@ export default function Vote() {
                         </FormControl>
                     </div>
                     <div id="bottom_vote">
-                        <button className="votePage_Button" id="vote_button_vote">투표</button>
+                        <button className="votePage_Button" id="vote_button_vote" onClick={vote}>투표</button>
                     </div>
                 </div>
             </div>

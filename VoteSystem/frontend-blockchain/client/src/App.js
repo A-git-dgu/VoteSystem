@@ -38,9 +38,9 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = Election.networks[networkId];
+      const deployedNetwork = SimpleStorageContract.networks[networkId];
       const instance = new web3.eth.Contract(
-        Election.abi,
+        SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
