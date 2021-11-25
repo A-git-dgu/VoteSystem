@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import Election from "./contracts/Election.json";
 import getWeb3 from "./getWeb3";
 
 import Main from './Main/main';
@@ -37,9 +38,9 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = Election.networks[networkId];
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
+        Election.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
@@ -69,9 +70,9 @@ class App extends Component {
   };
 
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
+//    if (!this.state.web3) {
+//      return <div>Loading Web3, accounts, and contract...</div>;
+//    }
     return (
         <BrowserRouter>
             <Routes>
