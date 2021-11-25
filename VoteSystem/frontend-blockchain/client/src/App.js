@@ -49,9 +49,9 @@ class App extends Component {
       this.setState({ web3, accounts, contract: instance }, this.runExample);
     } catch (error) {
       // Catch any errors for any of the above operations.
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`,
-      );
+      //alert(
+      //  `Failed to load web3, accounts, or contract. Check console for details.`,
+      //);
       console.error(error);
     }
   };
@@ -92,7 +92,7 @@ class App extends Component {
                 <Route path="/possibleVoters" element={<PossibleVoters/>} />
                 <Route path="/electionInfoForVoter/:id" element={<ElectionInfoForVoter/>} />
 
-                <Route path="/viewCandidate" element={<ViewCandidate/>} />
+                <Route path="/viewCandidate/:electionNum/:candidateId" element={<ViewCandidate/>} />
                 <Route path="/vote/:electionNum" element={<Vote/>} />
 
             </Routes>
