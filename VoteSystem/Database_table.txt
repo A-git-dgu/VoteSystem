@@ -4,6 +4,8 @@ drop table candidateinfo;
 drop table candidate;
 drop table user;
 drop table election;
+drop table electionresult;
+drop table candidateresult;
 
 create table user(
 user_ssn varchar(15) primary key,
@@ -76,3 +78,27 @@ insert into possiblevoter values(3, '000908-4200000', 1);
 insert into possiblevoter values(4, '000908-4200000', 1);
 insert into possiblevoter values(2, '991115-2000000', 0);
 insert into possiblevoter values(3, '991115-2000000', 1);
+
+create table electionresult (
+election_num INT not null,
+voting_rate decimal(5, 2) not null,
+primary key(election_num),
+foreign key(election_num) references election (election_num) on update cascade
+);
+
+create table candidateresult (
+election_num INT not null,
+candidate_ssn VARCHAR(15) not null,
+polling_rate decimal(5, 2) not null,
+primary key(election_num, candidate_ssn),
+foreign key(election_num) references election (election_num) on update cascade,
+foreign key(candidate_ssn) references candidate (candidate_ssn) on update cascade
+);
+
+insert into electionresult values(1, 67.8);
+insert into electionresult values(2, 50.3);
+
+insert into candidateresult values(1, '000908-4200000', 20.1);
+insert into candidateresult values(1, '001224-4000000', 45.2);
+insert into candidateresult values(1, '991115-2000000', 24.3);
+insert into candidateresult values(2, '001224-4000000', 53.3);
