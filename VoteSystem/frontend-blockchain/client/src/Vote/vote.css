@@ -1,0 +1,63 @@
+/* 리스트 및 공간 */
+#outer_form_vote {
+}
+#container_vote {
+    width:1000px;
+    margin:auto;
+}
+/* "투표가능한 리스트" */
+#title_vote {
+    font-weight: bold;
+    font-size: 30px;
+}
+/* 회색 틀 */
+#form_border_vote {
+
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+}
+/* 후보 표시 위치 정리 */
+#showCandidate_vote {
+    margin: 100px 200px 50px 200px;
+}
+/* 후보 객체 */
+.eachCandidate_vote {
+    width:550px;
+    margin:20px;
+    font-weight: bold;
+    font-size:20px;
+}
+/* 후보자 기호 및 이름 text */
+.textCandidate_vote {
+    float:left;
+}
+/* radio */
+.radioCandidate {
+    padding-top: 13px;
+    float:right;
+}
+/* 헤당 페이지 버튼 근본디자인 */
+.votePage_Button {
+    font-weight:bold;
+
+    border:0;
+    outline:0;
+    border-radius: 5px;
+    cursor:pointer;
+}
+/* 투표하기 버튼 div : bottom */
+#bottom_vote {
+    width:100%;
+    text-align:center;
+
+    clear:both;
+}
+#vote_button_vote {
+    height:40px;
+    width:100px;
+    margin: 0px 0px 70px 0px;
+
+    font-weight: bold;
+    font-size: 20px;
+    background-color:rgb(91, 223, 198);
+}

@@ -481,3 +481,34 @@ def requestReject(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getElectionName(request):
+    if request.method == 'POST':
+        try:
+            findElection = Election.objects.get(election_num=request.data['election_num'])
+            return Response(findElection.election_name, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getVoteCandidate(request):
+    if request.method == 'POST':
+        try:
+            findCandidates = Candidate.objects.filter(election_num=request.data['election_num']).values('candidate_ssn')
+            candidates = []
+            index = 0
+            for candidate in findCandidates:
+                userInfo = User.objects.get(user_ssn=candidate['candidate_ssn'])
+                index += 1
+                row = {
+                    'candidate_id': userInfo.id,
+                    'candidate_name': userInfo.name,
+                    'index': index
+                }
+                candidates.append(row)
+            return Response(candidates, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)

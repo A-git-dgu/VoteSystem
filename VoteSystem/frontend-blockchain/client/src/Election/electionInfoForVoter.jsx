@@ -4,6 +4,7 @@ import getSessionCookie, { isLogin } from '../Login/cookies';
 
 import Nav from '../Main/nav';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import './electionInfoForVoter.css';
 
@@ -137,7 +138,7 @@ export default function ElectionInfoForVoter({match}) {
 
                 </div>
             </div>
-            <button id="vote_button" className="election4user_Button">투표하기</button>
+            <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>
         </>
     );
 }

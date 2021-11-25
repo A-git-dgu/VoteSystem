@@ -28,5 +28,8 @@ urlpatterns = [
 
     path('getAdminCandidateInfo', views.getAdminCandidateInfo),
     path('requestReject', views.requestReject),
-    path('requestApproval', views.requestApproval)
+    path('requestApproval', views.requestApproval),
+
+    path('getElectionName', views.getElectionName),
+    path('getVoteCandidate', views.getVoteCandidate)
 ]
