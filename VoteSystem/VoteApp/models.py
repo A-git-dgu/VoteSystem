@@ -21,7 +21,7 @@ class Candidate(models.Model):
 
 class Candidateresult(models.Model):
     election_num = models.OneToOneField('Election', models.DO_NOTHING, db_column='election_num', primary_key=True)
-    candidate_ssn = models.ForeignKey('Candidate', models.DO_NOTHING, db_column='candidate_ssn')
+    candidate_ssn = models.CharField(max_length=15)
     polling_rate = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:

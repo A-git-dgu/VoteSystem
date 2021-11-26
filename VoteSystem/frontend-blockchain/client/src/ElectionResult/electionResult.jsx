@@ -75,7 +75,7 @@ export default function ElectionResult() {
                         <div id="right_form_result">
                             <div id="right_form_result_top">
                                 <div className="each_form_result">
-                                    <div className="article_result_title">유권자 수 : &nbsp;<b>{electionResult.possible_voters_num}</b></div>
+                                    <div className="article_result_title">유권자 수 : &nbsp;<b>{electionResult.countPossibleVoter}</b></div>
                                 </div>
                             <div className="each_form_result">
                                 <div className="article_result_title">투표율 : &nbsp;<b>{electionResult.voting_rate}%</b></div>
@@ -85,7 +85,7 @@ export default function ElectionResult() {
                         <div id="right_form_result_bottom">
                             <p className="sub_title_each_result">[ 득표율 ]</p>
                             <div className="form_border_result">
-                                <p className="winner_sub_content">홍길동{/* 기호 1번 */}</p>
+                                <p className="winner_sub_content">홍길동{}</p>
                                 <p className="sub_content">이기호{/* 기호 1번 */}</p>
                             </div>
                         </div>
