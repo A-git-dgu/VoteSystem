@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import './electionInfoForVoter.css';
 
-export default function ElectionInfoForVoter({match}) {
+export default function ElectionInfoForVoter() {
     let [electionInfoForUser, setElectionInfoForUser] = useState([]);
     let [candidateInfoForUser, setCandidateInfoForUser] = useState([]);
     const { id } = useParams();

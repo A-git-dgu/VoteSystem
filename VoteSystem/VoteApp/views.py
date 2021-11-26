@@ -8,6 +8,8 @@ from .models import Candidate
 from .models import User
 from .models import Election
 from .models import Possiblevoter
+from .models import Electionresult
+from .models import Candidateresult
 
 from .serializers import UserSerializer
 from .serializers import ElectionSerializer
@@ -512,3 +514,76 @@ def getVoteCandidate(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getElectionResult(request):
+    if request.method=='POST':
+        try:
+            er = Electionresult.objects.get(election_num=request.data['election_num'])
+            cr = Candidateresult.objects.filter(election_num=request.data['election_num']).values('candidate_ssn')
+            elec = Election.objects.get(election_num=request.data['election_num'])
+            possible_num = Possiblevoter.objects.filter(election_num=request.data['election_num']).values('voter_ssn')
+
+            candidateResults = []
+            for i in cr:
+                print(i['candidate_ssn'])
+                c = Candidate.objects.get(election_num=request.data['election_num'], candidate_ssn=i['candidate_ssn'])
+                print(c)
+                findUser = User.objects.get(user_ssn=i['candidate_ssn'])
+                print(findUser)
+                newCr = Candidateresult.objects.get(election_num=elec, candidate_ssn='000908-4200000')
+                print(newCr)
+                candidate = {
+                    'candidate_name': findUser.name,
+                    'approval_state':c.approval_state,
+                    'polling_rate':newCr.polling_rate
+                }
+                candidateResults.append(candidate)
+                # print(i.polling_rate)
+                # print(i.candidate_ssn)
+            row = {
+                'election_name':elec.election_name,
+                'possible_voters_num':len(possible_num),
+                'voting_rate':er.voting_rate
+            }
+            electionResult = row
+            return Response(electionResult, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getCandidateResult(request):
+    if request.method=='POST':
+        try:
+            cr = Candidateresult.objects.filter(candidate_ssn=request.get('candidate_ssn'))
+
+            return Response({}, status=200)
+        except Exception as e:
+                print(e)
+                return Response({'msg': 'failed'}, status=400)
+#
+#             # cr = Candidateresult.objects.filter(election_num=request.data['election_num']).values('candidate_ssn')
+#             # results = []
+#             # for i in cr:
+#             #     print(i['candidate_ssn'])
+#             #     print(i)
+#             #     c = Candidate.objects.get(election_num=request.data['election_num'], candidate_ssn=i['candidate_ssn'])
+#             #     print(request.data['election_num'])
+#             #
+#             #     findUser = User.objects.get(user_ssn=i['candidate_ssn'])
+#             #
+#             #     print(c.candidate_ssn)
+#             #     newCr = Candidateresult.objects.filter(candidate_ssn=i['candidate_ssn'])
+#             #     print(newCr)
+#             #     # row = {
+#             #     #     'candidate_name':findUser.name,
+#             #     #     'approval_state':c.approval_state,
+#             #     #     'polling_rate':newCr.polling_rate
+#             #     # }
+#             #     # results.append(row)
+#             # candidateResult = results
+#             # print(results)
+#         except Exception as e:
+#             print(e)
+#             return Response({'msg': 'failed'}, status=400)

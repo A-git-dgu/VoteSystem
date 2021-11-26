@@ -19,6 +19,17 @@ class Candidate(models.Model):
         unique_together = (('election_num', 'candidate_ssn'),)
 
 
+class Candidateresult(models.Model):
+    election_num = models.OneToOneField('Election', models.DO_NOTHING, db_column='election_num', primary_key=True)
+    candidate_ssn = models.ForeignKey('Candidate', models.DO_NOTHING, db_column='candidate_ssn')
+    polling_rate = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        managed = False
+        db_table = 'candidateresult'
+        unique_together = (('election_num', 'candidate_ssn'),)
+
+
 class Election(models.Model):
     election_num = models.AutoField(primary_key=True)
     election_name = models.CharField(max_length=50)
@@ -38,6 +49,15 @@ class Election(models.Model):
     class Meta:
         managed = False
         db_table = 'election'
+
+
+class Electionresult(models.Model):
+    election_num = models.OneToOneField(Election, models.DO_NOTHING, db_column='election_num', primary_key=True)
+    voting_rate = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        managed = False
+        db_table = 'electionresult'
 
 
 class Possiblevoter(models.Model):
