@@ -397,7 +397,7 @@ def getElectionInfoForUser(request):
             candidateInfo = Candidate.objects.filter(election_num=request.GET['election_num'])
             candidates=[]
             for i in candidateInfo:
-                if i.approval_state<1: break;
+                if i.approval_state<1: continue;
                 userInfo= i.candidate_ssn
                 candidate = {
                     'candidate_name': userInfo.name,
@@ -571,6 +571,18 @@ def getForCalculateResult(request):
                 'each_possible_voters': each_possible_voters
             }
             return Response(possible_voters, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def changeVotingStatus(request):
+    if request.method=='PUT':
+        try:
+            findUser = User.objects.get(id=request.data['user_id'])
+            findVoter = Possiblevoter.objects.filter(election_num=request.data['election_num'],voter_ssn=findUser.user_ssn)
+            findVoter.update(voting_status=1)
+            return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)

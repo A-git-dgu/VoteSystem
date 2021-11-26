@@ -3,6 +3,7 @@ import getWeb3 from "../getWeb3";
 import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getSessionCookie, {isLogin} from '../Login/cookies';
 import axios from 'axios';
+
 class Voting extends Component {
     state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
@@ -39,12 +40,13 @@ class Voting extends Component {
     let name = window.location.pathname.split('/')[2]+";"+window.location.pathname.split('/')[3];
     console.log(this.state.contract)
     await contract.methods.voting(name).send({ from: accounts[0], gas:900000 }).then( async () =>{
-            alert('투표가 완료되었습니다.')
-            const url = "http://localhost:8000/changeElectionStatus";
-            await axios.post(url,{
+            const url = "http://localhost:8000/changeVotingStatus";
+            await axios.put(url,{
+                election_num:window.location.pathname.split('/')[2],
                 user_id:getSessionCookie('id')
             })
             .then(function(response) {
+                alert('투표가 완료되었습니다.')
                 window.location.href = "/mainVoter"
             })
             .catch(function(error) {
