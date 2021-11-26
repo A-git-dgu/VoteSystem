@@ -309,11 +309,7 @@ def getUserElection(request):
 def getAdminElection(request):
     if request.method=='POST':
         try:
-            print("id = ")
-            print(request.data)
             electionInfo = Election.objects.get(admin_id=request.data['id'])
-            print("election_num : " + str(electionInfo.election_num))
-            election=[]
             row = {
                 'election_num': electionInfo.election_num,
                 'election_name': electionInfo.election_name,
@@ -326,7 +322,7 @@ def getAdminElection(request):
                 'enroll_start': electionInfo.enroll_start.date(),
                 'enroll_end': electionInfo.enroll_end.date()
             }
-            election= row
+            election=row
             return Response(election, status=200)
         except Exception as e:
             print(e)
@@ -379,7 +375,6 @@ def getPossibleVoter(request):
 def insertPossibleVoter(request):
     if request.method=='PUT':
         try:
-
             e = Possiblevoter.objects.filter(election_num=request.data['election_num'])
             e.delete()
             e = Election.objects.get(election_num=request.data['election_num'])
@@ -402,13 +397,15 @@ def getElectionInfoForUser(request):
             candidateInfo = Candidate.objects.filter(election_num=request.GET['election_num'])
             candidates=[]
             for i in candidateInfo:
+                if i.approval_state<1: break;
                 userInfo= i.candidate_ssn
                 candidate = {
                     'candidate_name': userInfo.name,
                     'candidate_email': i.candidate_email,
                     'introduce_self': i.introduce_self,
                     'election_pledge': i.election_pledge,
-                    'career': i.career
+                    'career': i.career,
+                    'approval_state':i.approval_state
                 }
                 candidates.append(candidate)
 
@@ -434,12 +431,8 @@ def getElectionInfoForUser(request):
 def getAdminCandidateInfo(request):
     if request.method == 'POST':
         try:
-            print("candidate = ")
-            print(request.data)
             findUser = User.objects.get(id=request.data['candidate_id'])
-            print(findUser.user_ssn)
             findCandidate = Candidate.objects.get(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
-            print(findCandidate.candidate_email)
             row = {
                 'name': findUser.name,
                 'phonenumber': findUser.phonenumber,
@@ -450,7 +443,6 @@ def getAdminCandidateInfo(request):
                 'career':findCandidate.career,
                 'approval_state':findCandidate.approval_state
             }
-            print(row)
             return Response(row, status=200)
         except Exception as e:
             print(e)
@@ -460,11 +452,19 @@ def getAdminCandidateInfo(request):
 def requestApproval(request):
     if request.method=='PUT':
         try:
-            print("requestReject = ")
-            print(request.data)
+            #print("requestReject = ")
+            #print(request.data)
             findUser = User.objects.get(id=request.data['candidate_id'])
             findCandidate = Candidate.objects.filter(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
-            findCandidate.update(approval_state=1)
+
+            # 후보자 기호 구하기
+            candidateNum = Candidate.objects.filter(election_num=request.data['election_num']).values('approval_state')
+            count = 1;
+            for candidate in candidateNum:
+                if candidate['approval_state'] >= 1:
+                    count += 1;
+
+            findCandidate.update(approval_state=count)
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
@@ -474,8 +474,6 @@ def requestApproval(request):
 def requestReject(request):
     if request.method=='PUT':
         try:
-            print("requestReject = ")
-            print(request.data)
             findUser = User.objects.get(id=request.data['candidate_id'])
             findCandidate = Candidate.objects.filter(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
             findCandidate.update(approval_state=-1)
@@ -502,14 +500,17 @@ def getVoteCandidate(request):
             candidates = []
             index = 0
             for candidate in findCandidates:
+                candidateNum = Candidate.objects.get(election_num=request.data['election_num'], candidate_ssn=candidate['candidate_ssn'])
+                if candidateNum.approval_state < 1: break;
                 userInfo = User.objects.get(user_ssn=candidate['candidate_ssn'])
                 index += 1
                 row = {
                     'candidate_id': userInfo.id,
                     'candidate_name': userInfo.name,
-                    'index': index
+                    'approval_state': candidateNum.approval_state
                 }
                 candidates.append(row)
+            candidates = sorted(candidates, key=(lambda x:x['approval_state']),reverse=False)
             return Response(candidates, status=200)
         except Exception as e:
             print(e)
@@ -533,7 +534,6 @@ def getElectionResult(request):
                     'polling_rate' :candidateResult.polling_rate
                 }
                 candidates_info.append(row)
-            print(candidates_info)
             send_data = {
                 'election_name': election.election_name,
                 'countPossibleVoter':countPossibleVoter,

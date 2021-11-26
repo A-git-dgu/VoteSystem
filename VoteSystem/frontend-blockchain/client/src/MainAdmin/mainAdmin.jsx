@@ -193,7 +193,7 @@ export default function MainAdmin() {
                                 <div className="candidate_mainAdmin">{candidate.candidate_name}
                                     <div id="candidate_button"> 승인여부:
                                         {candidate.approval_state=="0" && <button id="request_button" className="signupPage_Button">승인중</button>}
-                                        {candidate.approval_state=="1" && <button id="finish_button" className="signupPage_Button">승인완료</button>}
+                                        {candidate.approval_state>="1" && <button id="finish_button" className="signupPage_Button">승인완료</button>}
                                         {candidate.approval_state=="-1" && <button id="reject_button" className="signupPage_Button">승인거절</button>}
                                     </div>
                                 </div>
