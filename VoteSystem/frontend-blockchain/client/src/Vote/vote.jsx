@@ -15,7 +15,7 @@ export default function Vote() {
     let [election, setElection] = useState();
     let [candidates, setCandidates] = useState([]);
     let [radioValue, setRadioValue] = useState("");
-
+    const state = { web3: null, accounts: null, contract: null, electionNum: null }
     // 선거 이름 불러오기
     const getElectionName = async() => {
         const url = "http://localhost:8000/getElectionName";
@@ -58,6 +58,9 @@ export default function Vote() {
     }
 
     function vote() {
+        if(radioValue){
+            window.location.href="/voting/"+electionNum+"/"+radioValue
+        }
         console.log(electionNum);
         console.log(radioValue);
         console.log(getSessionCookie('id'));
