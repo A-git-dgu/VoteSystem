@@ -33,21 +33,27 @@ export default function ElectionResult() {
         isLogin( "Voter" )
         searchApi();
     }, [])
+    function checkWinner(name) {
+        if (name == electionResult.winner_name) {
+            return true;
+        }
+        else
+            return false;
+    }
 
-//     const pieData = electionResult.map((result)) => (
-//         return {'title': result.candidate_name, 'value': result.voti, 'color': }
-//     )
-
+    const color = { 1: "#F7819F", 2: "#0174DF",
+                    3: "#FA5858", 4: "#3ADF00",
+                    5: "#00FF40", 6: "#088A08",
+                    7: "#FE2E9A", 8: "#B45F04" }
+    var colorIdx = 0
     return (
         <>
             <Nav Type={"Voter"}/>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
 
             <div id="outer_form_result">
                 <div id="container_result">
                     <div><p id="title_result">선거 결과 확인</p></div>
-                    <div className="form_border_result">
+                    <div className="form_border_result_full">
                         <div><p id="sub_title_result">선거 이름 : {electionResult.election_name}</p></div>
                         <div id="left_form_result">
                             <div className="print_winner">
@@ -55,20 +61,23 @@ export default function ElectionResult() {
                                     <img class="crown_image" src={crownImg} />
                                 </div>
                                 <div id="article_result_content">
-                                    <div id="big_print_winner">당선자 : {/* 당선자 이름 */}</div>
+                                    <div id="big_print_winner">당선자 : {electionResult.winner_name}</div>
                                 </div>
                             </div>
                             <div className="show_percentage">
                                 <div id="pie_chart">
-{/*                                     <PieChart */}
-{/*                                         data={[ */}
-{/*                                             { title: 'One', value: 10, color: '#00FFFF' }, */}
-{/*                                             { title: 'Two', value: 15, color: '#FFBF00' }, */}
-{/*                                             { title: 'Three', value: 20, color: '#FFFF00' }, */}
-{/*                                         ]} */}
-{/*                                         animate={[true]} */}
-{/*                                     /> */}
-{/*                                     <PieChart data={pieData}/> */}
+                                    <PieChart
+                                        data={candidateResult.map((result) => (
+                                            {'title': result.candidate_name,
+                                            'value': result.polling_rate,
+                                            'color': color[(++colorIdx)%8] }
+                                        ))}
+                                        label={ (data) => data.dataEntry.title+data.dataEntry.value+'%' }
+                                        labelStyle= { {
+                                            fontSize:"6px",
+                                            fontWeight: "bold",
+                                        }}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -77,19 +86,22 @@ export default function ElectionResult() {
                                 <div className="each_form_result">
                                     <div className="article_result_title">유권자 수 : &nbsp;<b>{electionResult.countPossibleVoter}</b></div>
                                 </div>
-                            <div className="each_form_result">
-                                <div className="article_result_title">투표율 : &nbsp;<b>{electionResult.voting_rate}%</b></div>
-
+                                <div className="each_form_result">
+                                    <div className="article_result_title">투표율 : &nbsp;<b>{electionResult.voting_rate}%</b></div>
+                                </div>
+                            </div>
+                            <div id="right_form_result_bottom">
+                                <p className="sub_title_each_result">[ 득표율 ]</p>
+                                <div className="form_border_result">
+                                    {candidateResult.map((candidate) => (
+                                        checkWinner(candidate.candidate_name) ?
+                                            <div className="winner_sub_content">기호 {electionResult.winner_number_of_candidate}번 {electionResult.winner_name} : {electionResult.winner_polling_rate}%</div>
+                                            :
+                                            <div className="sub_content">기호 {candidate.NumberOfCandidate}번 {candidate.candidate_name} : {candidate.polling_rate}%</div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                        <div id="right_form_result_bottom">
-                            <p className="sub_title_each_result">[ 득표율 ]</p>
-                            <div className="form_border_result">
-                                <p className="winner_sub_content">홍길동{}</p>
-                                <p className="sub_content">이기호{/* 기호 1번 */}</p>
-                            </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
