@@ -143,7 +143,7 @@ export default function MainAdmin({match}) {
                             { candidate.approval_state=="0" && <button id="request_button_viewCandidate" className="viewCandidate_Button" onClick={requestApproval}>승인</button>}
                             { candidate.approval_state=="0" && <button id="reject_button_viewCandidate" className="viewCandidate_Button" onClick={requestReject}>거절</button>}
                             { candidate.approval_state=="-1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인거절</button>}
-                            { candidate.approval_state=="1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인완료</button>}
+                            { candidate.approval_state>="1" && <button id="finish_button_viewCandidate" className="viewCandidate_Button">승인완료</button>}
                         </div>
                     </div>
                 </div>

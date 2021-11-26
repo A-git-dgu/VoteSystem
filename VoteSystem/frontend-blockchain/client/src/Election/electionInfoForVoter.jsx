@@ -106,6 +106,10 @@ export default function ElectionInfoForVoter() {
                     <div className="form_border_election4user">
                         <div className="left_form_election4user">
                             <div className="each_form_election4user">
+                                <div className="article_election4user_bottom_up">기호 {candidate.approval_state}번</div>
+                                <div className="article_print_election4user_bottom_up" id="candidate_name"></div>
+                            </div>
+                            <div className="each_form_election4user">
                                 <div className="article_election4user_bottom_up">이름 : {candidate.candidate_name}</div>
                                 <div className="article_print_election4user_bottom_up" id="candidate_name">
                             </div>
@@ -116,7 +120,7 @@ export default function ElectionInfoForVoter() {
                             {electionInfoForUser.candidate_email}</div>
                         </div>
                         <div className="each_form_election4user">
-                            <div className="article_election4user_bottom">소개 :</div>
+                            <div className="article_election4user_bottom">소개</div>
                             <div><p className="print_form" id="self_introduce">
                             {candidate.introduce_self}</p></div>
                         </div>
@@ -124,11 +128,11 @@ export default function ElectionInfoForVoter() {
                     <div className="middle_line_election4user"></div>
                     <div className="right_form_election4user">
                         <div className="each_form_election4user_bottom">
-                            <div className="article_election4user_bottom">이력 : </div>
+                            <div className="article_election4user_bottom">이력</div>
                             <div><p className="print_form" id="career">{candidate.career}</p></div>
                         </div>
                         <div className="each_form_election4user_bottom">
-                             <div className="article_election4user_bottom">공약 : </div>
+                             <div className="article_election4user_bottom">공약</div>
                              <div><p className="print_form" id="election_pledge">{candidate.election_pledge}</p></div>
                         </div>
                     </div>
