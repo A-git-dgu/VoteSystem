@@ -29,6 +29,8 @@ export default function MainAdmin() {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+    const [modifyMode, setModifyMode] = React.useState(false);
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -109,7 +111,8 @@ export default function MainAdmin() {
                         <div id="left_form_mainadmin">
                             <div className="each_form_signup_admain">
                                 <div className="article_signup_admain">선거 이름 : </div>
-                                <Input placeholder = {election.election_name} id="election_name" className="input_form_mainadmin"/>
+                                {modifyMode==false && <Input value = {election.election_name} id="election_name" className="input_form_mainadmin"/>}
+                                {modifyMode==true && <Input placeholder = {election.election_name} id="election_name" className="input_form_mainadmin"/>}
                             </div>
                             <div className="each_form_signup_admain">
                             <div className="article_signup_admain">선거 종류 : </div>
@@ -124,18 +127,21 @@ export default function MainAdmin() {
                             </div>
                             <div className="each_form_signup_admain">
                                 <div className="article_signup_admain">소속 기관 : </div>
-                                <Input placeholder = {election.institution} id="institution" className="input_form_mainadmin"/>
+                                {modifyMode==false && <Input value = {election.institution} id="institution" className="input_form_mainadmin"/>}
+                                {modifyMode==true && <Input placeholder = {election.institution} id="institution" className="input_form_mainadmin"/>}
                             </div>
                         </div>
                         <div id="middle_line_mainadmin"></div>
                         <div id="right_form_mainadmin">
                             <div className="each_form_signup_admain">
                                 <div className="article_signup_admain">회원 이름 : </div>
-                                <Input placeholder = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>
+                                {modifyMode==false && <Input value = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>}
+                                {modifyMode==true && <Input placeholder = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>}
                             </div>
                             <div className="each_form_signup_admain">
                                 <div className="article_signup_admain">관리자 e-mail : </div>
-                                <Input type="email" placeholder = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>
+                                {modifyMode==false && <Input type="email" value = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>}
+                                {modifyMode==true && <Input type="email" placeholder = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>}
                             </div>
                             <div className="each_form_signup_admain">
                                 <div className="article_signup_admain">선거 기간 : </div>
