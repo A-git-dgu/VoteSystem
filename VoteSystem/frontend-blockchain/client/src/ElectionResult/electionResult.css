@@ -16,6 +16,14 @@
 
 }
 /* 회색 틀 */
+.form_border_result_full {
+    padding:3%;
+    height: 500px;
+    border: 1px solid #BDBDBD;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+/* 회색 틀 */
 .form_border_result {
     padding:3%;
     border: 1px solid #BDBDBD;
@@ -28,15 +36,18 @@
     height:60vh;
     width: 45%;
 }
+/* "당선자" 글씨 옆에 당선자 출력 */
 .print_winner {
     margin-top: 20px;
 }
+/* 왕관 이미지 */
 .crown_image {
     margin-left: 20px;
     float: left;
     width: 50px;
     height: 50px;
 }
+/* "당선자" 글씨 출력 */
 #big_print_winner {
     float: right;
     width: 77%;
@@ -44,6 +55,7 @@
     font-weight: bold;
     font-size: 40px;
 }
+/* 파이 차트 */
 #pie_chart {
     width: 300px;
     height: 300px;
@@ -57,14 +69,6 @@
     height:60vh;
     width: 45%;
 }
-/* 중간 선 */
-#middle_line_result {
-    float:left;
-    height:55vh;
-    width:1px;
-    margin-left:4.7%;
-    background-color:rgb(189, 189, 189);
-}
 /* 각 입력 전체 틀 */
 .each_form_result {
     width: 100%;
@@ -72,67 +76,31 @@
     margin: 0% 0% 5%;
     font-size:17px;
 }
-/* 입력 항목 이름 */
-.article_result {
-    float:left;
-    width: 30%;
-
-    text-align:right;
-    font-size:17px;
-}
-/* 입력 폼 */
-.input_form_result {
-    width: 45%;
-    float:left;
-    margin: 0% 0% 0% 2%;
-    padding: 0% 0% 0% 2%;
-}
+/* 오른쪽 위 제목 출력 */
 .article_result_title {
     font-size: 17px;
     float: left;
 }
+/* 오른쪽 위 내용 출력 */
 .article_result_content {
     font-size: 17px;
     font-weight: bold;
     float: right;
 }
-
+/* [득표율] 자체 출력 */
 .sub_title_each_result {
     font-size: 17px;
 }
+/* 당선자 출력 */
 .winner_sub_content {
     font-size: 20px;
     font-weight: bold;
     color: red;
     margin-left: 7px;
 }
+/* 당선자 이외 출력 */
 .sub_content {
     font-size: 17px;
     font-weight: bold;
     margin-left: 7px;
-}
-/* 주민등록번호 입력 폼 */
-.ssn_result {
-    width: 21.25%;
-    padding: 0% 0% 0% 2%;
-}
-/* 뒤에 margin 필요한 특수 article */
-#backmargin_article_result {
-    margin: 0% 2% 0% 0%;
-}
-/* 헤당 페이지 버튼 근본디자인 */
-.result_Button {
-    font-weight:bold;
-
-    border:0;
-    outline:0;
-    border-radius: 5px;
-}
-/* "후보자 등록" 버튼 */
-#requestCandidate {
-    height:45px;
-    width:140px;
-    font-size:20px;
-    background-color:rgb(91, 223, 198);
-    cursor:pointer;
 }

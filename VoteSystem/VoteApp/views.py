@@ -501,7 +501,7 @@ def getVoteCandidate(request):
             index = 0
             for candidate in findCandidates:
                 candidateNum = Candidate.objects.get(election_num=request.data['election_num'], candidate_ssn=candidate['candidate_ssn'])
-                if candidateNum.approval_state < 1: break;
+                if candidateNum.approval_state < 1: continue;
                 userInfo = User.objects.get(user_ssn=candidate['candidate_ssn'])
                 index += 1
                 row = {
@@ -510,6 +510,7 @@ def getVoteCandidate(request):
                     'approval_state': candidateNum.approval_state
                 }
                 candidates.append(row)
+            print(candidates)
             candidates = sorted(candidates, key=(lambda x:x['approval_state']),reverse=False)
             return Response(candidates, status=200)
         except Exception as e:
@@ -531,17 +532,45 @@ def getElectionResult(request):
                 row = {
                     'NumberOfCandidate': candidate.approval_state,
                     'candidate_name': candidate.candidate_ssn.name,
-                    'polling_rate' :candidateResult.polling_rate
+                    'polling_rate': candidateResult.polling_rate
                 }
                 candidates_info.append(row)
+            candidates_info = sorted(candidates_info, key=(lambda x:x['polling_rate']), reverse=True)
+
             send_data = {
+                'winner_name': candidates_info[0]['candidate_name'],
+                'winner_polling_rate': candidates_info[0]['polling_rate'],
+                'winner_number_of_candidate': candidates_info[0]['NumberOfCandidate'],
                 'election_name': election.election_name,
-                'countPossibleVoter':countPossibleVoter,
+                'countPossibleVoter': countPossibleVoter,
                 'voting_rate': electionResult.voting_rate,
                 'candidateResults': candidates_info
             }
-
             return Response(send_data, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+
+@api_view(['POST'])
+def getForCalculateResult(request):
+    if request.method == 'POST':
+        try:
+            elections = Election.objects.all()
+            each_possible_voters = []
+            for election in elections:
+                possible_voters = Possiblevoter.objects.filter(election_num=election.election_num)
+                for possible_voter in possible_voters:
+                    each_possible_voter = {
+                        'each_election_num': election.election_num,
+                        'voting_status': possible_voter.voting_status
+                    }
+                    each_possible_voters.append(each_possible_voter)
+            possible_voters = {
+                'election_number': len(elections),
+                'each_possible_voters': each_possible_voters
+            }
+            return Response(possible_voters, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)

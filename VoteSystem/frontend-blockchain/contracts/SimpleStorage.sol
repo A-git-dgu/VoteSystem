@@ -2,13 +2,13 @@
 pragma solidity >=0.4.21 <0.7.0;
 
 contract SimpleStorage {
-  uint storedData;
+  mapping(string=>uint) candidateCount;
 
-  function set(uint x) public {
-    storedData = x;
+  function voting(string memory candidates) public {
+      candidateCount[candidates]++;
   }
 
-  function get() public view returns (uint) {
-    return storedData;
+  function countBallot(string memory candidates) view public returns (uint){
+      return candidateCount[candidates];
   }
 }
