@@ -89,7 +89,7 @@ export default function Vote() {
                             { candidates.length == 1 &&
                             candidates.map(candidate => (
                                 <div className="eachCandidate_vote">
-                                    <p className="textCandidate_vote">■ &nbsp;&nbsp; 기호 {candidate.index}번. {candidate.candidate_name}</p>
+                                    <p className="textCandidate_vote">■ &nbsp;&nbsp; 기호 {candidate.approval_state}번. {candidate.candidate_name}</p>
                                     <div className="radioCandidate">
                                         <FormControlLabel value="True" control={<Radio />} label="찬성" labelPlacement="bottom"/>
                                         <FormControlLabel value="False" control={<Radio />} label="반대" labelPlacement="bottom"/>

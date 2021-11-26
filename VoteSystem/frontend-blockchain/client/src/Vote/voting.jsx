@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Ballot from "../contracts/Ballot.json";
 import getWeb3 from "../getWeb3";
 import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getSessionCookie, {isLogin} from '../Login/cookies';
