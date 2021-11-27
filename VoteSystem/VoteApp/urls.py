@@ -34,8 +34,8 @@ urlpatterns = [
     path('getVoteCandidate', views.getVoteCandidate),
 
     path('getElectionResult', views.getElectionResult),
-    path('getForCalculateResult', views.getForCalculateResult),
 
     path('changeVotingStatus', views.changeVotingStatus),
-    path('getElectionCandidates', views.getElectionCandidates)
+    path('getElectionCandidates', views.getElectionCandidates),
+    path('setCandidateResult', views.setCandidateResult)
 ]

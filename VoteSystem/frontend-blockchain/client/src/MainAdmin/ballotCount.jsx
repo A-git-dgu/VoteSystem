@@ -5,7 +5,7 @@ import getSessionCookie from '../Login/cookies';
 import axios from 'axios';
 
 class BallotCount extends Component {
-    state = { storageValue: 0, web3: null, accounts: null, contract: null, Cname:null };
+    state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
     componentDidMount = async () => {
         console.log("componentDidMount");
@@ -44,15 +44,34 @@ class BallotCount extends Component {
         await axios.post(url,{
             election_num:window.location.pathname.split('/')[2]
         })
-        .then(function(response) {
-            console.log(response.data);
-            let candidates_count = response.data.split(';')[0];
+        .then(async(response) => {
+            let candidates_info = response.data;
+            console.log(candidates_info);
+            let candidates_count = candidates_info.split(';')[0];
 
             for (let i=1; i<=candidates_count; i++) {
-                let name = window.location.pathname.split('/')[2]+";"+response.data.split(';')[i];
-                this.setState({Cname:name})
-                console.log(this.state.Cname);
-                //let result = await contract.methods.countBallot(name).call()
+                let name = window.location.pathname.split('/')[2]+";"+candidates_info.split(';')[i];
+                console.log(name)
+                await contract.methods.countBallot(name).call()
+                .then(async(r) => {
+                    const url2 = "http://localhost:8000/setCandidateResult";
+                    await axios.put(url2, {
+                        election_num:window.location.pathname.split('/')[2],
+                        candidate_id:candidates_info.split(';')[i],
+                        number_votes:r
+                    })
+                    .then(function(response) {
+                        console.log("put 완료");
+                        console.log(r);
+                    })
+                    .catch(function(error) {
+                        console.log("failed");
+                    })
+                })
+                .catch(function(error) {
+                    console.log("call 실패");
+                })
+            }
                 //.then(async(result) =>{
                 //console.log(result)
                 //})
@@ -60,8 +79,6 @@ class BallotCount extends Component {
                 //    console.log("실패");
                 //})
                 //this.setState({ storageValue: result });
-            }
-
         })
         .catch(function(error) {
             console.log("실패 : " + error);

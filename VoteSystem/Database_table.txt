@@ -20,6 +20,14 @@ email varchar(50) not null
 insert into user values('991115-2000000','kimgaeun','kge','김가은','성균관대역','01012345678','kimgaeun@naver.com');
 insert into user values('001224-4000000','parkeve','pev','박이브','경기도 수원시 권선구 00동 0000아파트','01011112222','ev@dgu.ac.kr');
 insert into user values('000908-4200000','sieun','8018','이시은','경기도 화성시 향남읍 행정리 00아파트','01011111111','2019112009@dgu.ac.kr');
+insert into user values('000502-4000000','sogong','sogong','변소공','서울 중구','01054123248','sogong@naver.com');
+insert into user values('000813-3000000','kimdaeni','kdn','김대니','서울 중구 충무로','01034143248','kimdaeni@naver.com');
+insert into user values('001219-3000000','chu','kcs','박추석','인천 중구','01034143248','chu@naver.com');
+insert into user values('000309-4000000','seoul','seoul','김설','서울 송파구','01034243248','seoul@naver.com');
+insert into user values('000605-4000000','incheon','incheon','최인천','인천 연수구','01013213248','incheon@naver.com');
+insert into user values('000908-4112000','hyangnam','hyangnam','이향남','경기 화성시 향남읍','01065343248','hyangnam@naver.com');
+insert into user values('000911-4000000','suwon','suwon','김수원','경기 수원시','01045433248','suwon@naver.com');
+insert into user values('001111-4000000','gunpo','gunpo','김군포','경기 군포시','01054243248','gunpo@naver.com');
 
 create table election (
 election_num INT auto_increment primary key,
@@ -73,6 +81,14 @@ foreign key(election_num) references election (election_num) on update cascade
 insert into possiblevoter values(1, '991115-2000000', 0);
 insert into possiblevoter values(1, '001224-4000000', 0);
 insert into possiblevoter values(1, '000908-4200000', 0);
+insert into possiblevoter values(1, '000502-4000000', 0);
+insert into possiblevoter values(1, '000813-3000000', 0);
+insert into possiblevoter values(1, '001219-3000000', 0);
+insert into possiblevoter values(1, '000309-4000000', 0);
+insert into possiblevoter values(1, '000605-4000000', 0);
+insert into possiblevoter values(1, '000908-4112000', 0);
+insert into possiblevoter values(1, '000911-4000000', 0);
+insert into possiblevoter values(1, '001111-4000000', 0);
 insert into possiblevoter values(2, '000908-4200000', 0);
 insert into possiblevoter values(3, '000908-4200000', 1);
 insert into possiblevoter values(4, '000908-4200000', 1);
@@ -94,6 +110,38 @@ primary key(election_num, candidate_ssn),
 foreign key(election_num) references election (election_num) on update cascade,
 foreign key(candidate_ssn) references candidate (candidate_ssn) on update cascade
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 insert into electionresult values(1, 67.8);
 insert into electionresult values(2, 50.3);
