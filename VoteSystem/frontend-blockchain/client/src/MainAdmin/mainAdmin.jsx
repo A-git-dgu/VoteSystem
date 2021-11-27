@@ -93,9 +93,11 @@ export default function MainAdmin() {
             alert('실패했습니다.')
             console.log("실패");
         })
-
-
     };
+
+    function ballotCount() {
+        window.location.href="/ballotCount/"+election.election_num;
+    }
 
     return (
         <>
@@ -208,7 +210,7 @@ export default function MainAdmin() {
                         ))}
                     </div>
                     <div id="button_site">
-                        <button id="finish_election" className="signupPage_Button">개표하기</button>
+                        <button id="finish_election" className="signupPage_Button" onClick={ballotCount}>개표하기</button>
                         <button id="delete_election" className="signupPage_Button" onClick={handleClickOpen}>선거종료</button>
                         <Dialog
                             fullScreen={fullScreen}

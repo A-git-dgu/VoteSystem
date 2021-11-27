@@ -510,7 +510,6 @@ def getVoteCandidate(request):
                     'approval_state': candidateNum.approval_state
                 }
                 candidates.append(row)
-            print(candidates)
             candidates = sorted(candidates, key=(lambda x:x['approval_state']),reverse=False)
             return Response(candidates, status=200)
         except Exception as e:
@@ -583,6 +582,30 @@ def changeVotingStatus(request):
             findVoter = Possiblevoter.objects.filter(election_num=request.data['election_num'],voter_ssn=findUser.user_ssn)
             findVoter.update(voting_status=1)
             return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getElectionCandidates(request):
+    if request.method == 'POST':
+        try:
+            findCandidates = Candidate.objects.filter(election_num=request.data['election_num']).values('candidate_ssn')
+            index=0
+            #candidates = [ {'candidate_count':len(findCandidates)} ]
+            candidates = str(len(findCandidates))
+            for candidate in findCandidates:
+                #index+=1
+                #print(candidate['candidate_ssn'])
+                findId = User.objects.get(user_ssn=candidate['candidate_ssn'])
+                #row = {
+                #    'index': index,
+                #    'id': findId.id
+                #}
+                candidates += ";" + findId.id
+                #candidates.append(row)
+            #print(candidates)
+            return Response(candidates, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)

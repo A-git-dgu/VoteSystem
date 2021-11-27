@@ -23,6 +23,7 @@ import ElectionInfoForVoter from './Election/electionInfoForVoter';
 import ViewCandidate from './ViewCandidate/viewCandidate';
 import Vote from './Vote/vote';
 import Voting from './Vote/voting';
+import BallotCount from './MainAdmin/ballotCount';
 import ElectionResult from './ElectionResult/electionResult';
 
 import "./App.css";
@@ -54,6 +55,7 @@ class App extends Component {
                 <Route path="/viewCandidate/:electionNum/:candidateId" element={<ViewCandidate/>} />
                 <Route path="/vote/:electionNum" element={<Vote/>} />
                 <Route path="/voting/:electionNum/:candidateId" element={<Voting/>} />
+                <Route path="/ballotCount/:electionNum" element={<BallotCount/>} />
                 <Route path="/electionResult" element={<ElectionResult/>} />
 
             </Routes>

@@ -37,7 +37,7 @@ export default function Nav({Type}) {
             }
             {
             Type==="Admin" &&
-            <Link to='/'>
+            <Link to='/mainAdmin'>
                 <img src={Logo} className="Logo"/>
                 <p className="Title">투표 아지트</p>
             </Link>

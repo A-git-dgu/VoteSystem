@@ -58,7 +58,8 @@ export default function Vote() {
     }
 
     function vote() {
-        if(radioValue){
+        if (radioValue=="") { alert("투표할 항목을 선택해주세요."); return; }
+        else {
             window.location.href="/voting/"+electionNum+"/"+radioValue
         }
         console.log(electionNum);
