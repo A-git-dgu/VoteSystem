@@ -142,8 +142,9 @@ export default function ElectionInfoForVoter() {
 
                 </div>
             </div>
-            <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>
+            {electionInfoForUser.ballotCount==0 ?
+                <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>
+                : <Link to={'/electionResultVoter/'+electionInfoForUser.election_num}><button id="vote_button" className="election4user_Button">결과보기</button></Link> }
         </>
     );
 }
-

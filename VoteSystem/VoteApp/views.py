@@ -405,9 +405,18 @@ def getElectionInfoForUser(request):
                 }
                 candidates.append(candidate)
 
+            if e.election_type=='-1' or e.election_type=='0':
+                electionType = 0
+            else:
+                electionType = 1
+            if e.election_type=='0' or e.election_type =='1':
+                isBallotCount = 0
+            else:
+                isBallotCount = 1
             row = {
                 'election_name':e.election_name,
-                'election_type':e.election_type,
+                'election_type':electionType,
+                'ballotCount':isBallotCount,
                 'enroll_start':e.enroll_start.date(),
                 'enroll_end':e.enroll_end.date(),
                 'start_date':e.start_date.date(),
