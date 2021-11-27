@@ -195,10 +195,10 @@
     cursor:pointer;
     float:right;
 }
-#finish_election {
+#result_mainAdmin {
     height:100px;
     width:200px;
-    font-size:15px;
+    font-size:25px;
     background-color:rgb(255, 139, 139);
     cursor:pointer;
     float:right;

@@ -210,8 +210,10 @@ export default function MainAdmin() {
                         ))}
                     </div>
                     <div id="button_site">
-                        <button id="finish_election" className="signupPage_Button" onClick={ballotCount}>개표하기</button>
-                        <button id="delete_election" className="signupPage_Button" onClick={handleClickOpen}>선거종료</button>
+                        { (election.election_type==-1 || election.election_type==2) ?
+                            <Link to={'/electionResultAdmin/'+election.election_num}><button id="result_mainAdmin" className="signupPage_Button">결과보기</button></Link>
+                            : <button id="result_mainAdmin" className="signupPage_Button" onClick={ballotCount}>개표하기</button> }
+                        <button id="delete_election" className="signupPage_Button" onClick={handleClickOpen}>선거삭제</button>
                         <Dialog
                             fullScreen={fullScreen}
                             open={open}

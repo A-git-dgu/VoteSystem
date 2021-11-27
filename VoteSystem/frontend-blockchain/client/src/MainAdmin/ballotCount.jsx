@@ -61,10 +61,15 @@ class BallotCount extends Component {
                         number_votes:r
                     })
                     .then(function(response) {
-                        console.log("put 완료");
+                        if (response.status==400) {
+                            alert("개표 실패하였습니다.");
+                            window.location.href = "/mainAdmin";
+                        }
                         console.log(r);
                     })
                     .catch(function(error) {
+                        alert("개표 실패하였습니다.");
+                        window.location.href = "/mainAdmin";
                         console.log("failed");
                     })
                 })
@@ -72,24 +77,12 @@ class BallotCount extends Component {
                     console.log("call 실패");
                 })
             }
-                //.then(async(result) =>{
-                //console.log(result)
-                //})
-                //.catch(function(error) {
-                //    console.log("실패");
-                //})
-                //this.setState({ storageValue: result });
+            alert("개표가 완료되었습니다.");
+            window.location.href = "/electionResultAdmin/"+window.location.pathname.split('/')[2];
         })
         .catch(function(error) {
             console.log("실패 : " + error);
         })
-
-//        const { accounts, contract } = this.state;
-//        let name = window.location.pathname.split('/')[2]+";"+window.location.pathname.split('/')[3];
-//        console.log(this.state.contract)
-//        let response = await contract.methods.countBallot(name).call();
-//        console.log(response)
-//        this.setState({ storageValue: response });
     };
 
     findCandidates = async() => {

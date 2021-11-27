@@ -27,7 +27,14 @@ export default function ElectionResult({Type}) {
             console.log("성공");
         })
         .catch(function(error) {
-            console.log("실패");
+            console.log("실패 : " + error);
+            alert("개표가 완료되지 않았습니다.");
+            if (Type=="Voter") {
+                document.location.href='/mainVoter';
+            }
+            else if (Type=="Admin") {
+                document.location.href='/mainAdmin';
+            }
         })
     };
 

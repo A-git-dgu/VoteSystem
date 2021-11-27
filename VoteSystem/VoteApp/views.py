@@ -282,6 +282,8 @@ def getUserElection(request):
                 election_status = "0"
                 if now.date() <= electionInfo.end_date.date():
                     election_status = "1"
+                if electionInfo.election_type==-1 or electionInfo.election_type==2:
+                    election_status = "0"
                 index+=1
                 row = {
                     'election_num':electionInfo.election_num,
@@ -590,17 +592,18 @@ def setCandidateResult(request):
             else:
                 polling_rate = (float(request.data['number_votes'])/float(len(number_voters)))*100;
             # insert
-            election_num = Election.objects.get(election_num=request.data['election_num'])
-            try:
-                Candidateresult.objects.create(
-                    election_num=election_num,
-                    candidate_ssn=findUser.user_ssn,
-                    polling_rate=polling_rate
-                )
-                return Response({'msg': 'success'}, status=200)
-            except Exception as e:
-                print(e)
-                return Response({'msg': 'failed'}, status=400)
+            election = Election.objects.filter(election_num=request.data['election_num'])
+            Candidateresult.objects.create(
+                election_num=election[0],
+                candidate_ssn=findUser.user_ssn,
+                polling_rate=polling_rate
+            )
+            # election_type
+            if election[0].election_type==1:
+                election.update(election_type=2)
+            elif election[0].election_type==0:
+                election.update(election_type=-1)
+            return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
