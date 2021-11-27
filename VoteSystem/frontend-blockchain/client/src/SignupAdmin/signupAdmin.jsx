@@ -16,6 +16,10 @@ export default function SignupAdmin() {
     const [value, setValue] = React.useState([null, null]);
     const [value1, setValue1] = React.useState([null, null]);
 
+    const [pwd, setPwd]= React.useState("");
+    const [pwd2, setPwd2]= React.useState("");
+    const [pwdEqual, setPwdEqual] = React.useState("");
+
     const [okID, setOkID] = React.useState([]);
     const [okSSN, setOkSSN] = React.useState([]);
 
@@ -32,7 +36,7 @@ export default function SignupAdmin() {
             alert("아이디 중복 확인을 해주세요.");
             return;
         }
-        else if (document.getElementById('admin_pwd').value!==document.getElementById('admin_pwd2').value) {
+        else if (pwdEqual==="false") {
             alert("비밀번호가 일치하지 않습니다.");
             return;
         }
@@ -47,7 +51,7 @@ export default function SignupAdmin() {
         else if (document.getElementById('election_name').value===""||document.getElementById('start').value===""||document.getElementById('end').value===""
         ||document.getElementById('enroll_start').value===""||document.getElementById('enroll_end').value===""||document.getElementById('institution').value===""
         ||document.getElementById('admin_fssn').value===""||document.getElementById('admin_lssn').value===""||document.getElementById('admin_id').value===""
-        ||document.getElementById('admin_pwd').value===""||document.getElementById('admin_name').value===""||document.getElementById('admin_fphone').value===""
+        ||pwd===""||pwd2===""||document.getElementById('admin_name').value===""||document.getElementById('admin_fphone').value===""
         ||document.getElementById('admin_mphone').value===""||document.getElementById('admin_lphone').value===""||document.getElementById('admin_email').value==="") {
             alert("모든 항목을 작성해주세요.");
             return;
@@ -83,6 +87,31 @@ export default function SignupAdmin() {
             console.log("실패");
         })
     };
+
+    const handlePwdChange = (event) => {
+        setPwd(event.target.value);
+        console.log("Pwd : " + event.target.value)
+        if (pwd2=="") { setPwdEqual(""); }
+        else if (event.target.value===pwd2) {
+            setPwdEqual("true");
+            console.log("true");
+        } else {
+            setPwdEqual("false");
+            console.log("false");
+        }
+    }
+    const handlePwd2Change = (event) => {
+        setPwd2(event.target.value);
+        console.log("Pwd2 : " + event.target.value)
+        if (event.target.value=="") { setPwdEqual(""); }
+        else if (pwd===event.target.value) {
+            setPwdEqual("true");
+            console.log("true");
+        } else {
+            setPwdEqual("false");
+            console.log("false");
+        }
+    }
 
     return (
         <>
@@ -164,11 +193,15 @@ export default function SignupAdmin() {
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호</div>
-                            <Input type="password" placeholder="알파벳+숫자(영어 대소문자 구분)" id="admin_pwd" className="input_form_signup"/>
+                            <Input type="password" placeholder="알파벳+숫자(영어 대소문자 구분)" id="admin_pwd" className="input_form_signup" onChange={handlePwdChange}/>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호 재확인</div>
-                            <Input type="password" placeholder="비밀번호를 다시 한번 입력하세요." id="admin_pwd2" className="input_form_signup"/>
+                            <Input type="password" placeholder="비밀번호를 다시 한번 입력하세요." id="admin_pwd2" className="input_form_signup" onChange={handlePwd2Change}/>
+                            <div className="isPwdEqual">
+                                { pwdEqual=="false" && <p id="pwdNotEqual">비밀번호가 일치하지 않습니다.</p> }
+                                { pwdEqual=="true" && <p id="pwdEqual">비밀번호가 일치합니다.</p> }
+                            </div>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">회원 이름</div>

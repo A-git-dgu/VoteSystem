@@ -102,3 +102,15 @@
     background-color:rgb(64, 64, 64);
     cursor:pointer;
 }
+.isPwdEqual {
+    clear:both;
+    margin-left:135px;
+    margin-top:20px;
+    font-size:15px;
+}
+#pwdNotEqual {
+    color:red;
+}
+#pwdEqual {
+    color:green;
+}

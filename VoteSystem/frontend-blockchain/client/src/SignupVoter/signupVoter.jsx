@@ -10,6 +10,10 @@ export default function SignupVoter() {
     const [okID, setOkID] = useState([]);
     const [okSSN, setOkSSN] = useState([]);
 
+    const [pwd, setPwd]= useState("");
+    const [pwd2, setPwd2]= useState("");
+    const [pwdEqual, setPwdEqual] = useState("");
+
     useEffect(()=>{
         setOkID("T");
         setOkSSN("T");
@@ -22,7 +26,7 @@ export default function SignupVoter() {
             alert("아이디 중복 확인을 해주세요.");
             return;
         }
-        else if (document.getElementById('pwd').value!==document.getElementById('pwd2').value) {
+        else if (pwdEqual==="false") {
             alert("비밀번호가 일치하지 않습니다.");
             return;
         }
@@ -30,7 +34,7 @@ export default function SignupVoter() {
             alert("본인 확인을 해주세요.");
             return;
         }
-        else if (document.getElementById('id').value===""||document.getElementById('pwd').value===""||document.getElementById('pwd2').value===""||
+        else if (document.getElementById('id').value===""||pwd===""||pwd2===""||
         document.getElementById('name').value===""||document.getElementById('address').value===""||document.getElementById('phonenumber').value===""||
         document.getElementById('email').value==="") {
             alert("모든 항목을 작성해주세요.");
@@ -45,7 +49,7 @@ export default function SignupVoter() {
         axios.put(url,{
             user_ssn:document.getElementById('fssn').value+'-'+document.getElementById('lssn').value,
             id:document.getElementById('id').value,
-            pwd:document.getElementById('pwd').value,
+            pwd:pwd,
             name:document.getElementById('name').value,
             address:document.getElementById('address').value,
             phonenumber:document.getElementById('phonenumber').value,
@@ -66,6 +70,31 @@ export default function SignupVoter() {
         })
     };
 
+    const handlePwdChange = (event) => {
+        setPwd(event.target.value);
+        console.log("Pwd : " + event.target.value)
+        if (pwd2=="") { setPwdEqual(""); }
+        else if (event.target.value===pwd2) {
+            setPwdEqual("true");
+            console.log("true");
+        } else {
+            setPwdEqual("false");
+            console.log("false");
+        }
+    }
+    const handlePwd2Change = (event) => {
+        setPwd2(event.target.value);
+        console.log("Pwd2 : " + event.target.value)
+        if (event.target.value=="") { setPwdEqual(""); }
+        else if (pwd===event.target.value) {
+            setPwdEqual("true");
+            console.log("true");
+        } else {
+            setPwdEqual("false");
+            console.log("false");
+        }
+    }
+
     return (
         <>
             <Nav Type={"Voter"}/>
@@ -82,11 +111,15 @@ export default function SignupVoter() {
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호</div>
-                            <Input type="password" placeholder="알파벳+숫자(영어 대소문자 구분)" id="pwd" className="input_form_signup"/>
+                            <Input type="password" placeholder="알파벳+숫자(영어 대소문자 구분)" id="pwd" className="input_form_signup" onChange={handlePwdChange}/>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호 재확인</div>
-                            <Input type="password" placeholder="비밀번호를 다시 한번 입력하세요." id="pwd2" className="input_form_signup"/>
+                            <Input type="password" placeholder="비밀번호를 다시 한번 입력하세요." id="pwd2" className="input_form_signup" onChange={handlePwd2Change}/>
+                            <div className="isPwdEqual">
+                                { pwdEqual=="false" && <p id="pwdNotEqual">비밀번호가 일치하지 않습니다.</p> }
+                                { pwdEqual=="true" && <p id="pwdEqual">비밀번호가 일치합니다.</p> }
+                            </div>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">회원 이름</div>
