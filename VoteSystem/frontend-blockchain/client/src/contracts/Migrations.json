@@ -59,7 +59,7 @@
   "sourceMap": "69:326:1:-;;;229:52;8:9:-1;5:2;;;30:1;27;20:12;5:2;229:52:1;265:10;257:5;;:18;;;;;;;;;;;;;;;;;;69:326;;;;;;",
   "deployedSourceMap": "69:326:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;69:326:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;119:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;94:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;287:105;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;287:105:1;;;;;;;;;;;;;;;;;:::i;:::-;;119:36;;;;:::o;94:20::-;;;;;;;;;;;;;:::o;287:105::-;209:5;;;;;;;;;;;195:19;;:10;:19;;;191:26;;;377:9;350:24;:36;;;;191:26;287:105;:::o",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity >=0.4.21 <0.7.0;\r\n\r\ncontract Migrations {\r\n  address public owner;\r\n  uint public last_completed_migration;\r\n\r\n  modifier restricted() {\r\n    if (msg.sender == owner) _;\r\n  }\r\n\r\n  constructor() public {\r\n    owner = msg.sender;\r\n  }\r\n\r\n  function setCompleted(uint completed) public restricted {\r\n    last_completed_migration = completed;\r\n  }\r\n}\r\n",
-  "sourcePath": "C:\\Users\\user\\PycharmProjects\\VoteSystem\\VoteSystem\\frontend-blockchain\\contracts\\Migrations.sol",
+  "sourcePath": "C:\\Users\\Administrator\\PycharmProjects\\VoteSystem\\VoteSystem\\frontend-blockchain\\contracts\\Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -958,12 +958,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x37c34b485C427ea16175555d910fBA72dB516E96",
-      "transactionHash": "0x6135aceafa5931f6f8ecfbc50f8682cdcbfe17db8349eaaf88612eca32bf7d78"
+      "address": "0x59c1Bc4C5A7e933949b7853B9c11470b3dcDa499",
+      "transactionHash": "0x6c704e76d0de11c915e58df88786c17aa79e36d8b78fd303bbd76fc887fa2a26"
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-27T06:41:53.996Z",
+  "updatedAt": "2021-11-27T06:51:32.635Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
