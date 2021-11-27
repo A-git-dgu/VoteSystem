@@ -616,3 +616,22 @@ def setCandidateResult(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def setElectionResult(request):
+    if request.method=='PUT':
+        try:
+            possibleVoters = Possiblevoter.objects.filter(election_num=request.data['election_num'])
+            voterCount=0
+            for possibleVoter in possibleVoters:
+                if possibleVoter.voting_status == 1:
+                    voterCount += 1
+            election = Election.objects.get(election_num=request.data['election_num'])
+            Electionresult.objects.create(
+                election_num=election,
+                voting_rate=(float(voterCount)/float(len(possibleVoters)))*100
+            )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)

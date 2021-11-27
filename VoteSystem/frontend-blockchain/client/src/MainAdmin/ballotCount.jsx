@@ -68,15 +68,33 @@ class BallotCount extends Component {
                         console.log(r);
                     })
                     .catch(function(error) {
+                        console.log("failed");
                         alert("개표 실패하였습니다.");
                         window.location.href = "/mainAdmin";
-                        console.log("failed");
                     })
                 })
                 .catch(function(error) {
                     console.log("call 실패");
+                    alert("개표 실패하였습니다.");
+                    window.location.href = "/mainAdmin";
                 })
             }
+
+            const url3 = "http://localhost:8000/setElectionResult";
+            await axios.put(url3, {
+                election_num:window.location.pathname.split('/')[2]
+            })
+            .then(function(response) {
+                if (response.status==400) {
+                    alert("개표 실패하였습니다.");
+                    window.location.href = "/mainAdmin";
+                }
+            })
+            .catch(function(error) {
+                alert("개표 실패하였습니다.");
+                window.location.href = "/mainAdmin";
+                console.log("failed");
+            })
             alert("개표가 완료되었습니다.");
             window.location.href = "/electionResultAdmin/"+window.location.pathname.split('/')[2];
         })
