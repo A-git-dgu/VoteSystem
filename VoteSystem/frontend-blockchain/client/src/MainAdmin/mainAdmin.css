@@ -121,7 +121,7 @@
 }
 
 /* 각 입력 전체 틀 */
-.each_form_signup_admain {
+.each_form_mainadmin {
     width: 100%;
     display: inline-block;
     margin: 0% 0% 5%;
@@ -129,7 +129,7 @@
 }
 
 /* 입력 항목 이름 */
-.article_signup_admain {
+.article_mainadmin {
     float:left;
     width: 26%;
     text-align:right;
@@ -137,7 +137,7 @@
 }
 
 /* 후보자 등록 기간 항목 이름*/
-.article_signup_candi {
+.article_mainadmin {
     float:left;
     width: 26%;
     margin: 0% 0% 0% 2%;
@@ -179,7 +179,7 @@
     margin: 0% 2% 0% 0%;
 }
 /* 헤당 페이지 버튼 근본디자인 */
-.signupPage_Button {
+.mainadmin_Page_Button {
     font-weight:bold;
 
     border:0;
