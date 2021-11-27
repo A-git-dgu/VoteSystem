@@ -168,12 +168,6 @@ def requestSignup(request):
 def requestOpenElection(request):
     if request.method == 'PUT':
         try:
-            print(request.data)
-            print(request.data['election_type'])
-            print(request.data['start_date'])
-            print("transfer")
-            print(datetime.strptime(request.data['start_date'], "%m/%d/%Y"))
-            print("==")
             queryset = Election.objects.create(
                 election_name=request.data['election_name'],
                 election_type=request.data['election_type'],
@@ -550,30 +544,6 @@ def getElectionResult(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
-
-@api_view(['POST'])
-def getForCalculateResult(request):
-    if request.method == 'POST':
-        try:
-            elections = Election.objects.all()
-            each_possible_voters = []
-            for election in elections:
-                possible_voters = Possiblevoter.objects.filter(election_num=election.election_num)
-                for possible_voter in possible_voters:
-                    each_possible_voter = {
-                        'each_election_num': election.election_num,
-                        'voting_status': possible_voter.voting_status
-                    }
-                    each_possible_voters.append(each_possible_voter)
-            possible_voters = {
-                'election_number': len(elections),
-                'each_possible_voters': each_possible_voters
-            }
-            return Response(possible_voters, status=200)
-        except Exception as e:
-            print(e)
-            return Response({'msg': 'failed'}, status=400)
-
 @api_view(['PUT'])
 def changeVotingStatus(request):
     if request.method=='PUT':
@@ -591,21 +561,46 @@ def getElectionCandidates(request):
     if request.method == 'POST':
         try:
             findCandidates = Candidate.objects.filter(election_num=request.data['election_num']).values('candidate_ssn')
-            index=0
-            #candidates = [ {'candidate_count':len(findCandidates)} ]
-            candidates = str(len(findCandidates))
+            candidates_count=0
+            candidates=""
             for candidate in findCandidates:
-                #index+=1
-                #print(candidate['candidate_ssn'])
+                eachCandidate = Candidate.objects.get(election_num=request.data['election_num'],candidate_ssn=candidate['candidate_ssn'])
+                if eachCandidate.approval_state < 1:
+                    continue
                 findId = User.objects.get(user_ssn=candidate['candidate_ssn'])
-                #row = {
-                #    'index': index,
-                #    'id': findId.id
-                #}
                 candidates += ";" + findId.id
-                #candidates.append(row)
-            #print(candidates)
+                candidates_count += 1
+            candidates = str(candidates_count) + candidates
             return Response(candidates, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def setCandidateResult(request):
+    if request.method=='PUT':
+        try:
+            findUser = User.objects.get(id=request.data['candidate_id'])
+            # polling_rate 계산
+            number_voters = Possiblevoter.objects.filter(election_num=request.data['election_num'],voting_status=1)
+            # divide by 0
+
+            if len(number_voters)==0 or request.data['number_votes']==0:
+                polling_rate = 0;
+            else:
+                polling_rate = (float(request.data['number_votes'])/float(len(number_voters)))*100;
+            # insert
+            election_num = Election.objects.get(election_num=request.data['election_num'])
+            try:
+                Candidateresult.objects.create(
+                    election_num=election_num,
+                    candidate_ssn=findUser.user_ssn,
+                    polling_rate=polling_rate
+                )
+                return Response({'msg': 'success'}, status=200)
+            except Exception as e:
+                print(e)
+                return Response({'msg': 'failed'}, status=400)
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
