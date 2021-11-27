@@ -69,7 +69,7 @@
 
 /* "투표하기" 버튼 */
 #voteButton_mainVoter {
-    width:65px;
+    width:70px;
     height:27px;
     margin:2.5% 2% 0% 0%;
     float:right;
@@ -79,7 +79,7 @@
 }
 /* "투표완료" 버튼 */
 #complete_mainVoter {
-    width:65px;
+    width:70px;
     height:27px;
     margin:2.5% 2% 0% 0%;
     float:right;
@@ -90,7 +90,7 @@
 }
 /* "결과보기" 버튼 */
 #showResult_mainVoter {
-    width:65px;
+    width:70px;
     height:27px;
     margin:2.5% 2% 0% 0%;
     float:right;
