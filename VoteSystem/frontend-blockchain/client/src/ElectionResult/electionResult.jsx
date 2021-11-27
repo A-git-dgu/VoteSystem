@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import getSessionCookie, { isLogin } from '../Login/cookies';
 import { PieChart } from 'react-minimal-pie-chart';
 
@@ -7,16 +8,17 @@ import axios from 'axios';
 import crownImg from './crown.png';
 import './electionResult.css';
 
-export default function ElectionResult() {
+export default function ElectionResult({Type}) {
 
     let [electionResult, setElectionResult] = useState([]);
     let [candidateResult, setCandidateResult] = useState([]);
+    let { electionNum } = useParams();
 
     // 통신 메서드
     const searchApi = async()=> {
         const url = "http://localhost:8000/getElectionResult";
         await axios.post(url, {
-            election_num: '1'
+            election_num:electionNum
         })
         .then(function(response) {
             setElectionResult(response.data);
@@ -30,9 +32,9 @@ export default function ElectionResult() {
     };
 
     useEffect(()=>{
-        isLogin( "Voter" )
         searchApi();
     }, [])
+
     function checkWinner(name) {
         if (name == electionResult.winner_name) {
             return true;
@@ -48,7 +50,12 @@ export default function ElectionResult() {
     var colorIdx = 0
     return (
         <>
-            <Nav Type={"Voter"}/>
+            {Type == 'Voter' &&
+                <Nav Type={"Voter"}/>
+            }
+            {Type == 'Admin' &&
+                <Nav Type={"Admin"}/>
+            }
 
             <div id="outer_form_result">
                 <div id="container_result">
@@ -72,7 +79,7 @@ export default function ElectionResult() {
                                             'value': result.polling_rate,
                                             'color': color[(++colorIdx)%8] }
                                         ))}
-                                        label={ (data) => data.dataEntry.title+data.dataEntry.value+'%' }
+                                        label={ (data) => data.dataEntry.title+' '+data.dataEntry.value+'%' }
                                         labelStyle= { {
                                             fontSize:"6px",
                                             fontWeight: "bold",

@@ -56,7 +56,8 @@ class App extends Component {
                 <Route path="/vote/:electionNum" element={<Vote/>} />
                 <Route path="/voting/:electionNum/:candidateId" element={<Voting/>} />
                 <Route path="/ballotCount/:electionNum" element={<BallotCount/>} />
-                <Route path="/electionResult" element={<ElectionResult/>} />
+                <Route path="/electionResultVoter/:electionNum" element={<ElectionResult Type={"Voter"}/>} />
+                <Route path="/electionResultAdmin/:electionNum" element={<ElectionResult Type={"Admin"}/>} />
 
             </Routes>
         </BrowserRouter>
