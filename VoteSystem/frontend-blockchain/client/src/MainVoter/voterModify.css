@@ -4,6 +4,17 @@
     border-radius: 10px;
     padding-bottom: 15px;
 }
+#modify_button_voterModify {
+    height:40px;
+    width:80px;
+    margin-right: 20px;
+
+    float:right;
+
+    font-size:15px;
+    font-weight:bold;
+    background-color:rgb(91, 223, 198);
+}
 .inner_left_voterModify {
     width: 50%;
     float: left;
@@ -45,4 +56,12 @@
     outline:0;
     border-radius: 5px;
     cursor:pointer;
+}
+#pwdNotEqualVoterModify {
+    color:red;
+    margin-left: 380px;
+}
+#pwdEqualVoterModify {
+    color:green;
+    margin-left: 380px;
 }

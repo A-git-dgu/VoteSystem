@@ -91,11 +91,9 @@ def deleteElection(requset):
 def insertCandidate(request):
     if request.method=='PUT':
         try:
-            print(request.data)
             e = Election.objects.get(election_num=request.data['election_num'])
             u = User.objects.get(user_ssn=request.data['candidate_ssn'])
-            print(e)
-            print(u)
+
             queryset = Candidate.objects.create(
                 election_num=e,
                 candidate_ssn=u,
@@ -149,7 +147,6 @@ def checkVoterLogin(request):
 def requestSignup(request):
     if request.method=='PUT':
         try:
-            print(request.data)
             queryset = User.objects.create(
                 user_ssn=request.data['user_ssn'],
                 id=request.data['id'],
@@ -159,6 +156,33 @@ def requestSignup(request):
                 phonenumber=request.data['phonenumber'],
                 email=request.data['email']
             )
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def updatePWD(request):
+    if request.method=='PUT':
+        try:
+            findUser = User.objects.get(id=request.data['id'])
+            thisUser = User.objects.filter(id=findUser.id)
+            thisUser.update(pwd=request.data['pwd'])
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+@api_view(['PUT'])
+def updateVoterInfo(request):
+    if request.method=='PUT':
+        try:
+            findUser = User.objects.get(id=request.data['id'])
+            thisUser = User.objects.filter(id=findUser.id)
+            thisUser.update(name=request.data['name'])
+            thisUser.update(phonenumber=request.data['phone'])
+            thisUser.update(email=request.data['email'])
+            thisUser.update(address=request.data['address'])
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
@@ -231,26 +255,6 @@ def getCandidateContent(request):
                 'approval_state': thisCandidate.approval_state
             }
             candidate_elections.append(row)
-            print(candidate_elections)
-            # candidate = User.objects.get(id=request.data['id'])
-            # candidateElections = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).values('election_num')
-            # candidateSsn = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).distinct().values("candidate_ssn")
-            # candidate_elections = []
-            # for election in candidateElections:
-            #     thisCandidate = Candidate.objects.get(candidate_ssn=candidateSsn[0]['candidate_ssn'],
-            #                                           election_num=election['election_num'])
-            #     row = {
-            #         'candidate_ssn': candidateSsn[0]['candidate_ssn'],
-            #         'candidate_email': thisCandidate.candidate_email,
-            #         'name': candidate.name,
-            #         'phonenumber': candidate.phonenumber,
-            #         'address': candidate.address,
-            #         'introduce_self': thisCandidate.introduce_self,
-            #         'election_pledge': thisCandidate.election_pledge,
-            #         'career': thisCandidate.career,
-            #         'approval_state': thisCandidate.approval_state
-            #     }
-            #     candidate_elections.append(row)
             return Response(candidate_elections, status=200)
         except Exception as e:
             print(e)
@@ -262,7 +266,6 @@ def updateCandidateContent(request):
         try:
             cursor = connection.cursor()
             sql = "update Candidate SET introduce_self=%s, career=%s, election_pledge=%s WHERE candidate_ssn=%s and election_num=%s"
-            print(request.data)
             result = cursor.execute(sql, [request.data['introduceself'], request.data['career'], request.data['electionpledge'],
                                           request.data['candidate_ssn'], request.data['election_num']])
             connection.commit()
@@ -279,12 +282,8 @@ def updateCandidateContent(request):
 def getUserElection(request):
     if request.method=='POST':
         try:
-            # print("id = ")
-            # print(request.data)
             findSSN = User.objects.get(id=request.data['id'])
-            # print(findSSN.user_ssn)
             findElection = Possiblevoter.objects.filter(voter_ssn=findSSN.user_ssn).values('election_num')
-            # print(findElection)
             voter_elections=[]
             index=0
             for electionNum in findElection:
@@ -309,7 +308,6 @@ def getUserElection(request):
                     'index':index
                 }
                 voter_elections.append(row)
-            # print(voter_elections)
             return Response(voter_elections, status=200)
         except Exception as e:
             print(e)
@@ -471,8 +469,6 @@ def getAdminCandidateInfo(request):
 def requestApproval(request):
     if request.method=='PUT':
         try:
-            #print("requestReject = ")
-            #print(request.data)
             findUser = User.objects.get(id=request.data['candidate_id'])
             findCandidate = Candidate.objects.filter(candidate_ssn=findUser.user_ssn,election_num=request.data['election_num'])
 
@@ -669,4 +665,3 @@ def getUserModify(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
-
