@@ -12,6 +12,7 @@ import SignupAdmin from './SignupAdmin/signupAdmin';
 import SignupVoter from './SignupVoter/signupVoter';
 
 import MainVoter from './MainVoter/mainVoter';
+import VoterModify from './MainVoter/voterModify';
 import MainAdmin from './MainAdmin/mainAdmin';
 
 import CandidateInput from './Candidate/candidateInput';
@@ -44,6 +45,7 @@ class App extends Component {
                 <Route path="/signupVoter" element={<SignupVoter/>} />
 
                 <Route path="/mainVoter" element={<MainVoter/>} />
+                <Route path="/voterModify" element={<VoterModify/>}/>
                 <Route path="/mainAdmin" element={<MainAdmin/>} />
 
                 <Route path="/candidateInput" element={<CandidateInput/>} />

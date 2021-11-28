@@ -194,17 +194,15 @@ def requestOpenElection(request):
 def getCandidate(request):
     if request.method=="POST":
         try:
-            cursor = connection.cursor()
-            strSql = "SELECT distinct candidate.election_num, election_name FROM candidate, election where candidate_ssn=%s"
-            result = cursor.execute(strSql, [request.data['candidate_ssn']])
-            datas = cursor.fetchall()
-            connection.commit()
-            connection.close()
+            candidate = User.objects.get(id=request.data['id'])
+            candidateElections = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).values("election_num")
+
             candidate_elections = []
-            for election in datas:
+            for election in candidateElections:
+                electionName = Election.objects.get(election_num=election['election_num'])
                 row = {
-                    'election_num': election[0],
-                    'name': election[1]
+                    'election_num': election['election_num'],
+                    'name': electionName.election_name
                 }
                 candidate_elections.append(row)
             return Response(candidate_elections, status=200)
@@ -216,31 +214,47 @@ def getCandidate(request):
 def getCandidateContent(request):
     if request.method=="POST":
         try:
-            cursor = connection.cursor()
-            strSql = "select c.candidate_ssn, c.candidate_email, u.name, u.phonenumber, u.address, c.introduce_self," \
-                     "c.election_pledge, c.career, c.approval_state from  candidate c, election e, user u " \
-                     "where c.election_num=e.election_num and u.user_ssn=c.candidate_ssn and candidate_ssn=%s and c.election_num=%s;"
-            result = cursor.execute(strSql, [request.data['candidate_ssn'], request.data['election_num']])
-            datas = cursor.fetchall()
-            connection.commit()
-            connection.close()
-            for data in datas:
-                row={
-                    'candidate_ssn':data[0],
-                    'candidate_email':data[1],
-                    'name':data[2],
-                    'phonenumber': data[3],
-                    'address':data[4],
-                    'introduce_self':data[5],
-                    'election_pledge':data[6],
-                    'career':data[7],
-                    'approval_state':data[8]
-                }
-
+            candidate = User.objects.get(id=request.data['id'])
+            candidateSsn = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).distinct().values("candidate_ssn")
+            candidate_elections = []
+            thisCandidate = Candidate.objects.get(candidate_ssn=candidateSsn[0]['candidate_ssn'],
+                                                  election_num=request.data['election_num'])
+            row = {
+                'candidate_ssn': candidateSsn[0]['candidate_ssn'],
+                'candidate_email': thisCandidate.candidate_email,
+                'name': candidate.name,
+                'phonenumber': candidate.phonenumber,
+                'address': candidate.address,
+                'introduce_self': thisCandidate.introduce_self,
+                'election_pledge': thisCandidate.election_pledge,
+                'career': thisCandidate.career,
+                'approval_state': thisCandidate.approval_state
+            }
+            candidate_elections.append(row)
+            print(candidate_elections)
+            # candidate = User.objects.get(id=request.data['id'])
+            # candidateElections = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).values('election_num')
+            # candidateSsn = Candidate.objects.filter(candidate_ssn=candidate.user_ssn).distinct().values("candidate_ssn")
+            # candidate_elections = []
+            # for election in candidateElections:
+            #     thisCandidate = Candidate.objects.get(candidate_ssn=candidateSsn[0]['candidate_ssn'],
+            #                                           election_num=election['election_num'])
+            #     row = {
+            #         'candidate_ssn': candidateSsn[0]['candidate_ssn'],
+            #         'candidate_email': thisCandidate.candidate_email,
+            #         'name': candidate.name,
+            #         'phonenumber': candidate.phonenumber,
+            #         'address': candidate.address,
+            #         'introduce_self': thisCandidate.introduce_self,
+            #         'election_pledge': thisCandidate.election_pledge,
+            #         'career': thisCandidate.career,
+            #         'approval_state': thisCandidate.approval_state
+            #     }
+            #     candidate_elections.append(row)
+            return Response(candidate_elections, status=200)
         except Exception as e:
             print(e)
             return Response({'msg': 'data error'}, status=400)
-        return Response(row, status=200)
 
 @api_view(['PUT'])
 def updateCandidateContent(request):
@@ -635,3 +649,24 @@ def setElectionResult(request):
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
+
+@api_view(['POST'])
+def getUserModify(request):
+    if request.method == 'POST':
+        try:
+            findUser = User.objects.get(id=request.data['id'])
+            user_data = {
+                'id': findUser.id,
+                'pwd': findUser.pwd,
+                'name': findUser.name,
+                'fssn': findUser.user_ssn[:6],
+                'lssn': findUser.user_ssn[7:],
+                'phonenumber': findUser.phonenumber,
+                'email': findUser.email,
+                'address': findUser.address
+            }
+            return Response(user_data, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
