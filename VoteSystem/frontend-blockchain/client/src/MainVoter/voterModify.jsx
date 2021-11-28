@@ -81,10 +81,7 @@ export default function MainVoter({match}) {
         setEmail(user.email);
         setAddress(user.address);
         if (name == "" || phone == "" || email == "" || address == "") {
-            if (name == "") alert("이름을 입력해주세요.");
-            if (phone == "") alert("전화번호를 입력해주세요.");
-            if (email == "") alert("이메일을 입력해주세요.");
-            if (address == "") alert("주소를 입력해주세요.");
+            alert("모든 항목을 입력하세요.");
             setCanModifyAll(false);
         }
         else {
@@ -110,14 +107,19 @@ export default function MainVoter({match}) {
     // 비밀번호 재설정 버튼 클릭 시
     const [canModify, setCanModifyPWD] = useState(true);
     const setModifyFalse = () => { setCanModifyPWD(false); }
-    const setModifyTrue = () => { setCanModifyPWD(true); changePWD();
-        alert("비밀번호가 변경되었습니다."); window.location.reload(); }
+    const setModifyTrue = () => { setCanModifyPWD(true); changePWD(); }
 
     // 비밀번호 재설정
     const changePWD = async() => {
-        if (pwd == "") {
+        if (pwd != pwd2) {
+            alert("비밀번호가 다릅니다.");
+            setPwd(user.pwd);
+            setCanModifyPWD(false);
+        }
+        else if (pwd == "") {
             alert("비밀번호를 입력해주세요.");
             setPwd(user.pwd);
+            setCanModifyPWD(false);
         }
         else {
             const url = "http://localhost:8000/updatePWD";
@@ -132,6 +134,8 @@ export default function MainVoter({match}) {
             .catch(function(error) {
                 console.log("실패");
             })
+            alert("비밀번호가 변경되었습니다.");
+            window.location.reload();
         }
     }
 
