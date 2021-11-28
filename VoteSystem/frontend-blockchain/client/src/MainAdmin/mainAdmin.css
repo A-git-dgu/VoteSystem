@@ -195,6 +195,15 @@
     cursor:pointer;
     float:right;
 }
+#cancel_admin {
+    height:40px;
+    width:80px;
+    font-size:15px;
+    background-color:rgb(155, 155, 155);
+    cursor:pointer;
+    float:right;
+    margin-left:10px;
+}
 #result_mainAdmin {
     height:100px;
     width:200px;

@@ -30,15 +30,67 @@ export default function MainAdmin() {
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
     const [modifyMode, setModifyMode] = React.useState(false);
+    const [name, setName] = React.useState("");
+    const [type, setType] = React.useState("");
+    const [institution, setInstitution] = React.useState("");
+    const [adminName, setAdminName] = React.useState("");
+    const [email, setEmail] = React.useState("");
 
     const handleClickOpen = () => {
       setOpen(true);
     };
-
     const handleClose = () => {
       setOpen(false);
     };
+    const handleChangeName = (event) => { setName(event.target.value); if(event.target.value=="") {setName(election.election_name);} }
+    const handleChangeInstitution = (event) => { setInstitution(event.target.value); if(event.target.value=="") {setInstitution(election.institution);} }
+    const handleChangeAdminName = (event) => { setAdminName(event.target.value); if(event.target.value=="") {setAdminName(election.admin_name);} }
+    const handleChangeEmail = (event) => { setEmail(event.target.value); if(event.target.value=="") {setEmail(election.admin_email);}}
 
+   const ToModify = () => {
+        setModifyMode(true);
+    }
+    const Cancel = () => {
+        setName(election.election_name);
+        setType(election.election_type);
+        setInstitution(election.institution);
+        setAdminName(election.admin_name);
+        setEmail(election.admin_email);
+        setModifyMode(false);
+    }
+    const Save = () => {
+        const url = "http://localhost:8000/setElectionModify";
+        // 날짜 정보 입력
+        let voteStart, voteEnd, enrollStart, enrollEnd;
+        if (document.getElementById('start').value=="") {voteStart=election.start_date;}
+        else {voteStart=document.getElementById('start').value;}
+        if (document.getElementById('end').value=="") {voteEnd=election.end_date;}
+        else {voteEnd=document.getElementById('end').value;}
+        if (document.getElementById('enroll_start').value=="") {enrollStart=election.enroll_start;}
+        else {enrollStart=document.getElementById('enroll_start').value;}
+        if (document.getElementById('enroll_end').value=="") {enrollEnd=election.enroll_end;}
+        else {enrollEnd=document.getElementById('enroll_end').value;}
+
+        axios.put(url,{
+            num: election.election_num,
+            name: name,
+            type: document.getElementById('type').value,
+            institution: institution,
+            admin_name: adminName,
+            email: email,
+            start_date: voteStart,
+            end_date: voteEnd,
+            enroll_start: enrollStart,
+            enroll_end: enrollEnd
+        })
+        .then(function(response) {
+            console.log("성공");
+            window.location.href = "/mainAdmin";
+        })
+        .catch(function(error) {
+            console.log("실패");
+        })
+    }
     const getAdminElection = async() => {
         const url = "http://localhost:8000/getAdminElection";
         await axios.post(url,{
@@ -46,6 +98,11 @@ export default function MainAdmin() {
         })
         .then(function(response) {
             setElection(response.data);
+            setName(response.data.election_name);
+            setType(response.data.election_type);
+            setInstitution(response.data.institution);
+            setAdminName(response.data.admin_name);
+            setEmail(response.data.admin_email);
             console.log("성공");
         })
         .catch(function(error) {
@@ -95,6 +152,11 @@ export default function MainAdmin() {
         })
     };
 
+    function electionType(elec_type) {
+        if (elec_type==0) { return "찬반 투표";}
+        else { return "후보자 투표"}
+    }
+
     function ballotCount() {
         window.location.href="/ballotCount/"+election.election_num;
     }
@@ -105,48 +167,61 @@ export default function MainAdmin() {
 
             <div id="outer_form_mainadmin">
                 <div id="container">
-
                     <p id="title_mainadmin">선거 정보
-                        <button className="mainadmin_Page_Button" id="requestSignup_admain"> 정보 수정 </button>
+                        { modifyMode==false && <button className="mainadmin_Page_Button" id="requestSignup_admain" onClick={ToModify}> 정보 수정 </button> }
+                        { modifyMode==true && <button className="mainadmin_Page_Button" id="cancel_admin" onClick={Cancel}> 취소 </button> }
+                        { modifyMode==true && <button className="mainadmin_Page_Button" id="requestSignup_admain" onClick={Save}> 저장 </button> }
                     </p>
                     <div id="form_border_mainadmin">
                         <div id="left_form_mainadmin">
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">선거 이름 : </div>
-                                {modifyMode==false && <Input value = {election.election_name} id="election_name" className="input_form_mainadmin"/>}
-                                {modifyMode==true && <Input placeholder = {election.election_name} id="election_name" className="input_form_mainadmin"/>}
+                                { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                        {election.election_name} </div> }
+                                { modifyMode==true && <Input placeholder = {election.election_name} id="election_name" className="input_form_mainadmin" onChange={handleChangeName}/> }
                             </div>
                             <div className="each_form_mainadmin">
                             <div className="article_mainadmin">선거 종류 : </div>
-                                <NativeSelect value={election.election_type} className="input_form_mainadmin">
+                            { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                    {electionType(election.election_type)} </div> }
+                            { modifyMode==true &&
+                                <NativeSelect id="type" defaultValue={election.election_type} className="input_form_mainadmin">
                                     <option id="TF" value={0}>  찬반 투표  </option>
                                     <option id="who" value={1}>  후보자 투표  </option>
-                                </NativeSelect>
+                                </NativeSelect> }
                             </div>
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">선거 번호 : </div>
-                                <div className="election_num_view">&nbsp; {election.election_num}</div>
+                                { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                        {election.election_num} </div> }
+                                { modifyMode==true && <Input disabled value = {election.election_num} className="input_form_mainadmin"/> }
                             </div>
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">소속 기관 : </div>
-                                {modifyMode==false && <Input value = {election.institution} id="institution" className="input_form_mainadmin"/>}
-                                {modifyMode==true && <Input placeholder = {election.institution} id="institution" className="input_form_mainadmin"/>}
+                                { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                        {election.institution} </div> }
+                                { modifyMode==true && <Input placeholder = {election.institution} id="institution" className="input_form_mainadmin" onChange={handleChangeInstitution}/> }
                             </div>
                         </div>
                         <div id="middle_line_mainadmin"></div>
                         <div id="right_form_mainadmin">
                             <div className="each_form_mainadmin">
-                                <div className="article_mainadmin">회원 이름 : </div>
-                                {modifyMode==false && <Input value = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>}
-                                {modifyMode==true && <Input placeholder = {election.admin_name} id="admin_name" className="input_form_mainadmin"/>}
+                                <div className="article_mainadmin">관리자 이름 : </div>
+                                { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                        {election.admin_name} </div> }
+                                { modifyMode==true && <Input placeholder = {election.admin_name} id="admin_name" className="input_form_mainadmin" onChange={handleChangeAdminName}/> }
                             </div>
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">관리자 e-mail : </div>
-                                {modifyMode==false && <Input type="email" value = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>}
-                                {modifyMode==true && <Input type="email" placeholder = {election.admin_email} className="input_form_mainadmin" id="admin_email"/>}
+                                { modifyMode==false && <div className="article_print_election4user" id="election_type">
+                                                        {election.admin_email} </div> }
+                                { modifyMode==true && <Input type="email" placeholder = {election.admin_email} className="input_form_mainadmin" id="admin_email" onChange={handleChangeEmail}/> }
                             </div>
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">선거 기간 : </div>
+                                { modifyMode==false && <div className="article_print_election4user" id="election_period">
+                                                        {election.start_date} ~ {election.end_date}</div> }
+                                { modifyMode==true &&
                                 <div className="input_form_mainadmin2">
                                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                                         <DateRangePicker
@@ -158,17 +233,20 @@ export default function MainAdmin() {
                                             }}
                                         renderInput={(startProps, endProps) => (
                                         <React.Fragment>
-                                            <TextField size="small" id="start"{...startProps} />
+                                            <TextField size="small" id="start" {...startProps} />
                                             <Box sx={{ mx: 2, fontSize:18 }}> to </Box>
                                             <TextField size="small" id="end"{...endProps} />
                                         </React.Fragment>
                                         )}
                                         />
                                     </LocalizationProvider>
-                                </div>
+                                </div> }
                             </div>
                             <div className="each_form_mainadmin">
                                 <div className="article_mainadmin">후보자 등록기간 : </div>
+                                { modifyMode==false && <div className="article_print_election4user" id="reg_candidate_period">
+                                                        {election.enroll_start} ~ {election.enroll_end}</div> }
+                                { modifyMode==true &&
                                 <div className="input_form_mainadmin2">
                                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                                         <DateRangePicker
@@ -187,7 +265,7 @@ export default function MainAdmin() {
                                         )}
                                         />
                                     </LocalizationProvider>
-                                </div>
+                                </div> }
                             </div>
                         </div>
                         <div id="reg_button_mainadmin"></div>
@@ -210,8 +288,8 @@ export default function MainAdmin() {
                         ))}
                     </div>
                     <div id="button_site">
-                        { (election.election_type==-1 || election.election_type==2) ?
-                            <Link to={'/electionResultAdmin/'+election.election_num}><button id="result_mainAdmin" className="mainadmin_Page_Buttondmin_Page_Button">결과보기</button></Link>
+                        { election.isBallotCount==1 ?
+                            <Link to={'/electionResultAdmin/'+election.election_num}><button id="result_mainAdmin" className="mainadmin_Page_Button">결과보기</button></Link>
                             : <button id="result_mainAdmin" className="mainadmin_Page_Button" onClick={ballotCount}>개표하기</button> }
                         <button id="delete_election" className="mainadmin_Page_Button" onClick={handleClickOpen}>선거삭제</button>
                         <Dialog

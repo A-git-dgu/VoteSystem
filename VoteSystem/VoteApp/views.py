@@ -306,10 +306,19 @@ def getAdminElection(request):
     if request.method=='POST':
         try:
             electionInfo = Election.objects.get(admin_id=request.data['id'])
+            if electionInfo.election_type==-1 or electionInfo.election_type==0:
+                electionType = 0
+            else:
+                electionType = 1
+            if electionInfo.election_type==0 or electionInfo.election_type ==1:
+                isBallotCount = 0
+            else:
+                isBallotCount = 1
             row = {
                 'election_num': electionInfo.election_num,
                 'election_name': electionInfo.election_name,
-                'election_type': electionInfo.election_type,
+                'election_type': electionType,
+                'isBallotCount': isBallotCount,
                 'institution': electionInfo.institution,
                 'admin_name': electionInfo.admin_name,
                 'admin_email': electionInfo.admin_email,
@@ -349,6 +358,53 @@ def getAdminCandidate(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
+@api_view(['PUT'])
+def setElectionModify(request):
+    if request.method=='PUT':
+        try:
+            print("Maerong~ ", request.data)
+            findElection = Election.objects.filter(election_num=request.data['num'])
+            type=3
+            print(findElection[0].election_type)
+            print(request.data['type'])
+            if request.data['type']=='0' and (findElection[0].election_type==-1 or findElection[0].election_type==2):
+                type=-1
+            elif request.data['type']=='0' and (findElection[0].election_type==0 or findElection[0].election_type==1):
+                type=0
+            elif request.data['type']=='1' and (findElection[0].election_type==-1 or findElection[0].election_type==2):
+                type=2
+            elif request.data['type']=='1' and (findElection[0].election_type==0 or findElection[0].election_type==1):
+                type=1
+
+            try:
+                findElection.update(election_name=request.data['name'],
+                                election_type=type,
+                                institution=request.data['institution'],
+                                admin_name=request.data['admin_name'],
+                                admin_email=request.data['email'])
+            except Exception as e:
+                print("update many : ",e)
+            # 날짜 Update
+            try:
+                findElection.update(start_date=datetime.strptime(request.data['start_date'], "%m/%d/%Y"))
+            except Exception as e:
+                findElection.update(start_date=datetime.strptime(request.data['start_date'], "%Y-%m-%d"))
+            try:
+                findElection.update(end_date=datetime.strptime(request.data['end_date'], "%m/%d/%Y"))
+            except Exception as e:
+                findElection.update(end_date=datetime.strptime(request.data['end_date'], "%Y-%m-%d"))
+            try:
+                findElection.update(enroll_start=datetime.strptime(request.data['enroll_start'], "%m/%d/%Y"))
+            except Exception as e:
+                findElection.update(enroll_start=datetime.strptime(request.data['enroll_start'], "%Y-%m-%d"))
+            try:
+                findElection.update(enroll_end=datetime.strptime(request.data['enroll_end'], "%m/%d/%Y"))
+            except Exception as e:
+                findElection.update(enroll_end=datetime.strptime(request.data['enroll_end'], "%Y-%m-%d"))
+            return Response({'msg': 'success'}, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
 
 @api_view(['GET'])
 def getPossibleVoter(request):
@@ -405,11 +461,11 @@ def getElectionInfoForUser(request):
                 }
                 candidates.append(candidate)
 
-            if e.election_type=='-1' or e.election_type=='0':
+            if e.election_type==-1 or e.election_type==0:
                 electionType = 0
             else:
                 electionType = 1
-            if e.election_type=='0' or e.election_type =='1':
+            if e.election_type==0 or e.election_type ==1:
                 isBallotCount = 0
             else:
                 isBallotCount = 1

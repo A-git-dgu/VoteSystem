@@ -20,6 +20,7 @@ urlpatterns = [
     path('getAdminElection', views.getAdminElection),
     path('deleteElection', views.deleteElection),
     path('getAdminCandidate', views.getAdminCandidate),
+    path('setElectionModify', views.setElectionModify),
     path('getPossibleVoter', views.getPossibleVoter),
     path('insertPossibleVoter', views.insertPossibleVoter),
 
