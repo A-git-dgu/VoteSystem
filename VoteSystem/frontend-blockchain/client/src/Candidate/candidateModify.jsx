@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import NativeSelect from '@mui/material/NativeSelect';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
@@ -15,7 +16,9 @@ export default function CandidateInput() {
     // 통신 메서드
     const searchApi = async()=> {
         const url = "http://localhost:8000/getCandidate";
-        await axios.post(url, {'candidate_ssn': '991115-2000000'})
+        await axios.post(url, {
+            id:getSessionCookie('id')
+        })
         .then(function(response) {
             setCandidateElections(response.data);
             console.log("성공");
@@ -33,7 +36,7 @@ export default function CandidateInput() {
     function showCandidateInfo(){
         const url = "http://localhost:8000/getCandidateContent";
         axios.post(url,{
-                'candidate_ssn':'001224-4000000',
+                id:getSessionCookie('id'),
                 'election_num':document.getElementById('election').value
             }
         )
@@ -46,15 +49,15 @@ export default function CandidateInput() {
                     alert('이미 승인된 후보자입니다.')
                 }
                 else{
-                    document.getElementById("name").value=response.data.name
-                    document.getElementById("fssn").value=response.data.candidate_ssn.substring(0,6)
-                    document.getElementById("lssn").value=response.data.candidate_ssn.substring(7)
-                    document.getElementById("phonenumber").value=response.data.phonenumber
-                    document.getElementById("email").value=response.data.candidate_email
-                    document.getElementById("address").value=response.data.address
-                    document.getElementById("introduceself").value=response.data.introduce_self
-                    document.getElementById("career").value=response.data.career
-                    document.getElementById("electionpledge").value=response.data.election_pledge
+                    document.getElementById("name").value=response.data[0].name
+                    document.getElementById("fssn").value=response.data[0].candidate_ssn.substring(0,6)
+                    document.getElementById("lssn").value=response.data[0].candidate_ssn.substring(7)
+                    document.getElementById("phonenumber").value=response.data[0].phonenumber
+                    document.getElementById("email").value=response.data[0].candidate_email
+                    document.getElementById("address").value=response.data[0].address
+                    document.getElementById("introduceself").value=response.data[0].introduce_self
+                    document.getElementById("career").value=response.data[0].career
+                    document.getElementById("electionpledge").value=response.data[0].election_pledge
                 }
             }
         })
@@ -146,7 +149,7 @@ export default function CandidateInput() {
                         </div>
 
                         <div id="reg_button_candidate">
-                            <button className="candidate_Button" id="requestCandidate" onClick={updateCandidateContent}>수정</button>
+                            <Link to="/voterModify"><button className="candidate_Button" id="requestCandidate" onClick={updateCandidateContent}>수정</button></Link>
                         </div>
                     </div>
                 </div>

@@ -45,7 +45,7 @@ export default function Nav({Type}) {
             { checkLogin===1 &&
             <div class="Nav_right">
                 {
-                    Type==="Voter" && <button className="button_nav" id="modifyUserInfo">회원정보 수정</button>
+                    Type==="Voter" && <Link to={'/voterModify'}><button className="button_nav" id="modifyUserInfo">회원정보 수정</button></Link>
                 }
                 <button className="button_nav" id="logoutButton" onClick={Logout}>로그아웃</button>
                 {
