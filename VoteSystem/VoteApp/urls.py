@@ -43,4 +43,6 @@ urlpatterns = [
     path('setCandidateResult', views.setCandidateResult),
     path('setElectionResult', views.setElectionResult),
     path('getUserModify', views.getUserModify),
+
+    path('checkIdAdmin',views.checkIdAdmin),
 ]

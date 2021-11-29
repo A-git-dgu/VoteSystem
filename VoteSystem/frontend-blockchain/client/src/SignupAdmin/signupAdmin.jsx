@@ -113,6 +113,28 @@ export default function SignupAdmin() {
         }
     }
 
+    const checkIdAdmin = async() =>{
+        const url="http://localhost:8000/checkIdAdmin";
+
+       await axios.post(url,{
+        admin_id:document.getElementById('admin_id').value
+        })
+        .then(function(response) {
+            if(response.status===200){
+                 alert('존재하는 아이디입니다.')
+            }
+            else {
+                  alert('사용할수 있는 아이디입니다.')
+                  setOkID("T");
+                  console.log(okID);
+                  console.log("성공");
+            }
+        })
+        .catch(function(error) {
+             alert('서버 연결실패')
+             console.log("실패");
+         })
+    };
     return (
         <>
             <Nav Type={"Admin"}/>
@@ -189,7 +211,7 @@ export default function SignupAdmin() {
                         <div className="each_form_signup">
                             <div className="article_signup">회원 ID</div>
                             <Input placeholder="아이디를 입력하세요.(영어 대소문자 구분)" id="admin_id" className="input_form_signup"/>
-                            <button className="signupPage_Button" id="checkInput_signup">중복확인</button>
+                            <button className="signupPage_Button" id="checkInput_signup" onClick={checkIdAdmin}>중복확인</button>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호</div>
