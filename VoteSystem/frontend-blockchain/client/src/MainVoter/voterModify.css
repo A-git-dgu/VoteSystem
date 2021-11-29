@@ -7,13 +7,25 @@
 #modify_button_voterModify {
     height:40px;
     width:80px;
-    margin-right: 20px;
+    margin-right: 10px;
 
     float:right;
 
     font-size:15px;
     font-weight:bold;
     background-color:rgb(91, 223, 198);
+}
+#cancel_button_voterModify {
+
+    height:40px;
+    width:80px;
+    margin-right: 20px;
+
+    float:right;
+
+    font-size:15px;
+    font-weight:bold;
+    background-color:#BDBDBD;
 }
 .inner_left_voterModify {
     width: 50%;

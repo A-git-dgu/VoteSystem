@@ -37,17 +37,17 @@ export default function MainAdmin() {
     const [email, setEmail] = React.useState("");
 
     const handleClickOpen = () => {
-      setOpen(true);
+        setOpen(true);
     };
     const handleClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
     const handleChangeName = (event) => { setName(event.target.value); if(event.target.value=="") {setName(election.election_name);} }
     const handleChangeInstitution = (event) => { setInstitution(event.target.value); if(event.target.value=="") {setInstitution(election.institution);} }
     const handleChangeAdminName = (event) => { setAdminName(event.target.value); if(event.target.value=="") {setAdminName(election.admin_name);} }
     const handleChangeEmail = (event) => { setEmail(event.target.value); if(event.target.value=="") {setEmail(election.admin_email);}}
 
-   const ToModify = () => {
+    const ToModify = () => {
         setModifyMode(true);
     }
     const Cancel = () => {
@@ -85,6 +85,7 @@ export default function MainAdmin() {
         })
         .then(function(response) {
             console.log("성공");
+            alert("선거정보가 올바르게 수정되었습니다.");
             window.location.href = "/mainAdmin";
         })
         .catch(function(error) {
@@ -255,7 +256,7 @@ export default function MainAdmin() {
                                           value={value}
                                           onChange={(newValue) => {
                                            setValue(newValue);
-                                          }}
+                                        }}
                                         renderInput={(startProps, endProps) => (
                                            <React.Fragment>
                                                 <TextField size="small" id="enroll_start"{...startProps} />
@@ -314,7 +315,7 @@ export default function MainAdmin() {
                                 선거 삭제
                             </Button>
                         </DialogActions>
-                      </Dialog>
+                        </Dialog>
                     </div>
                     <div id="reg_button_mainadmin"></div>
                 </div>

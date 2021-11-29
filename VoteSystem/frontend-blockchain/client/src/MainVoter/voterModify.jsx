@@ -61,6 +61,7 @@ export default function MainVoter({match}) {
 
     const setModifyFalseAll = () => { setCanModifyAll(false); }
     const setModifyTrueAll = () => { setCanModifyAll(true); changeVoterInfo(); }
+    const setCancelModify = () => { setCanModifyAll(true); window.location.reload(); }
 
     // 회원 정보 수정
     const [name, setName] = useState("");
@@ -147,10 +148,14 @@ export default function MainVoter({match}) {
             <div id="container_mainVoter">
             <div><p id="title_mainVoter">회원 정보
                 {
+                    canModifyAll == false &&
+                    <button id="cancel_button_voterModify" className="voterModify_Button" onClick={setCancelModify}>취소</button>
+                }
+                {
                     canModifyAll == true ?
                     <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyFalseAll}>회원 정보 수정</button>
                     :
-                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyTrueAll}>수정하기</button>
+                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setCancelModify}>수정하기</button>
                 }
 
             </p></div>
