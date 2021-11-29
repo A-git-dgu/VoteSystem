@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+                import React, {useState, useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
@@ -95,6 +95,29 @@ export default function SignupVoter() {
         }
     }
 
+    const checkIdVote = async() =>{
+        const url="http://localhost:8000/checkIdVote";
+
+       await axios.post(url,{
+        voter_id:document.getElementById('id').value
+        })
+        .then(function(response) {
+            if(response.status===200){
+                 alert('존재하는 아이디입니다.')
+            }
+            else {
+                  alert('사용할수 있는 아이디입니다.')
+                  setOkID("T");
+                  console.log(okID);
+                  console.log("성공");
+            }
+        })
+        .catch(function(error) {
+             alert('서버 연결실패')
+             console.log("실패");
+         })
+    };
+
     return (
         <>
             <Nav Type={"Voter"}/>
@@ -107,7 +130,7 @@ export default function SignupVoter() {
                         <div className="each_form_signup">
                             <div className="article_signup">회원 ID</div>
                             <Input placeholder="아이디를 입력하세요.(영어 대소문자 구분)" id="id" className="input_form_signup"/>
-                            <button className="signupPage_Button" id="checkInput_signup">중복확인</button>
+                            <button className="signupPage_Button" id="checkInput_signup" onClick={checkIdVote}>중복확인</button>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup">비밀번호</div>

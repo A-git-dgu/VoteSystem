@@ -22,10 +22,12 @@ export default function SignupAdmin() {
 
     const [okID, setOkID] = React.useState([]);
     const [okSSN, setOkSSN] = React.useState([]);
+    const [okName, setOkName]=React.useState([]);
 
     React.useEffect(()=>{
         setOkID("T");
         setOkSSN("T");
+        setOkName("T");
     },[])
 
     function requestOpenElection() {
@@ -113,6 +115,29 @@ export default function SignupAdmin() {
         }
     }
 
+    const checkVoteName =async()=>{
+        const url="http://localhost:8000/checkVoteName";
+
+        await axios.post(url,{
+        vote_name:document.getElementById('election_name').value
+        })
+        .then(function(response){
+            if(response.status===200){
+                 alert('존재하는 선거이름입니다.')
+            }
+            else {
+                  alert('사용할수 있는 선거이름입니다.')
+                  setOkName("T");
+                  console.log(okName);
+                  console.log("성공");
+            }
+        })
+        .catch(function(error) {
+             alert('서버 연결실패')
+             console.log("실패");
+         })
+    };
+
     const checkIdAdmin = async() =>{
         const url="http://localhost:8000/checkIdAdmin";
 
@@ -135,6 +160,7 @@ export default function SignupAdmin() {
              console.log("실패");
          })
     };
+
     return (
         <>
             <Nav Type={"Admin"}/>
@@ -147,7 +173,7 @@ export default function SignupAdmin() {
                        <div className="each_form_signup">
                             <div className="article_signup">선거 이름</div>
                             <Input placeholder="선거 이름을 입력하세요" id="election_name" className="input_form_signup"/>
-                            <button className="signupPage_Button" id="checkInput_signup">중복확인</button>
+                            <button className="signupPage_Button" id="checkInput_signup" onClick={checkVoteName}>중복확인</button>
                        </div>
                        <div className="each_form_signup">
                        <div className="article_signup">선거 종류 </div>

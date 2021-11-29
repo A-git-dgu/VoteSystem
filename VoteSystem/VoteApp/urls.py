@@ -45,4 +45,6 @@ urlpatterns = [
     path('getUserModify', views.getUserModify),
 
     path('checkIdAdmin',views.checkIdAdmin),
+    path('checkIdVote',views.checkIdVote),
+    path('checkVoteName',views.checkVoteName),
 ]

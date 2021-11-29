@@ -726,16 +726,13 @@ def getUserModify(request):
 def checkIdAdmin(request):
     if request.method=='POST':
         try:
-            print(request.data)
             admindata=Election.objects.all()
             n = Election.objects.count()
             k=0
             for i in range(0,n):
-                print(admindata[i].admin_id)
                 if (admindata[i].admin_id==request.data['admin_id']):
                     k+=1
 
-            print(k)
             if k==0:
                 return Response({'msg': 'success'}, status=205)
             else:
@@ -745,3 +742,44 @@ def checkIdAdmin(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
+@api_view(['POST'])
+def checkIdVote(request):
+    if request.method=='POST':
+        try:
+            votedata=User.objects.all()
+            n = User.objects.count()
+            k=0
+            for i in range(0,n):
+                if (votedata[i].id==request.data['voter_id']):
+                    k+=1
+
+
+            if k==0:
+                return Response({'msg': 'success'}, status=205)
+            else:
+                return Response({'msg': 'failed'}, status=200)
+
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
+
+
+@api_view(['POST'])
+def checkVoteName(request):
+    if request.method == 'POST':
+        try:
+            electiondata = Election.objects.all()
+            n = Election.objects.count()
+            k = 0
+            for i in range(0, n):
+                if (electiondata[i].election_name == request.data['vote_name']):
+                    k += 1
+
+            if k == 0:
+                return Response({'msg': 'success'}, status=205)
+            else:
+                return Response({'msg': 'failed'}, status=200)
+
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'failed'}, status=400)
