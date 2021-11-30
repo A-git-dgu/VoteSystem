@@ -29,11 +29,9 @@ class Voting extends Component {
             // example of interacting with the contract's methods.
             this.setState({ web3, accounts, contract: instance }, this.runExample);
         } catch (error) {
-            // Catch any errors for any of the above operations.
-            //alert(
-            //  `Failed to load web3, accounts, or contract. Check console for details.`,
-            //);
-            console.error(error);
+            alert("투표가 취소되었습니다.")
+            window.location.href = "/mainVoter"
+
         }
     };
 
@@ -41,23 +39,28 @@ class Voting extends Component {
         const { accounts, contract } = this.state;
         let name = window.location.pathname.split('/')[2]+";"+window.location.pathname.split('/')[3];
         console.log(this.state.contract)
-        await contract.methods.voting(name).send({ from: accounts[0], gas:900000 }).then( async () =>{
-            const url = "http://localhost:8000/changeVotingStatus";
-            await axios.put(url,{
-                election_num:window.location.pathname.split('/')[2],
-                user_id:getSessionCookie('id')
-            })
-            .then(function(response) {
-                alert('투표가 완료되었습니다.')
-                window.location.href = "/mainVoter"
-            })
-            .catch(function(error) {
-                console.log("실패");
-            })}
-        );
-        //let response = await contract.methods.countBallot(name).call();
-        //console.log(response)
-        //this.setState({ storageValue: response });
+        try{
+            await contract.methods.voting(name).send({ from: accounts[0], gas:900000 }).then( async () =>{
+                const url = "http://localhost:8000/changeVotingStatus";
+                await axios.put(url,{
+                    election_num:window.location.pathname.split('/')[2],
+                    user_id:getSessionCookie('id')
+                })
+                .then(function(response) {
+                    alert('투표가 완료되었습니다.')
+                    window.location.href = "/mainVoter"
+                })
+                .catch(function(error) {
+                    alert("투표가 취소되었습니다.")
+                    window.location.href = "/mainVoter"
+                    console.log("실패");
+                })}
+            );
+        }catch(error){
+                document.location.href = "/mainVoter"
+
+        }
+
     };
 
 
