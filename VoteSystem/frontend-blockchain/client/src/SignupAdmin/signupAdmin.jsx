@@ -192,6 +192,7 @@ export default function SignupAdmin() {
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
+                                        disablePast
                                         startText="시작"
                                         endText="종료"
                                         value={value1}
@@ -214,8 +215,10 @@ export default function SignupAdmin() {
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
-                                       startText="시작"
-                                       endText="종료"
+                                      disablePast
+                                      startText="시작"
+                                      endText="종료"
+                                      maxDate={value1[0]}
                                       value={value}
                                       onChange={(newValue) => {
                                        setValue(newValue);
