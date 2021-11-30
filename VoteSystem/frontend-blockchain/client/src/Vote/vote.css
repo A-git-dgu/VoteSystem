@@ -61,3 +61,10 @@
     font-size: 20px;
     background-color:rgb(91, 223, 198);
 }
+
+/* 투표 시 화면 */
+#voteMessage {
+    margin:500px 0px 0px 700px;
+    font-size:35px;
+    font-weight:bold;
+}
