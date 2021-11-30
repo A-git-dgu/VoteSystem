@@ -102,9 +102,6 @@ export default function MainAdmin({match}) {
                            <div className="each_form_viewCandidate">
                                 <div className="article_viewCandidate">주민등록번호 : {candidate.ssn}</div>
                            </div>
-                           <div className="each_form_viewCandidate">
-                                <div className="article_viewCandidate">소속 : </div>
-                           </div>
                         </div>
                         <div id="middle_line_viewCandidate"></div>
                         <div id="right_form_viewCandidate">
@@ -118,26 +115,26 @@ export default function MainAdmin({match}) {
                         <div id="bottom_form">
                             <div className="each_form_viewCandidate">
                                 <div className="article_viewCandidate">소개: </div>
-                                <TextField multiline maxRows={4} rows="5"
-                                id="introduceself" value={candidate.introduce}
-                                fullWidth></TextField>
+                                <div className="introduce">{candidate.introduce}</div>
                             </div>
                             <div className="each_form_viewCandidate">
                                 <div className="article_viewCandidate">이력: </div>
-                                <TextField multiline maxRows={4} rows="5"
-                                id="introduceself" value={candidate.career}
-                                fullWidth></TextField>
+                                <div className="introduce">{candidate.career}</div>
                             </div>
                             <div className="each_form_viewCandidate2">
-                                <div className="article_viewCandidate">공약: </div>
-                                <TextField multiline maxRows={4} rows="5"
-                                id="introduceself" value={candidate.pledge}
-                                fullWidth></TextField>
+                                <div className="article_viewCandidate">공약: {candidate.pledge}</div>
+                                <div className="introduce">{candidate.pledge}</div>
                             </div>
-                            <div id="checkDocument" className="each_form_viewCandidate">
+                           {candidate.approval_state=="0" && <div id="checkDocument" className="each_form_viewCandidate">
                                 모든서류의 제출을 확인하였습니다:
                                 <Checkbox onClick={changeCheck}/>
-                            </div>
+                            </div>}
+                           {candidate.approval_state=="-1" && <div id="checkDocument" className="each_form_viewCandidate">
+                                &nbsp;
+                            </div>}
+                           {candidate.approval_state>="1" && <div id="checkDocument" className="each_form_viewCandidate">
+                                &nbsp;
+                            </div>}
                         </div>
                         <div id="bottom_viewCandidate">
                             { candidate.approval_state=="0" && <button id="request_button_viewCandidate" className="viewCandidate_Button" onClick={requestApproval}>승인</button>}

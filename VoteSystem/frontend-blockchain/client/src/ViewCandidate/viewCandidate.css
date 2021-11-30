@@ -14,7 +14,7 @@
 
 /* 회색 틀 */
 #form_border_viewCandidate {
-    padding:3%;
+    padding:5%;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
     margin-bottom:30px;
@@ -101,7 +101,7 @@
 /* 입력 항목 이름 */
 .article_viewCandidate {
     float:left;
-    width: 90%;
+    width: 100%;
     text-align:left;
     font-size:18px;
 }
@@ -119,4 +119,14 @@
     outline:0;
     border-radius: 5px;
     margin: 5px;
+}
+
+.introduce{
+    border: 1px solid #BDBDBD;
+    border-radius: 3px;
+    width: 95%;
+    height:90px;
+    margin-top:30px;
+    font-size:16px;
+    padding:2%;
 }

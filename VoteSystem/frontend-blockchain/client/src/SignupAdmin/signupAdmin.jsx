@@ -81,7 +81,7 @@ export default function SignupAdmin() {
             }
             else {
                 alert('선거개설 성공')
-                console.log("성공");
+                window.location.href="/loginAdmin"
             }
         })
         .catch(function(error) {

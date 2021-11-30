@@ -37,7 +37,7 @@
 /* 선거정보보기 이동 div */
 .showElection_mainVoter {
     height:80px;
-    width:90%;
+    width:80%;
     float:left;
     color: black;
 }
@@ -69,32 +69,32 @@
 
 /* "투표하기" 버튼 */
 #voteButton_mainVoter {
-    width:70px;
-    height:27px;
-    margin:2.5% 2% 0% 0%;
+    width:90px;
+    height:47px;
+    margin:1.65% 2% 0% 0%;
     float:right;
-
+    font-size: 16px;
     color:rgb(255, 255, 255);
     background-color:rgb(91, 223, 198);
 }
 /* "투표완료" 버튼 */
 #complete_mainVoter {
-    width:70px;
-    height:27px;
-    margin:2.5% 2% 0% 0%;
+    width:90px;
+    height:47px;
+    margin:1.65% 2% 0% 0%;
     float:right;
-
+    font-size: 16px;
     color:rgb(255, 255, 255);
     background-color:rgb(155, 155, 155);
     cursor:default;
 }
 /* "결과보기" 버튼 */
 #showResult_mainVoter {
-    width:70px;
-    height:27px;
-    margin:2.5% 2% 0% 0%;
+    width:90px;
+    height:47px;
+    margin:1.65% 2% 0% 0%;
     float:right;
-
+    font-size: 16px;
     color:rgb(255, 255, 255);
     background-color:rgb(64, 64, 64);
 }
@@ -118,10 +118,9 @@
     height:40px;
     width:170px;
     margin:5px 0px 0px 20px;
-
     float:left;
 
-    font-size:15px;
+    font-size:16px;
     font-weight:bold;
     color:rgb(255, 255, 255);
     background-color:rgb(64, 64, 64);

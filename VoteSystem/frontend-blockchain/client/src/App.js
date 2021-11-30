@@ -51,7 +51,7 @@ class App extends Component {
                 <Route path="/candidateInput" element={<CandidateInput/>} />
                 <Route path="/candidateModify" element={<CandidateModify/>} />
 
-                <Route path="/possibleVoters" element={<PossibleVoters/>} />
+                <Route path="/possibleVoters/:electionNum" element={<PossibleVoters/>} />
                 <Route path="/electionInfoForVoter/:id" element={<ElectionInfoForVoter/>} />
 
                 <Route path="/viewCandidate/:electionNum/:candidateId" element={<ViewCandidate/>} />
