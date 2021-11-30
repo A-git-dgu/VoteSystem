@@ -70,7 +70,7 @@ export default function CandidateInput() {
     function updateCandidateContent(){
         const url = "http://localhost:8000/updateCandidateContent";
         axios.put(url, {
-            'candidate_ssn':'001224-4000000',
+            id:getSessionCookie('id'),
             'election_num':document.getElementById('election').value,
             'introduceself': document.getElementById("introduceself").value,
             'career': document.getElementById("career").value,
