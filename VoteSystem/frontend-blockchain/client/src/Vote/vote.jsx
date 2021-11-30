@@ -92,8 +92,8 @@ export default function Vote() {
                                 <div className="eachCandidate_vote">
                                     <p className="textCandidate_vote">■ &nbsp;&nbsp; 기호 {candidate.approval_state}번. {candidate.candidate_name}</p>
                                     <div className="radioCandidate">
-                                        <FormControlLabel value="True" control={<Radio />} label="찬성" labelPlacement="bottom"/>
-                                        <FormControlLabel value="False" control={<Radio />} label="반대" labelPlacement="bottom"/>
+                                        <FormControlLabel value="TRUE" control={<Radio />} label="찬성" labelPlacement="bottom"/>
+                                        <FormControlLabel value="FALSE" control={<Radio />} label="반대" labelPlacement="bottom"/>
                                     </div>
                                 </div>
                             ))

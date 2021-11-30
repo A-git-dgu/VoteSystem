@@ -71,7 +71,7 @@ function Login({Type}) {
             }
             else if (response.status===204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
-                document.location.href='/';
+                document.location.href='/loginVoter';
             }
             else if (response.status=400) {
                 alert(response.data.msg)

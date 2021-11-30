@@ -8,6 +8,7 @@
     height:40px;
     width:80px;
     margin-right: 10px;
+    margin-top: 15px;
 
     float:right;
 
@@ -16,10 +17,10 @@
     background-color:rgb(91, 223, 198);
 }
 #cancel_button_voterModify {
-
     height:40px;
     width:80px;
     margin-right: 20px;
+    margin-top: 15px;
 
     float:right;
 
@@ -28,7 +29,7 @@
     background-color:#BDBDBD;
 }
 .inner_left_voterModify {
-    width: 50%;
+    width: 40%;
     float: left;
     text-align: right;
     margin-right: 15px;
@@ -55,6 +56,7 @@
 }
 .changePWD_Button {
     margin-left: 15px;
+    height: 30px;
     font-size:15px;
     font-weight:bold;
     color:rgb(255, 255, 255);
@@ -71,9 +73,9 @@
 }
 #pwdNotEqualVoterModify {
     color:red;
-    margin-left: 380px;
+    margin-left: 280px;
 }
 #pwdEqualVoterModify {
     color:green;
-    margin-left: 380px;
+    margin-left: 280px;
 }

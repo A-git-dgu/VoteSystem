@@ -4,6 +4,8 @@ import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getSessionCookie from '../Login/cookies';
 import axios from 'axios';
 
+import styles from './vote.css';
+
 class Voting extends Component {
     state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
@@ -63,11 +65,11 @@ class Voting extends Component {
         console.log(this.state)
 
     if (!this.state.web3) {
-        return <div>Loading Web3, accounts, and contract...</div>;
+        return <div id="voteMessage">Meta Mask에 연결해주세요.</div>;
     }
     return (
         <>
-            <h1>{this.state.storageValue}</h1>
+            <div id="voteMessage">Meta Mask 로그인 후 '동의'버튼을 눌러주세요.</div>
         </>
     );
   }
