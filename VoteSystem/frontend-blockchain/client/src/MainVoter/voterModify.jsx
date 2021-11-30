@@ -153,7 +153,7 @@ export default function MainVoter({match}) {
                 }
                 {
                     canModifyAll == true ?
-                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyFalseAll}>회원 정보 수정</button>
+                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyFalseAll}>정보 수정</button>
                     :
                     <button id="modify_button_voterModify" className="voterModify_Button" onClick={setCancelModify}>수정하기</button>
                 }
@@ -167,16 +167,16 @@ export default function MainVoter({match}) {
                     <div className="inner_voterModify">
                         <div className="inner_left_voterModify">비밀번호</div>
                         <div className="inner_right_voterModify"><Input type="password" placeholder={user.pwd} id="pwd" disabled={canModify} onChange={handlePwdChange}/>
-                        {canModify == true ?
-                            <button className="voterModify_Button changePWD_Button" onClick={setModifyFalse} disabled={canModifyAll}>비밀번호 재설정</button>
-                            :
-                            <button className="voterModify_Button changePWD_Button" onClick={setModifyTrue} disabled={canModifyAll}>변경</button>
-                        }
                         </div>
                     </div>
                     <div className="inner_voterModify">
                         <div className="inner_left_voterModify">비밀번호 재확인</div>
                         <div className="inner_right_voterModify"><Input type="password" id="pwd2" disabled={canModify} onChange={handlePwd2Change}/>
+                            {canModify == true ?
+                                <button className="voterModify_Button changePWD_Button" onClick={setModifyFalse} disabled={canModifyAll}>비밀번호 재설정</button>
+                                :
+                                <button className="voterModify_Button changePWD_Button" onClick={setModifyTrue} disabled={canModifyAll}>변경</button>
+                            }
                         <div className="isPwdEqual">
                             { pwdEqual=="false" && <p id="pwdNotEqualVoterModify">비밀번호가 일치하지 않습니다.</p> }
                             { pwdEqual=="true" && <p id="pwdEqualVoterModify">비밀번호가 일치합니다.</p> }</div>
