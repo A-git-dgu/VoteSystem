@@ -25,9 +25,9 @@ export default function SignupAdmin() {
     const [okName, setOkName]=React.useState([]);
 
     React.useEffect(()=>{
-        setOkID("T");
+        setOkID("F");
         setOkSSN("T");
-        setOkName("T");
+        setOkName("F");
     },[])
 
     function requestOpenElection() {
@@ -125,6 +125,9 @@ export default function SignupAdmin() {
             if(response.status===200){
                  alert('존재하는 선거이름입니다.')
             }
+            else if(response.status===201){
+                 alert('선거이름을 입력해주세요.')
+            }
             else {
                   alert('사용할수 있는 선거이름입니다.')
                   setOkName("T");
@@ -141,15 +144,21 @@ export default function SignupAdmin() {
     const checkIdAdmin = async() =>{
         const url="http://localhost:8000/checkIdAdmin";
 
-       await axios.post(url,{
+        await axios.post(url,{
         admin_id:document.getElementById('admin_id').value
         })
         .then(function(response) {
             if(response.status===200){
                  alert('존재하는 아이디입니다.')
             }
+            else if(response.status===201){
+                 alert('아이디를 입력해주세요.')
+            }
+            else if(response.status===202){
+                 alert('아이디에 공백이 포함될 수 없습니다.')
+            }
             else {
-                  alert('사용할수 있는 아이디입니다.')
+                  alert('사용할 수 있는 아이디입니다.')
                   setOkID("T");
                   console.log(okID);
                   console.log("성공");
