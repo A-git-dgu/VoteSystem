@@ -294,7 +294,10 @@ def getUserElection(request):
                 if now.date() <= electionInfo.end_date.date():
                     election_status = "1"
                 if electionInfo.election_type==-1 or electionInfo.election_type==2:
-                    election_status = "0"
+                    election_status = "1"
+                isBeforeDate = '1'
+                if electionInfo.start_date.date() <= now.date():
+                    isBeforeDate = '0'
                 index+=1
                 row = {
                     'election_num':electionInfo.election_num,
@@ -303,9 +306,11 @@ def getUserElection(request):
                     'end_date':electionInfo.end_date.date(),
                     'election_status':election_status,
                     'voting_status':voterElection.voting_status,
+                    'isBeforeDate':isBeforeDate,
                     'index':index
                 }
                 voter_elections.append(row)
+            print(voter_elections)
             return Response(voter_elections, status=200)
         except Exception as e:
             print(e)
