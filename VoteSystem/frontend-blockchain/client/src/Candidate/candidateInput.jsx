@@ -34,22 +34,23 @@ export default function CandidateInput() {
 
     function insertApi(){
         const url = "http://localhost:8000/insertCandidate";
+        console.log(document.getElementById('election').value)
         axios.put(url,{
                 election_num: document.getElementById('election').value,
                 candidate_ssn: document.getElementById('fssn').value+'-'+document.getElementById('lssn').value,
                 email: document.getElementById('email').value,
-                introduceself: document.getElementById('introduceself').value,
-                electionpledge:document.getElementById('electionpledge').value,
-                carrer: document.getElementById('carrer').value
+                introduce_self: document.getElementById('introduce_self').value,
+                election_pledge:document.getElementById('election_pledge').value,
+                career: document.getElementById('career').value
             }
         )
         .then(function(response) {
             if(response.status==400){
-                alert('실패했습니다.')
+                alert('후보자 등록에 실패했습니다.')
             }
             else {
-                alert('성공했습니다.')
-                console.log("성공");
+                alert('후보자 등록이 완료되었습니다.')
+                window.location.href="/mainVoter";
             }
         })
         .catch(function(error) {
@@ -68,64 +69,64 @@ export default function CandidateInput() {
                         <div id="left_form_candidate">
                             <div className="each_form_candidate">
                                 <div className="article_candidate">선거 선택</div>
-                                    <NativeSelect default="select_election" id="election" className="input_form_candidate">
-                                        <option value={"select_election"}>-- 선거 선택 --</option>
-                                            if(elections.length>0){
-                                                elections.map((election) => (
-                                        <option value={election.election_num}>{election.election_name}</option>
-                                        ))
-                                        }
-                                    </NativeSelect>
-                                </div>
-                                <div className="each_form_candidate">
-                                    <div className="article_candidate"> 이름 </div>
-                                     <Input placeholder="내용을 입력하세요." id="name" className="input_form_candidate"/>
-                                </div>
-                                <div className="each_form_candidate">
-                                    <div className="article_candidate"> 주민등록번호 </div>
-                                     <Input className="ssn_candidate" placeholder="000000" id="fssn"/>
-                                    - <Input className="ssn_candidate" type="password" placeholder="1234567" id="lssn"/>
-                                </div>
-                                <div className="each_form_candidate">
-                                    <div className="article_candidate"> 전화번호 </div>
-                                     <Input type="tel" placeholder="010-0000-0000" id="phonenumber" className="input_form_candidate"/>
-                                </div>
-                                <div className="each_form_candidate">
-                                    <div className="article_candidate">이메일</div>
-                                     <Input type="email" placeholder="dongguk@dgu.kr" id="email" className="input_form_candidate"/>
-                                </div>
+                                <NativeSelect default="select_election" id="election" className="input_form_candidate">
+                                    <option value={"select_election"}>-- 선거 선택 --</option>
+                                        if(elections.length>0){
+                                            elections.map((election) => (
+                                    <option value={election.election_num}>{election.election_name}</option>
+                                    ))
+                                    }
+                                </NativeSelect>
                             </div>
-                            <div id="middle_line_candidate"></div>
-                            <div id="right_form_candidate">
-                                <div className="each_form_candidate">
-                                    <div>
-                                        소개 <TextField multiline maxRows={4} rows="5"
-                                        placeholder="자유롭게 본인을 소개하세요."
-                                        helperText="500자 이내로 작성하세요." id="introduceself"
-                                        fullWidth></TextField>
-                                    </div>
-                                </div>
-                                <div className="each_form_candidate">
-                                    이력 <TextField multiline maxRows={4} rows="5"
-                                    placeholder="예)20xx년~20xx년 학생회 집행부"
-                                    helperText="1000자 이내로 작성하세요." id="carrer"
-                                    fullWidth></TextField>
-                                </div>
-                                <div className="each_form_candidate">
-                                    공약 <TextField multiline maxRows={4} rows="5"
-                                    placeholder="본인의 공약을 자세히 작성하세요."
-                                    helperText="1000자 이내로 작성하세요." id="electionpledge"
+                            <div className="each_form_candidate">
+                                <div className="article_candidate"> 이름 </div>
+                                 <Input placeholder="내용을 입력하세요." id="name" className="input_form_candidate"/>
+                            </div>
+                            <div className="each_form_candidate">
+                                <div className="article_candidate"> 주민등록번호 </div>
+                                 <Input className="ssn_candidate" placeholder="000000" id="fssn"/>
+                                - <Input className="ssn_candidate" type="password" placeholder="1234567" id="lssn"/>
+                            </div>
+                            <div className="each_form_candidate">
+                                <div className="article_candidate"> 전화번호 </div>
+                                 <Input type="tel" placeholder="010-0000-0000" id="phonenumber" className="input_form_candidate"/>
+                            </div>
+                            <div className="each_form_candidate">
+                                <div className="article_candidate">이메일</div>
+                                 <Input type="email" placeholder="dongguk@dgu.kr" id="email" className="input_form_candidate"/>
+                            </div>
+                        </div>
+                        <div id="middle_line_candidate"></div>
+                        <div id="right_form_candidate">
+                            <div className="each_form_candidate">
+                                <div>
+                                    소개 <TextField multiline maxRows={4} rows="5"
+                                    placeholder="자유롭게 본인을 소개하세요."
+                                    helperText="500자 이내로 작성하세요." id="introduce_self"
                                     fullWidth></TextField>
                                 </div>
                             </div>
+                            <div className="each_form_candidate">
+                                이력 <TextField multiline maxRows={4} rows="5"
+                                placeholder="예)20xx년~20xx년 학생회 집행부"
+                                helperText="1000자 이내로 작성하세요." id="career"
+                                fullWidth></TextField>
+                            </div>
+                            <div className="each_form_candidate">
+                                공약 <TextField multiline maxRows={4} rows="5"
+                                placeholder="본인의 공약을 자세히 작성하세요."
+                                helperText="1000자 이내로 작성하세요." id="election_pledge"
+                                fullWidth></TextField>
+                            </div>
+                        </div>
 
-                            <div id="reg_button_candidate">
-                                <button className="candidate_Button" id="requestCandidate" onClick={insertApi}>후보자 등록</button>
-                                    &nbsp;&nbsp;후보자 등록 정보는 "회원정보 수정"에서 수정 가능합니다.
-                            </div>
+                        <div id="reg_button_candidate">
+                            <button className="candidate_Button" id="requestCandidate" onClick={insertApi}>후보자 등록</button>
+                                &nbsp;&nbsp;후보자 등록 정보는 "회원정보 수정"에서 수정 가능합니다.
                         </div>
                     </div>
                 </div>
-    </>
+            </div>
+        </>
     );
 }

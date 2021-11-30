@@ -91,6 +91,7 @@ def deleteElection(requset):
 def insertCandidate(request):
     if request.method=='PUT':
         try:
+            print(request.data)
             e = Election.objects.get(election_num=request.data['election_num'])
             u = User.objects.get(user_ssn=request.data['candidate_ssn'])
 
@@ -98,11 +99,12 @@ def insertCandidate(request):
                 election_num=e,
                 candidate_ssn=u,
                 candidate_email=request.data['email'],
-                introduce_self=request.data['introduceself'],
-                election_pledge=request.data['electionpledge'],
+                introduce_self=request.data['introduce_self'],
+                election_pledge=request.data['election_pledge'],
                 career=request.data['career'],
                 approval_state=0
             )
+            print(queryset)
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
