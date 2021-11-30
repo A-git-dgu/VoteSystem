@@ -416,11 +416,11 @@ def setElectionModify(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def getPossibleVoter(request):
-    if request.method=='GET':
+    if request.method=='POST':
         try:
-            datas = Possiblevoter.objects.filter(election_num=request.GET['election_num'])
+            datas = Possiblevoter.objects.filter(election_num=request.data['election_num'])
 
             possibleVoters=[]
             for data in datas:

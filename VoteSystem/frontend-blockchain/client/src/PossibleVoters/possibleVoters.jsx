@@ -3,6 +3,8 @@ import axios from 'axios'
 import Input from '@mui/material/Input';
 import Nav from '../Main/main';
 
+import { useParams } from 'react-router-dom';
+
 import './possibleVoters.css';
 
 // 주민등록번호에 입력 가능한 문자인지 확인 (숫자와 '-'만 가능)
@@ -22,13 +24,15 @@ function ErrorMsgForWrongInput() {
 
 export default function PossibleVoters() {
     let [possibleVoter, setPossibleVoter] = useState([]);
+    let { electionNum } = useParams();
 
     // 통신 메서드
     const searchApi = async()=> {
-        const url = "http://localhost:8000/getPossibleVoter?election_num="+1;
-        await axios.get(url)
+        const url = "http://localhost:8000/getPossibleVoter";
+        await axios.post(url, {
+            election_num:electionNum
+        })
         .then(function(response) {
-            console.log("성공");
             for(let i=0; i< response.data.length; i++){
                 addPossibleVoterTd(response.data[i].voter_ssn)
             }
@@ -36,39 +40,36 @@ export default function PossibleVoters() {
         .catch(function(error) {
             console.log("실패");
         })
-
     };
 
-    useEffect(()=>{
+    useEffect( () => {
         searchApi();
     }, [])
 
-    function insertApi(){
+    function insertApi() {
         const url = "http://localhost:8000/insertPossibleVoter";
         let voters = []
         let tds=document.querySelectorAll(".newTd")
 
-        for(let i=0; i < tds.length; i++){
+        for(let i=0; i < tds.length; i++) {
             voters.push(tds[i].textContent)
         }
-        axios.put(url,{
-                election_num: 1,//수정해야함
-                voter_ssn: voters,
-                voting_status: 0
-            }
-        )
+        axios.put(url, {
+            election_num: electionNum,
+            voter_ssn: voters,
+            voting_status: 0
+        })
         .then(function(response) {
             if(response.status==400){
                 alert('실패했습니다.')
             }
             else {
-                alert('성공했습니다.')
-                console.log("성공");
+                alert('명부 등록이 완료되었습니다.')
             }
         })
         .catch(function(error) {
             alert('실패했습니다.')
-            console.log("실패: ",error);
+            console.log("실패");
         })
     };
 
@@ -143,32 +144,30 @@ export default function PossibleVoters() {
         newTr.id = "trNum_" + (document.querySelectorAll('.newBtn').length)
     }
 
-
-
     return (
-    <>
-        <Nav Type={"Admin"}/>
-        <div id="outer_form_possibleVoters">
-            <div id="container_possibleVoters">
-                <div><p id="title_possibleVoters">유권자 명부 등록</p></div>
-                <div id="form_border_possibleVoters">
-                    <div id="inner_each_possibleVoters">
-                        <div className="possibleVotersSsn">등록할 유권자의 주민등록번호를 입력하세요.</div>
-                        <table id="new_table">
-                            <button className="" id="add_possibleVoter" className="possibleVoters_Button"
-                            onClick={addPossibleVoterTd}>추가</button>
+        <>
+            <Nav Type={"Admin"}/>
+            <div id="outer_form_possibleVoters">
+                <div id="container_possibleVoters">
+                    <div><p id="title_possibleVoters">유권자 명부 등록</p></div>
+                    <div id="form_border_possibleVoters">
+                        <div id="inner_each_possibleVoters">
+                            <div className="possibleVotersSsn">등록할 유권자의 주민등록번호를 입력하세요.</div>
+                            <table id="new_table">
+                                <button className="" id="add_possibleVoter" className="possibleVoters_Button"
+                                onClick={addPossibleVoterTd}>추가</button>
 
-                            <Input placeholder="000000-123456789"
-                            className="possibleVoters_ssn" id="possibleVoters_ssn"/>
-                        </table>
-                    </div>
-                    <div id="reg_button_possibleVoters">
-                        <button className="possibleVoters_Button" id="requestPossibleVoters"
-                        onClick={insertApi}>유권자 명부 등록</button>
+                                <Input placeholder="000000-123456789"
+                                className="possibleVoters_ssn" id="possibleVoters_ssn"/>
+                            </table>
+                        </div>
+                        <div id="reg_button_possibleVoters">
+                            <button className="possibleVoters_Button" id="requestPossibleVoters"
+                            onClick={insertApi}>유권자 명부 등록</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </>
+        </>
     );
 }
