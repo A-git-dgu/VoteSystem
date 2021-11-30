@@ -52,6 +52,7 @@ export default function MainVoter({match}) {
                             {election.election_status=="1" && election.voting_status=="1" && <button className="mainVoterPage_Button" id="complete_mainVoter">투표완료</button>}
                         </div>
                     ))}
+                    {elections.length==0 && <div id="notFoundElection">투표 가능한 선거가 없습니다.</div>}
                 </div>
                 <div id="bottom_mainVoter">
                     <img src={CandiAppliImg} id="candiAppli_img_mainVoter"/>
