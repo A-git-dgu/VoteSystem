@@ -96,7 +96,6 @@ export default function MainVoter({match}) {
             })
             .then(function(response) {
                 setVoterInfo(response.data);
-                console.log("성공");
                 alert("회원 정보가 수정되었습니다.");
             })
             .catch(function(error) {
@@ -130,7 +129,6 @@ export default function MainVoter({match}) {
             })
             .then(function(response) {
                 setUser(response.data);
-                console.log("성공");
             })
             .catch(function(error) {
                 console.log("실패");
@@ -155,7 +153,7 @@ export default function MainVoter({match}) {
                     canModifyAll == true ?
                     <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyFalseAll}>정보 수정</button>
                     :
-                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setCancelModify}>수정하기</button>
+                    <button id="modify_button_voterModify" className="voterModify_Button" onClick={setModifyTrueAll}>수정하기</button>
                 }
 
             </p></div>
