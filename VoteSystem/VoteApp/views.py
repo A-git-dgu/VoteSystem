@@ -308,7 +308,6 @@ def getUserElection(request):
                     'index':index
                 }
                 voter_elections.append(row)
-            print(voter_elections)
             return Response(voter_elections, status=200)
         except Exception as e:
             print(e)

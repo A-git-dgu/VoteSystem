@@ -29,18 +29,28 @@ export default function Nav({Type}) {
     return (
         <div className={Type}>
             {
-            Type==="Voter" &&
+            Type==="Voter" && (checkLogin==1 ?
             <Link to='/mainVoter'>
                 <img src={Logo} className="Logo"/>
                 <p className="Title">투표 아지트</p>
             </Link>
+            :
+            <Link to='/'>
+                <img src={Logo} className="Logo"/>
+                <p className="Title">투표 아지트</p>
+            </Link>)
             }
             {
-            Type==="Admin" &&
+            Type==="Admin" && (checkLogin==1 ?
             <Link to='/mainAdmin'>
                 <img src={Logo} className="Logo"/>
                 <p className="Title">투표 아지트</p>
             </Link>
+            :
+            <Link to='/'>
+                <img src={Logo} className="Logo"/>
+                <p className="Title">투표 아지트</p>
+            </Link>)
             }
             { checkLogin===1 &&
             <div class="Nav_right">
