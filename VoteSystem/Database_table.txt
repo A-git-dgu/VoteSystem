@@ -1,9 +1,10 @@
+drop table electionresult;
+drop table candidateresult;
 drop table possiblevoter;
 drop table candidate;
 drop table user;
 drop table election;
-drop table electionresult;
-drop table candidateresult;
+
 
 create table user(
 user_ssn varchar(15) primary key,
@@ -59,8 +60,7 @@ election_pledge VARCHAR(1000) not null,
 career VARCHAR(1000) not null,
 approval_state INT(1) not null,
 primary key(election_num, candidate_ssn),
-foreign key(candidate_ssn) references user (user_ssn) on update cascade,
-foreign key(election_num) references election (election_num) on update cascade
+foreign key(candidate_ssn) references user (user_ssn)
 );
 
 insert into candidate values(1, '991115-2000000', 'aaa@dgu.kr', '후보자 a의 소개입니다.', '후보자 a의 공약입니다.', '2019년~2020년 학생회 집행부', 0);
@@ -80,8 +80,7 @@ create table possiblevoter (
 election_num INT not null,
 voter_ssn varchar(15) not null,
 voting_status INT not null,
-primary key(election_num, voter_ssn),
-foreign key(election_num) references election (election_num) on update cascade
+primary key(election_num, voter_ssn)
 );
 
 insert into possiblevoter values(1, '991115-2000000', 0);
@@ -133,17 +132,14 @@ insert into possiblevoter values(4, '000119-4200000', 0);
 create table electionresult (
 election_num INT not null,
 voting_rate decimal(5, 2) not null,
-primary key(election_num),
-foreign key(election_num) references election (election_num) on update cascade
+primary key(election_num)
 );
 
 create table candidateresult (
 election_num INT not null,
 candidate_ssn VARCHAR(15) not null,
 polling_rate decimal(5, 2) not null,
-primary key(election_num, candidate_ssn),
-foreign key(election_num) references election (election_num) on update cascade,
-foreign key(candidate_ssn) references candidate (candidate_ssn) on update cascade
+primary key(election_num, candidate_ssn)
 );
 
 
