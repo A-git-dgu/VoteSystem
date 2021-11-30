@@ -24,7 +24,7 @@
     overflow: auto;
     border: 1px solid #BDBDBD;
     border-radius: 10px;
-    height:20vh;
+    height:180px;
     width :75%;
     float:left;
 }
@@ -33,7 +33,7 @@
 .form_view_candidate{
     padding:1%;
     height:30px;
-    width:97%;
+    width:97.71%;
     color:black;
     border-radius: 10px;
     border:1px solid #BDBDBD;
@@ -204,8 +204,18 @@
     float:right;
     margin-left:10px;
 }
+#register_possible_voter {
+    height:40px;
+    width:200px;
+    font-size:18px;
+    color: white;
+    background-color:rgb(64, 64, 64);
+    cursor:pointer;
+    float:right;
+    margin-bottom:5px;
+}
 #result_mainAdmin {
-    height:100px;
+    height:85px;
     width:200px;
     font-size:25px;
     background-color:rgb(255, 139, 139);

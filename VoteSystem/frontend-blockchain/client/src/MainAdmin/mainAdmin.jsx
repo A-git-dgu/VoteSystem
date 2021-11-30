@@ -289,6 +289,7 @@ export default function MainAdmin() {
                         ))}
                     </div>
                     <div id="button_site">
+                        <Link to={'/possibleVoters/'+election.election_num}><button id="register_possible_voter" className="mainadmin_Page_Button">유권자 명부 등록</button></Link>
                         { election.isBallotCount==1 ?
                             <Link to={'/electionResultAdmin/'+election.election_num}><button id="result_mainAdmin" className="mainadmin_Page_Button">결과보기</button></Link>
                             : <button id="result_mainAdmin" className="mainadmin_Page_Button" onClick={ballotCount}>개표하기</button> }

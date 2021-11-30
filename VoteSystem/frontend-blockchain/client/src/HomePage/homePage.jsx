@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './homePage.css';
 
 import Logo from '../Img/logo.png';
@@ -6,8 +6,18 @@ import ManageImg from '../Img/homeManage.png';
 import VoteImg from '../Img/homeVote.png';
 
 import { Link } from 'react-router-dom';
+import getSessionCookie, {isLogin} from '../Login/cookies';
 
-function homePage() {
+export default function HomePage() {
+    useEffect(() => {
+        if (getSessionCookie("type")=="Voter") {
+            window.location.href = "/mainVoter";
+        }
+        else if (getSessionCookie("type")=="Admin") {
+            window.location.href = "/mainAdmin";
+        }
+    },[])
+
     return (
     <body>
         <Link to="/loginAdmin">
@@ -55,5 +65,3 @@ function homePage() {
     </body>
     );
 }
-
-export default homePage;
