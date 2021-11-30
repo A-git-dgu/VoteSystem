@@ -264,19 +264,15 @@ def getCandidateContent(request):
 def updateCandidateContent(request):
     if request.method=='PUT':
         try:
-            cursor = connection.cursor()
-            sql = "update Candidate SET introduce_self=%s, career=%s, election_pledge=%s WHERE candidate_ssn=%s and election_num=%s"
-            result = cursor.execute(sql, [request.data['introduceself'], request.data['career'], request.data['electionpledge'],
-                                          request.data['candidate_ssn'], request.data['election_num']])
-            connection.commit()
-            connection.close()
+            whichCandidate = User.objects.get(id=request.data['id'])
+            candidateContent = Candidate.objects.filter(election_num=request.data['election_num'], candidate_ssn=whichCandidate.user_ssn)
+            candidateContent.update(introduce_self=request.data['introduceself'],
+                                    career=request.data['career'],
+                                    election_pledge=request.data['electionpledge'])
             return  Response({'msg': 'success'}, status=200)
-
-
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
-
 
 @api_view(['POST'])
 def getUserElection(request):
