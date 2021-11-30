@@ -91,7 +91,6 @@ def deleteElection(requset):
 def insertCandidate(request):
     if request.method=='PUT':
         try:
-            print(request.data)
             e = Election.objects.get(election_num=request.data['election_num'])
             u = User.objects.get(user_ssn=request.data['candidate_ssn'])
 
@@ -104,7 +103,6 @@ def insertCandidate(request):
                 career=request.data['career'],
                 approval_state=0
             )
-            print(queryset)
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
             print(e)
@@ -372,11 +370,8 @@ def getAdminCandidate(request):
 def setElectionModify(request):
     if request.method=='PUT':
         try:
-            print("Maerong~ ", request.data)
             findElection = Election.objects.filter(election_num=request.data['num'])
             type=3
-            print(findElection[0].election_type)
-            print(request.data['type'])
             if request.data['type']=='0' and (findElection[0].election_type==-1 or findElection[0].election_type==2):
                 type=-1
             elif request.data['type']=='0' and (findElection[0].election_type==0 or findElection[0].election_type==1):
@@ -724,17 +719,20 @@ def getUserModify(request):
 def checkIdAdmin(request):
     if request.method=='POST':
         try:
-            admindata=Election.objects.all()
-            n = Election.objects.count()
-            k=0
-            for i in range(0,n):
-                if (admindata[i].admin_id==request.data['admin_id']):
-                    k+=1
-
-            if k==0:
-                return Response({'msg': 'success'}, status=205)
+            if request.data['admin_id'].find(" ") != -1:
+                return Response({'msg': 'success'}, status=202)
+            elif request.data['admin_id'] == "TRUE" or request.data['admin_id'] == "FALSE":
+                return Response({'msg': 'success'}, status=200)
+            elif request.data['admin_id'] == '':
+                return Response({'msg': 'success'}, status=201)
             else:
-                return Response({'msg': 'failed'}, status=200)
+                adminData=Election.objects.all()
+                n = Election.objects.count()
+                for i in range(0, n):
+                    if adminData[i].admin_id == request.data['admin_id']:
+                        return Response({'msg': 'success'}, status=200)
+                else:
+                    return Response({'msg': 'success'}, status=205)
 
         except Exception as e:
             print(e)
@@ -744,39 +742,38 @@ def checkIdAdmin(request):
 def checkIdVote(request):
     if request.method=='POST':
         try:
-            votedata=User.objects.all()
-            n = User.objects.count()
-            k=0
-            for i in range(0,n):
-                if (votedata[i].id==request.data['voter_id']):
-                    k+=1
-
-
-            if k==0:
-                return Response({'msg': 'success'}, status=205)
+            if request.data['voter_id'].find(" ") != -1:
+                return Response({'msg': 'success'}, status=202)
+            elif request.data['voter_id'] == "TRUE" or request.data['voter_id'] == "FALSE":
+                return Response({'msg': 'success'}, status=200)
+            elif request.data['voter_id'] == '':
+                return Response({'msg': 'success'}, status=201)
             else:
-                return Response({'msg': 'failed'}, status=200)
+                voteData=User.objects.all()
+                n = Election.objects.count()
+                for i in range(0, n):
+                    if voteData[i].id == request.data['voter_id']:
+                        return Response({'msg': 'success'}, status=200)
+                else:
+                    return Response({'msg': 'success'}, status=205)
 
         except Exception as e:
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
-
 @api_view(['POST'])
 def checkVoteName(request):
     if request.method == 'POST':
         try:
-            electiondata = Election.objects.all()
+            if request.data['vote_name'] == '':
+                return Response({'msg': 'success'}, status=201)
+            electionData = Election.objects.all()
             n = Election.objects.count()
-            k = 0
             for i in range(0, n):
-                if (electiondata[i].election_name == request.data['vote_name']):
-                    k += 1
-
-            if k == 0:
-                return Response({'msg': 'success'}, status=205)
+                if electionData[i].election_name == request.data['vote_name']:
+                    return Response({'msg': 'success'}, status=200)
             else:
-                return Response({'msg': 'failed'}, status=200)
+                return Response({'msg': 'success'}, status=205)
 
         except Exception as e:
             print(e)

@@ -1,4 +1,4 @@
-                import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 
@@ -15,8 +15,8 @@ export default function SignupVoter() {
     const [pwdEqual, setPwdEqual] = useState("");
 
     useEffect(()=>{
-        setOkID("T");
-        setOkSSN("T");
+        setOkID("F");
+        setOkSSN("F");
     },[])
 
     function requestSignup() {
@@ -104,6 +104,12 @@ export default function SignupVoter() {
         .then(function(response) {
             if(response.status===200){
                  alert('존재하는 아이디입니다.')
+            }
+            else if(response.status===201){
+                 alert('아이디를 입력해주세요.')
+            }
+            else if(response.status===202){
+                 alert('아이디에 공백이 포함될 수 없습니다.')
             }
             else {
                   alert('사용할수 있는 아이디입니다.')
