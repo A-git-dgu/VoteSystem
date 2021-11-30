@@ -81,6 +81,10 @@ def deleteElection(requset):
     if requset.method == 'POST':
         try:
             e=Election.objects.get(admin_id=requset.data['admin_id'])
+            Electionresult.objects.filter(election_num=e).delete()
+            Candidateresult.objects.filter(election_num=e).delete()
+            Possiblevoter.objects.filter(election_num=e).delete()
+            Candidate.objects.filter(election_num=e).delete()
             e.delete()
             return Response({'msg': 'success'}, status=200)
         except Exception as e:
