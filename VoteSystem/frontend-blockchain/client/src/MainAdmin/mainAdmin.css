@@ -241,3 +241,10 @@
     right:0;
     bottom:0;
 }
+#notFoundCandidate {
+    height:50px;
+    width:100%;
+    text-align:center;
+    margin-top:20px;
+    font-size:20px;
+}
