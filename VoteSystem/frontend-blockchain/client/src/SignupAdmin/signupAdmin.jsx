@@ -26,7 +26,7 @@ export default function SignupAdmin() {
 
     React.useEffect(()=>{
         setOkID("F");
-        setOkSSN("T");
+        setOkSSN("F");
         setOkName("F");
     },[])
 
@@ -89,6 +89,27 @@ export default function SignupAdmin() {
             console.log("실패");
         })
     };
+    function checkSSN(){
+        const fssnElement = document.getElementById("admin_fssn")
+        const lssnElement = document.getElementById("admin_lssn")
+        const fssn = fssnElement.value
+        const lssn = lssnElement.value
+        if(fssn.length!=6 || lssn.length!=7 || fssn[2]+fssn[3] > 12 || fssn[4]+fssn[5] > 31 || fssn[4]+fssn[5]==0){
+            alert("유효한 주민등록번호를 입력하세요.")
+        }
+        else if(isNaN(fssn)||isNaN(lssn)){
+            alert("유효한 주민등록번호를 입력하세요.")
+        }
+        else if(!(lssn[0]==5)&&!(fssn[0]+fssn[1]>21&&(lssn[0]==1||lssn[0]==2)) && !(fssn[0]+fssn[1]<=21&&(lssn[0]==3||lssn[0]==4))){
+            alert("유효한 주민등록번호를 입력하세요.")
+        }
+        else{
+            alert("유효한 주민등록번호입니다!")
+            fssnElement.disabled="true"
+            lssnElement.disabled="true"
+            setOkSSN("T")
+        }
+    }
 
     const handlePwdChange = (event) => {
         setPwd(event.target.value);
@@ -271,7 +292,7 @@ export default function SignupAdmin() {
                             <div className="article_signup" id="backmargin_article_signup">주민등록번호</div>
                             <Input className="ssn_signup" placeholder="000000" id="admin_fssn"/>
                             &nbsp;&nbsp;- <Input className="ssn_signup" type="password" placeholder="1234567" id="admin_lssn"/>
-                            <button className="signupPage_Button" id="checkInput_signup">본인확인</button>
+                            <button className="signupPage_Button" id="checkInput_signup" onClick={checkSSN}>본인확인</button>
                         </div>
                         <div className="each_form_signup">
                             <div className="article_signup" id="backmargin_article_signup">전화번호</div>

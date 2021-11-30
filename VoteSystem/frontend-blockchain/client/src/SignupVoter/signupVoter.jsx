@@ -139,9 +139,10 @@ export default function SignupVoter() {
             alert("유효한 주민등록번호를 입력하세요.")
         }
         else{
-            alert("유요한 주민등록번호입니다!")
+            alert("유효한 주민등록번호입니다!")
             fssnElement.disabled="true"
             lssnElement.disabled="true"
+            setOkSSN("T")
         }
     }
 
