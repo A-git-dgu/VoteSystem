@@ -4,7 +4,7 @@ import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getSessionCookie from '../Login/cookies';
 import axios from 'axios';
 
-import styles from './vote.css';
+import '../Vote/vote.css';
 
 class BallotCount extends Component {
     state = { storageValue: 0, web3: null, accounts: null, contract: null };

@@ -119,7 +119,6 @@
     font-size:22px;
     font-weight: bold;
     background-color:rgb(155, 155, 155);
-    cursor:pointer;
 }
 /* "결과보기" 버튼 */
 #showResult_button {

@@ -44,6 +44,24 @@ def getUser(request):
         sendData=UserSerializer(users, many=True).data
         return Response(sendData, status=200)
 
+@api_view(['POST'])
+def getUserContent(request):
+    if request.method=="POST":
+        try:
+            user = User.objects.get(id=request.data['id'])
+
+            row = {
+                'ssn': user.user_ssn,
+                'email': user.email,
+                'name': user.name,
+                'phonenumber': user.phonenumber,
+                'address': user.address
+            }
+            return Response(row, status=200)
+        except Exception as e:
+            print(e)
+            return Response({'msg': 'data error'}, status=400)
+
 @api_view(['GET'])
 def getElection(request):
     if request.method=='GET':

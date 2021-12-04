@@ -5,6 +5,7 @@ urlpatterns = [
     path('', include('rest_framework.urls', namespace='rest_framework_category')),
     path('getUser', views.getUser),
     path('getElection', views.getElection),
+    path('getUserContent', views.getUserContent),
     path('insertCandidate', views.insertCandidate),
 
     path('checkAdminLogin', views.checkAdminLogin),

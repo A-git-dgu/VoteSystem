@@ -43,7 +43,7 @@ function Login({Type}) {
             }
             else if (response.status===204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
-                document.location.href='/loginAdmin';
+                document.getElementById('pwd').value="";
             }
             else if (response.status=400) {
                 alert(response.data.msg)
@@ -71,7 +71,7 @@ function Login({Type}) {
             }
             else if (response.status===204) {
                 alert('아이디 혹은 비밀번호를 확인하세요.')
-                document.location.href='/loginVoter';
+                document.getElementById('pwd').value="";
             }
             else if (response.status=400) {
                 alert(response.data.msg)
