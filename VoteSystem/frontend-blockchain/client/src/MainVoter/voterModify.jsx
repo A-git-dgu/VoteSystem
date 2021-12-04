@@ -9,7 +9,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import getSessionCookie, {isLogin} from '../Login/cookies';
 
-export default function MainVoter({match}) {
+export default function MainVoter() {
     // user의 선거 불러오기
     let [user, setUser] = useState([]);
 
@@ -19,6 +19,11 @@ export default function MainVoter({match}) {
             id:getSessionCookie('id')
         })
         .then(function(response) {
+
+            setName(user.name);
+            setPhone(user.phonenumber);
+            setEmail(user.email);
+            setAddress(user.address);
             setUser(response.data);
             console.log("성공");
         })
@@ -77,10 +82,6 @@ export default function MainVoter({match}) {
     let [voterInfo, setVoterInfo] = useState([]);
 
     const changeVoterInfo = async() => {
-        setName(user.name);
-        setPhone(user.phonenumber);
-        setEmail(user.email);
-        setAddress(user.address);
         if (name == "" || phone == "" || email == "" || address == "") {
             alert("모든 항목을 입력하세요.");
             setCanModifyAll(false);
