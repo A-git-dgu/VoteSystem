@@ -89,7 +89,14 @@
     margin-left:4.7%;
     background-color:rgb(189, 189, 189);
 }
+/* 헤당 페이지 버튼 근본디자인 */
+.election4user_Button {
+    font-weight:bold;
 
+    border:0;
+    outline:0;
+    border-radius: 5px;
+}
 /* "투표하기" 버튼 */
 #vote_button {
     position: fixed;
@@ -102,11 +109,27 @@
     background-color:rgb(91, 223, 198);
     cursor:pointer;
 }
-/* 헤당 페이지 버튼 근본디자인 */
-.election4user_Button {
-    font-weight:bold;
-
-    border:0;
-    outline:0;
-    border-radius: 5px;
+/* "투표완료 및 준비중" 버튼 */
+#not_button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width:150px;
+    height:60px;
+    font-size:22px;
+    font-weight: bold;
+    background-color:rgb(155, 155, 155);
+    cursor:pointer;
+}
+/* "결과보기" 버튼 */
+#showResult_button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width:150px;
+    height:60px;
+    font-size:22px;
+    font-weight: bold;
+    background-color:rgb(64, 64, 64);
+    cursor:pointer;
 }

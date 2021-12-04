@@ -218,29 +218,6 @@ export default function SignupAdmin() {
                             <Input placeholder="소속기관을 입력하세요" id="institution" className="input_form_signup"/>
                        </div>
                        <div className="each_form_signup">
-                            <p className="article_signup">선거 기간</p>
-                            <div className="input_form_signup2">
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DateRangePicker
-                                        disablePast
-                                        startText="시작"
-                                        endText="종료"
-                                        value={value1}
-                                        onChange={(newdate) => {
-                                        setValue1(newdate);
-                                        }}
-                                    renderInput={(startProps, endProps) => (
-                                    <React.Fragment>
-                                        <TextField id="start"{...startProps} />
-                                        <Box sx={{ mx: 2, fontSize:18 }}> to </Box>
-                                        <TextField id="end"{...endProps} />
-                                    </React.Fragment>
-                                    )}
-                                    />
-                                </LocalizationProvider>
-                            </div>
-                       </div>
-                       <div className="each_form_signup">
                             <p className="article_signup_candi">후보자 등록기간</p>
                             <div className="input_form_signup2">
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -259,6 +236,29 @@ export default function SignupAdmin() {
                                             <Box sx={{ mx: 2,fontSize:18 }}> to </Box>
                                             <TextField id="enroll_end"{...endProps} />
                                         </React.Fragment>
+                                    )}
+                                    />
+                                </LocalizationProvider>
+                            </div>
+                       </div>
+                        <div className="each_form_signup">
+                            <p className="article_signup">선거 기간</p>
+                            <div className="input_form_signup2">
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DateRangePicker
+                                        disablePast
+                                        startText="시작"
+                                        endText="종료"
+                                        value={value1}
+                                        onChange={(newdate) => {
+                                        setValue1(newdate);
+                                        }}
+                                    renderInput={(startProps, endProps) => (
+                                    <React.Fragment>
+                                        <TextField id="start"{...startProps} />
+                                        <Box sx={{ mx: 2, fontSize:18 }}> to </Box>
+                                        <TextField id="end"{...endProps} />
+                                    </React.Fragment>
                                     )}
                                     />
                                 </LocalizationProvider>
