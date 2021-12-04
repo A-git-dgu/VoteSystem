@@ -18,11 +18,8 @@ export default function MainVoter({match}) {
         })
         .then(function(response) {
             setElections(response.data);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     useEffect(()=>{

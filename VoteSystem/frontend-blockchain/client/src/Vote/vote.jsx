@@ -24,10 +24,8 @@ export default function Vote() {
         })
         .then(function(response) {
             setElection(response.data);
-            console.log("성공");
         })
         .catch(function(error) {
-            console.log("실패");
         })
     };
 
@@ -39,10 +37,8 @@ export default function Vote() {
         })
         .then(function(response) {
             setCandidates(response.data);
-            console.log("성공");
         })
         .catch(function(error) {
-            console.log("실패");
         })
     };
 
@@ -54,7 +50,6 @@ export default function Vote() {
 
     const handleRadioChange = (event) => {
         setRadioValue(event.target.value);
-        console.log(event.target.value);
     }
 
     function vote() {
@@ -62,9 +57,6 @@ export default function Vote() {
         else {
             window.location.href="/voting/"+electionNum+"/"+radioValue
         }
-        console.log(electionNum);
-        console.log(radioValue);
-        console.log(getSessionCookie('id'));
     }
 
     return (

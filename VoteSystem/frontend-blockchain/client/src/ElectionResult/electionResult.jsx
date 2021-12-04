@@ -23,11 +23,8 @@ export default function ElectionResult({Type}) {
         .then(function(response) {
             setElectionResult(response.data);
             setCandidateResult(response.data.candidateResults)
-            console.log(response.data);
-            console.log("성공");
         })
         .catch(function(error) {
-            console.log("실패 : " + error);
             alert("개표가 완료되지 않았습니다.");
             if (Type=="Voter") {
                 document.location.href='/mainVoter';

@@ -25,11 +25,8 @@ export default function MainVoter() {
             setEmail(user.email);
             setAddress(user.address);
             setUser(response.data);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     useEffect(()=>{
@@ -99,9 +96,7 @@ export default function MainVoter() {
                 setVoterInfo(response.data);
                 alert("회원 정보가 수정되었습니다.");
             })
-            .catch(function(error) {
-                console.log("실패");
-            })
+            .catch(function(error) {})
         }
     }
 
@@ -137,9 +132,7 @@ export default function MainVoter() {
             .then(function(response) {
                 setUser(response.data);
             })
-            .catch(function(error) {
-                console.log("실패");
-            })
+            .catch(function(error) {})
             alert("비밀번호가 변경되었습니다.");
             window.location.reload();
         }

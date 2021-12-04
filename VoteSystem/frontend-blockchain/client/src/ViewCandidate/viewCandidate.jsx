@@ -23,10 +23,8 @@ export default function MainAdmin({match}) {
         })
         .then(function(response) {
             setCandidate(response.data);
-            console.log("성공");
         })
         .catch(function(error) {
-            console.log("실패");
         })
     };
     function requestApproval() {
@@ -41,13 +39,11 @@ export default function MainAdmin({match}) {
             candidate_id:candidateId
         })
         .then(function(response) {
-            console.log("성공");
             alert('승인이 완료되었습니다.');
             document.location.href='/mainAdmin';
         })
         .catch(function(error) {
-            alert('서버 연결실패')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
     function requestReject() {
@@ -62,13 +58,11 @@ export default function MainAdmin({match}) {
             candidate_id:candidateId
         })
         .then(function(response) {
-            console.log("성공");
             alert('승인이 거절되었습니다.');
             document.location.href='/mainAdmin';
         })
         .catch(function(error) {
-            alert('서버 연결실패')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
     function changeCheck() {

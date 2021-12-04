@@ -31,9 +31,6 @@ class BallotCount extends Component {
             this.setState({ web3, accounts, contract: instance }, this.runExample);
         } catch (error) {
             // Catch any errors for any of the above operations.
-            //alert(
-            //  `Failed to load web3, accounts, or contract. Check console for details.`,
-            //);
             console.error(error);
         }
     };
@@ -64,19 +61,17 @@ class BallotCount extends Component {
                     })
                     .then(function(response) {
                         if (response.status==400) {
-                            alert("개표 실패하였습니다.");
+                            alert("개표를 실패하였습니다.");
                             window.location.href = "/mainAdmin";
                         }
                         console.log(r);
                     })
                     .catch(function(error) {
-                        console.log("failed");
-                        alert("개표 실패하였습니다.");
+                        alert("개표를 실패하였습니다.");
                         window.location.href = "/mainAdmin";
                     })
                 })
                 .catch(function(error) {
-                    console.log("call 실패");
                     alert("개표 실패하였습니다.");
                     window.location.href = "/mainAdmin";
                 })
@@ -88,21 +83,18 @@ class BallotCount extends Component {
             })
             .then(function(response) {
                 if (response.status==400) {
-                    alert("개표 실패하였습니다.");
+                    alert("개표를 실패하였습니다.");
                     window.location.href = "/mainAdmin";
                 }
             })
             .catch(function(error) {
-                alert("개표 실패하였습니다.");
+                alert("개표를 실패하였습니다.");
                 window.location.href = "/mainAdmin";
-                console.log("failed");
             })
             alert("개표가 완료되었습니다.");
             window.location.href = "/electionResultAdmin/"+window.location.pathname.split('/')[2];
         })
-        .catch(function(error) {
-            console.log("실패 : " + error);
-        })
+        .catch(function(error) {})
     };
 
     findCandidates = async() => {
@@ -114,11 +106,8 @@ class BallotCount extends Component {
         })
         .then(function(response) {
             this.candidates = response.data;
-            console.log(this.candidates);
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     render() {

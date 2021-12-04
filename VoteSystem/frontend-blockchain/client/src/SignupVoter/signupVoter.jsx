@@ -42,7 +42,6 @@ export default function SignupVoter() {
         }
         while ( document.getElementById('phonenumber').value.includes('-')) {
             document.getElementById('phonenumber').value = document.getElementById('phonenumber').value.replace('-','');
-            console.log(document.getElementById('phonenumber').value)
         }
 
         // 삽입
@@ -57,41 +56,34 @@ export default function SignupVoter() {
         })
         .then(function(response) {
             if(response.status===400){
-                alert('회원가입 실패')
+                alert('회원가입이 실패하였습니다.')
             }
             else {
-                alert('회원가입 성공')
-                console.log("성공");
+                alert('회원가입이 완료되었습니다.')
+                window.location.href="/loginVoter"
             }
         })
         .catch(function(error) {
-            alert('서버 연결실패')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
 
     const handlePwdChange = (event) => {
         setPwd(event.target.value);
-        console.log("Pwd : " + event.target.value)
         if (pwd2=="") { setPwdEqual(""); }
         else if (event.target.value===pwd2) {
             setPwdEqual("true");
-            console.log("true");
         } else {
             setPwdEqual("false");
-            console.log("false");
         }
     }
     const handlePwd2Change = (event) => {
         setPwd2(event.target.value);
-        console.log("Pwd2 : " + event.target.value)
         if (event.target.value=="") { setPwdEqual(""); }
         else if (pwd===event.target.value) {
             setPwdEqual("true");
-            console.log("true");
         } else {
             setPwdEqual("false");
-            console.log("false");
         }
     }
 
@@ -114,13 +106,10 @@ export default function SignupVoter() {
             else {
                   alert('사용할수 있는 아이디입니다.')
                   setOkID("T");
-                  console.log(okID);
-                  console.log("성공");
             }
         })
         .catch(function(error) {
-             alert('서버 연결실패')
-             console.log("실패");
+             alert('다시 한번 시도해주세요.')
          })
     };
 

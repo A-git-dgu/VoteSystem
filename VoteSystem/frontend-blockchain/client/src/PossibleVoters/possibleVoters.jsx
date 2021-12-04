@@ -37,9 +37,7 @@ export default function PossibleVoters() {
                 addPossibleVoterTd(response.data[i].voter_ssn)
             }
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     useEffect( () => {
@@ -61,15 +59,14 @@ export default function PossibleVoters() {
         })
         .then(function(response) {
             if(response.status==400){
-                alert('실패했습니다.')
+                alert('다시 한번 시도해주세요.')
             }
             else {
                 alert('명부 등록이 완료되었습니다.')
             }
         })
         .catch(function(error) {
-            alert('실패했습니다.')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
 

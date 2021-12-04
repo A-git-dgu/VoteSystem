@@ -18,11 +18,8 @@ export default function CandidateInput() {
         await axios.get(url)
         .then(function(response) {
             setElections(response.data);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
 
     };
     function showVoterInfo(){
@@ -33,7 +30,7 @@ export default function CandidateInput() {
         )
         .then(function(response) {
             if(response.status==400){
-                alert('실패했습니다.')
+                alert('다시 한번 시도해주세요.')
             }
             else {
                 if(response.data.approval_state==1){
@@ -49,8 +46,7 @@ export default function CandidateInput() {
             }
         })
         .catch(function(error) {
-            alert('실패했습니다.')
-            console.log(error);
+            alert('다시 한번 시도해주세요.')
         })
     }
     useEffect(()=>{
@@ -58,11 +54,9 @@ export default function CandidateInput() {
         searchApi();
         showVoterInfo();
     }, [])
-    console.log(elections)
 
     function insertApi(){
         const url = "http://localhost:8000/insertCandidate";
-        console.log(document.getElementById('election').value)
         axios.put(url,{
                 election_num: document.getElementById('election').value,
                 candidate_ssn: document.getElementById('fssn').value+'-'+document.getElementById('lssn').value,
@@ -82,8 +76,7 @@ export default function CandidateInput() {
             }
         })
         .catch(function(error) {
-            alert('실패했습니다.')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
 

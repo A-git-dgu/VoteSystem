@@ -84,13 +84,10 @@ export default function MainAdmin() {
             enroll_end: enrollEnd
         })
         .then(function(response) {
-            console.log("성공");
             alert("선거정보가 올바르게 수정되었습니다.");
             window.location.href = "/mainAdmin";
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     }
     const getAdminElection = async() => {
         const url = "http://localhost:8000/getAdminElection";
@@ -104,11 +101,8 @@ export default function MainAdmin() {
             setInstitution(response.data.institution);
             setAdminName(response.data.admin_name);
             setEmail(response.data.admin_email);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     const getAdminCandidate = async() => {
@@ -118,11 +112,8 @@ export default function MainAdmin() {
         })
         .then(function(response) {
             setCandidates(response.data);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     React.useEffect(()=>{
@@ -138,7 +129,7 @@ export default function MainAdmin() {
         )
         .then(function(response) {
             if(response.status===400){
-                alert('실패했습니다.')
+                alert('다시 한번 시도해주세요.')
             }
             else {
                 alert('선거 강제 종료에 성공했습니다.')
@@ -148,8 +139,7 @@ export default function MainAdmin() {
             }
         })
         .catch(function(error) {
-            alert('실패했습니다.')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     };
 

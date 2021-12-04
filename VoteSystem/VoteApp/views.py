@@ -513,7 +513,6 @@ def getElectionInfoForUser(request):
 
             voter = User.objects.get(id=request.data['id'])
             voterElection = Possiblevoter.objects.get(election_num=request.data['election_num'],voter_ssn=voter.user_ssn)
-            print(voterElection.voting_status)
             row = {
                 'election_name': e.election_name,
                 'enroll_start': e.enroll_start.date(),

@@ -21,11 +21,8 @@ export default function CandidateInput() {
         })
         .then(function(response) {
             setCandidateElections(response.data);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     useEffect(()=>{
@@ -42,7 +39,7 @@ export default function CandidateInput() {
         )
         .then(function(response) {
             if(response.status==400){
-                alert('실패했습니다.')
+                alert('다시 한번 시도해주세요.')
             }
             else {
                 if(response.data.approval_state==1){
@@ -62,8 +59,7 @@ export default function CandidateInput() {
             }
         })
         .catch(function(error) {
-            alert('실패했습니다.')
-            console.log("실패");
+            alert('다시 한번 시도해주세요.')
         })
     }
 
@@ -81,7 +77,7 @@ export default function CandidateInput() {
                 alert("수정이 완료되었습니다.")
             }
             else{
-                alert("실패했습니다.")
+                alert("다시 한번 시도해주세요.")
             }
         })
     }

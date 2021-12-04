@@ -23,11 +23,8 @@ export default function ElectionInfoForVoter() {
         .then(function(response) {
             setElectionInfoForUser(response.data);
             setCandidateInfoForUser(response.data.candidates);
-            console.log("성공");
         })
-        .catch(function(error) {
-            console.log("실패");
-        })
+        .catch(function(error) {})
     };
 
     useEffect(()=>{

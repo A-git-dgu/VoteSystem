@@ -50,7 +50,7 @@ function Login({Type}) {
             }
         })
         .catch(function(error) {
-            alert('서버연결 실패')
+            alert('다시 한번 시도해주세요.')
         })
     }
 
@@ -78,7 +78,7 @@ function Login({Type}) {
             }
         })
         .catch(function(error) {
-            alert('서버연결 실패')
+            alert('다시 한번 시도해주세요.')
         })
     }
 
