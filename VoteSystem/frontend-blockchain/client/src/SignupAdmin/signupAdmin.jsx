@@ -247,6 +247,7 @@ export default function SignupAdmin() {
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <DateRangePicker
                                         disablePast
+                                        minDate={value[1]}
                                         startText="시작"
                                         endText="종료"
                                         value={value1}
