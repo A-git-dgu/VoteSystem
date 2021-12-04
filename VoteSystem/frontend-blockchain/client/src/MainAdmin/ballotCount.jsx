@@ -4,6 +4,8 @@ import SimpleStorageContract from "../contracts/SimpleStorage.json";
 import getSessionCookie from '../Login/cookies';
 import axios from 'axios';
 
+import styles from './vote.css';
+
 class BallotCount extends Component {
     state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
@@ -123,11 +125,11 @@ class BallotCount extends Component {
         console.log(this.state)
 
         if (!this.state.web3) {
-            return <div>Loading Web3, accounts, and contract...</div>;
+            return <div>개표 중입니다...</div>;
         }
         return (
             <>
-                <h1>{this.state.storageValue}</h1>
+                <div id="voteMessage">개표 중입니다...</div>
             </>
         );
     }

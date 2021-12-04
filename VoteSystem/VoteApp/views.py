@@ -292,21 +292,24 @@ def getUserElection(request):
 
                 # 선거 종료 여부 판단
                 now = datetime.now()
-                election_status = "0"
-                if now.date() <= electionInfo.end_date.date():
-                    election_status = "1"
+                election_end = "0"
+                if electionInfo.end_date.date() < now.date():  # 선거 기간 종료
+                    election_end = "1"
                 if electionInfo.election_type==-1 or electionInfo.election_type==2:
-                    election_status = "1"
+                    election_end = "1"
+
+                # 투표 기간 전.. [투표 준비중]
                 isBeforeDate = '1'
                 if electionInfo.start_date.date() <= now.date():
                     isBeforeDate = '0'
+
                 index+=1
                 row = {
                     'election_num':electionInfo.election_num,
                     'election_name':electionInfo.election_name,
                     'start_date':electionInfo.start_date.date(),
                     'end_date':electionInfo.end_date.date(),
-                    'election_status':election_status,
+                    'election_end':election_end,
                     'voting_status':voterElection.voting_status,
                     'isBeforeDate':isBeforeDate,
                     'index':index
