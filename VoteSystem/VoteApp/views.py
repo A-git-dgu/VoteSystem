@@ -457,15 +457,15 @@ def insertPossibleVoter(request):
             print(e)
             return Response({'msg': 'failed'}, status=400)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def getElectionInfoForUser(request):
-    if request.method=='GET':
+    if request.method=='POST':
         try:
-            e = Election.objects.get(election_num=request.GET['election_num'])
-            candidateInfo = Candidate.objects.filter(election_num=request.GET['election_num'])
+            e = Election.objects.get(election_num=request.data['election_num'])
+            candidateInfo = Candidate.objects.filter(election_num=request.data['election_num'])
             candidates=[]
             for i in candidateInfo:
-                if i.approval_state<1: continue;
+                if i.approval_state < 1: continue;
                 userInfo= i.candidate_ssn
                 candidate = {
                     'candidate_name': userInfo.name,
@@ -477,26 +477,35 @@ def getElectionInfoForUser(request):
                 }
                 candidates.append(candidate)
 
-            if e.election_type==-1 or e.election_type==0:
-                electionType = 0
-            else:
-                electionType = 1
-            if e.election_type==0 or e.election_type ==1:
-                isBallotCount = 0
-            else:
-                isBallotCount = 1
+            now = datetime.now()
+            # 선거 종료 여부 판단
+            election_end = "0"
+            if e.end_date.date() < now.date(): # 선거 기간 종료
+                election_end = "1"
+            if e.election_type == -1 or e.election_type == 2: # 개표
+                election_end = "1"
+
+            # 투표 기간 전.. [투표 준비중]
+            isBeforeDate = '1'
+            if e.start_date.date() <= now.date():
+                isBeforeDate = '0'
+
+            voter = User.objects.get(id=request.data['id'])
+            voterElection = Possiblevoter.objects.get(election_num=request.data['election_num'],voter_ssn=voter.user_ssn)
+            print(voterElection.voting_status)
             row = {
-                'election_name':e.election_name,
-                'election_type':electionType,
-                'ballotCount':isBallotCount,
-                'enroll_start':e.enroll_start.date(),
-                'enroll_end':e.enroll_end.date(),
-                'start_date':e.start_date.date(),
-                'end_date':e.end_date.date(),
-                'institution':e.institution,
-                'admin_name':e.admin_name,
-                'admin_email':e.admin_email,
-                'candidates':candidates
+                'election_name': e.election_name,
+                'enroll_start': e.enroll_start.date(),
+                'enroll_end': e.enroll_end.date(),
+                'start_date': e.start_date.date(),
+                'end_date': e.end_date.date(),
+                'institution': e.institution,
+                'admin_name': e.admin_name,
+                'admin_email': e.admin_email,
+                'candidates': candidates,
+                'election_end': election_end,
+                'isBeforeDate': isBeforeDate,
+                'voting_status': voterElection.voting_status
             }
             electionInfoForUser = row
             return Response(electionInfoForUser, status=200)

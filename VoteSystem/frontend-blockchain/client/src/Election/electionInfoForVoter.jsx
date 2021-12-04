@@ -15,8 +15,11 @@ export default function ElectionInfoForVoter() {
 
     // 통신 메서드
     const searchApi = async()=> {
-        const url = "http://localhost:8000/getElectionInfoForUser?election_num="+id;
-        await axios.get(url)
+        const url = "http://localhost:8000/getElectionInfoForUser";
+        await axios.post(url, {
+            id:getSessionCookie('id'),
+            election_num:id
+        })
         .then(function(response) {
             setElectionInfoForUser(response.data);
             setCandidateInfoForUser(response.data.candidates);
@@ -142,9 +145,10 @@ export default function ElectionInfoForVoter() {
 
                 </div>
             </div>
-            {electionInfoForUser.ballotCount==0 ?
-                <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>
-                : <Link to={'/electionResultVoter/'+electionInfoForUser.election_num}><button id="vote_button" className="election4user_Button">결과보기</button></Link> }
+            {electionInfoForUser.isBeforeDate=='1' && <button id="not_button" className="election4user_Button">준비 중</button>}
+            {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='1' && <Link to={'/electionResultVoter/'+electionInfoForUser.election_num}><button id="showResult_button" className="election4user_Button">결과보기</button></Link>}
+            {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='0' && electionInfoForUser.voting_status=='0' && <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>}
+            {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='0' && electionInfoForUser.voting_status=='1' && <button id="not_button" className="election4user_Button">투표완료</button>}
         </>
     );
 }
