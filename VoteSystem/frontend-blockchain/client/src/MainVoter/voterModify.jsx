@@ -107,7 +107,13 @@ export default function MainVoter({match}) {
     // 비밀번호 재설정 버튼 클릭 시
     const [canModify, setCanModifyPWD] = useState(true);
     const setModifyFalse = () => { setCanModifyPWD(false); }
-    const setModifyTrue = () => { setCanModifyPWD(true); changePWD(); }
+    const setModifyTrue = () => {
+        if (document.getElementById('new_pwd').value != user.pwd) {
+            setCanModifyPWD(false);
+            alert("기존 비밀번호를 확인하세요.");
+        }
+        else { setCanModifyPWD(true); changePWD(); }
+    }
 
     // 비밀번호 재설정
     const changePWD = async() => {
@@ -163,8 +169,13 @@ export default function MainVoter({match}) {
                         <div className="inner_right_voterModify"><Input value={user.id} disabled id="id"/></div>
                     </div>
                     <div className="inner_voterModify">
-                        <div className="inner_left_voterModify">비밀번호</div>
-                        <div className="inner_right_voterModify"><Input type="password" placeholder={user.pwd} id="pwd" disabled={canModify} onChange={handlePwdChange}/>
+                        <div className="inner_left_voterModify">기존 비밀번호 확인</div>
+                        <div className="inner_right_voterModify"><Input type="password" id="new_pwd" disabled={canModify} onChange={handlePwdChange}/>
+                        </div>
+                    </div>
+                    <div className="inner_voterModify">
+                        <div className="inner_left_voterModify">변경할 비밀번호</div>
+                        <div className="inner_right_voterModify"><Input type="password" id="pwd" disabled={canModify} onChange={handlePwdChange}/>
                         </div>
                     </div>
                     <div className="inner_voterModify">
