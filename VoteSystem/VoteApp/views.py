@@ -72,8 +72,9 @@ def getElection(request):
         connection.commit()
         connection.close()
         elections = []
+        now = datetime.now()
         for election in datas:
-            if election.end_date.date() < datetime.now.date() and election.start_date.date() > datetime.now.date():
+            if election[6].date() < now.date() or election[5].date() > now.date():
                 continue
             row = {
                 'election_num':election[0],
