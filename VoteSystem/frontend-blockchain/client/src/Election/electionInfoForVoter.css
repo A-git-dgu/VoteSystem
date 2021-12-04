@@ -129,6 +129,7 @@
     height:60px;
     font-size:22px;
     font-weight: bold;
+    color:white;
     background-color:rgb(64, 64, 64);
     cursor:pointer;
 }

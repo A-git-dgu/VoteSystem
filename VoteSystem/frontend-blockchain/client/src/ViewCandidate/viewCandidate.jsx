@@ -122,7 +122,7 @@ export default function MainAdmin({match}) {
                                 <div className="introduce">{candidate.career}</div>
                             </div>
                             <div className="each_form_viewCandidate2">
-                                <div className="article_viewCandidate">공약: {candidate.pledge}</div>
+                                <div className="article_viewCandidate">공약: </div>
                                 <div className="introduce">{candidate.pledge}</div>
                             </div>
                            {candidate.approval_state=="0" && <div id="checkDocument" className="each_form_viewCandidate">

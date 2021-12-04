@@ -146,7 +146,7 @@ export default function ElectionInfoForVoter() {
                 </div>
             </div>
             {electionInfoForUser.isBeforeDate=='1' && <button id="not_button" className="election4user_Button">준비 중</button>}
-            {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='1' && <Link to={'/electionResultVoter/'+electionInfoForUser.election_num}><button id="showResult_button" className="election4user_Button">결과보기</button></Link>}
+            {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='1' && <Link to={'/electionResultVoter/'+id}><button id="showResult_button" className="election4user_Button">결과보기</button></Link>}
             {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='0' && electionInfoForUser.voting_status=='0' && <Link to={'/vote/'+id}><button id="vote_button" className="election4user_Button">투표하기</button></Link>}
             {electionInfoForUser.isBeforeDate=='0' && electionInfoForUser.election_end=='0' && electionInfoForUser.voting_status=='1' && <button id="not_button" className="election4user_Button">투표완료</button>}
         </>
