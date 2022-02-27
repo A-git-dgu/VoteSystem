@@ -6,7 +6,11 @@
 ## 실행방법
 
 ```bash
+cd VoteSystem/frontend-blockchain/client
 npm install
+
+python runserver manage.py
+npm start
 ```
 
 ## 주요기능 소개
