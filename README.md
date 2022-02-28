@@ -8,12 +8,15 @@
 ```bash
 cd VoteSystem/frontend-blockchain/client
 npm install
+npm install -g truffle
+truffle compile
 
 python runserver manage.py
 npm start
 ```
 
 ## 주요기능 소개
+![image](https://user-images.githubusercontent.com/80963996/155933631-ec9a322f-0070-4599-8e14-42e52e2a57a5.png) <br><br>
 투표 아지트는 **선거 관리자**와 **투표자**로 사용자가 나뉘어 사용된다. <br>
 사용자는 사용 목적에 맞게 관리자 혹은 투표자로 가입하여 아래와 같은 기능을 사용할 수 있다.
 
