@@ -6,6 +6,38 @@
 Voting A.git is a **voting system using blockchain** for safe electronic voting.<br>
 We used **MetaMask**<img width="20" alt="logo" src="https://user-images.githubusercontent.com/26293917/155936348-7252ac8f-a1eb-4fbc-9a04-99361b7a4169.png">(extension)와 **Ganache**<img width="15" alt="logo" src="https://user-images.githubusercontent.com/26293917/155936982-37b6da8a-9b9f-4335-bddd-4412bac56bdc.png"> (For test) for blockchain implementation.
 
+## 프로젝트 구조
+```bash
+📦VoteSystem
+├─📂api
+│  └─📂migrations
+├─📂frontend-blockchain
+│  ├─📂client
+│  │  ├─📂public
+│  │  └─📂src
+│  │      ├─📂Candidate
+│  │      ├─📂contracts
+│  │      ├─📂Election
+│  │      ├─📂ElectionResult
+│  │      ├─📂HomePage
+│  │      ├─📂Img
+│  │      ├─📂Login
+│  │      ├─📂Main
+│  │      ├─📂MainAdmin
+│  │      ├─📂MainVoter
+│  │      ├─📂PossibleVoters
+│  │      ├─📂SignupAdmin
+│  │      ├─📂SignupVoter
+│  │      ├─📂ViewCandidate
+│  │      └─📂Vote
+│  ├─📂contracts
+│  ├─📂migrations
+│  └─📂test
+├─📂VoteApp
+│  └─📂migrations
+└─📂VoteSystem
+```
+
 ## 실행방법 (Usage)
 
 ```bash
